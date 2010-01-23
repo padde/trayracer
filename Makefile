@@ -38,7 +38,7 @@ OBJ_PATH =./build
 
 CXX =g++
 CXX_FLAGS =-Wall
-# CXX_FLAGS =-Wall -pedantic -O3 -fast
+# CXX_FLAGS =-Wall -pedantic -O3 -fast -D NDEBUG
 INCLUDE =\
 	-I/opt/local/include/ \
 	-I/private/var/lib/unittest++/src/ \
