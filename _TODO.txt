@@ -1,0 +1,14 @@
+2010-01-22 15:20
+Patrick Oscity
+
+TODO: Raytracer programmieren
+
+-----
+
+2010-01-22 12:40
+John Doe
+
+This is just an example. We should try to keep this structure in order to maintain the readability of the Readme file. Thanks!
+
+-----
+

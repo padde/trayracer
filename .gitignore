@@ -1,0 +1,11 @@
+# OSX System files
+.DS_Store
+
+# Linux/Unix temporary files
+*~
+
+# Objects and output files
+build/
+**/*.o
+**/*.out
+*.ppm
