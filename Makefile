@@ -51,7 +51,7 @@ INCLUDE =\
 ################################################################################
 # linker
 
-LIB =-lGL -lglut -lUnittest++ -lboost_thread-mt
+LIB =-lGL -lglut -lunittest++ -lboost_thread-mt
 LIB_PATH =-L/opt/local/lib/
 
 
@@ -69,6 +69,7 @@ RM =rm -f
 HEADER =\
 	$(INC_PATH)/datatypes/rgb.hpp \
 	$(INC_PATH)/datatypes/pixel.hpp \
+	$(INC_PATH)/datatypes/point.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
@@ -101,7 +102,7 @@ main: $(OBJECT) $(MAIN_OBJECT)
 
 TEST_SOURCE =\
 	$(SRC_PATH)/test/test.cpp \
-	$(SRC_PATH)/test/test_truth.cpp \
+	$(SRC_PATH)/test/test_point.cpp \
 	$(NULL)
 
 TEST_OBJECT =$(TEST_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
@@ -119,7 +120,7 @@ test: $(OBJECT) $(TEST_OBJECT)
 
 build: test main
 
-cleanbuild: realclean build
+cleanbuild: realclean build clean
 
 
 
