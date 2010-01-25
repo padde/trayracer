@@ -9,7 +9,7 @@ class Vector
 public: // enums, typedefs
 	typedef float value_t;
 	
-public: // c'tors d'tor
+public: // c'tors, d'tor
 	Vector ();
 	Vector (const Vector& v);
 	Vector (const Point& p);

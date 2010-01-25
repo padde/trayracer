@@ -1,4 +1,4 @@
-// project header
+// system header
 #include <UnitTest++.h>
 
 
