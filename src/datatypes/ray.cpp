@@ -54,7 +54,7 @@ Ray::dir ( const Vector& v )
 }
 
 Point
-Ray::point_at_parameter ( const float& param )
+Ray::point_at_parameter ( const Ray::scalar_t& param )
 {
 	return origin_ + dir_ * param;
 }

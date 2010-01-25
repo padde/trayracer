@@ -12,32 +12,30 @@ class Point;
 class Matrix 
 {
 public : // c'tors, d'tor
-  Matrix            ( );
-  Matrix            ( Matrix const& );
-  Matrix            ( double const [16] );
-  ~Matrix           ( );
-  
+	Matrix  ( );
+	Matrix  ( Matrix const& );
+	Matrix  ( double const [16] );
+	~Matrix ( );
+	
 public : // methods
-  void              swap          ( Matrix& rhs );
-  Matrix&           operator=     ( Matrix const& rhs );
-  double const&     operator()    ( unsigned row, unsigned col ) const;
-  double&           operator()    ( unsigned row, unsigned col );
-  double const&     operator[]    ( unsigned ) const;
-  double&           operator[]    ( unsigned );
-  Matrix&           operator*=    ( Matrix const& );
-  double            determinant   ( ) const;
-  bool              invert        ( );
-  void              transpose     ( );
-  bool              is_invertible ( ) const;
-
+	void          swap          ( Matrix& rhs );
+	Matrix&       operator=     ( Matrix const& rhs );
+	double const& operator()    ( unsigned row, unsigned col ) const;
+	double&       operator()    ( unsigned row, unsigned col );
+	double const& operator[]    ( unsigned ) const;
+	double&       operator[]    ( unsigned );
+	Matrix&       operator*=    ( Matrix const& );
+	double        determinant   ( ) const;
+	bool          invert        ( );
+	void          transpose     ( );
+	bool          is_invertible ( ) const;
+	
 public : // static methods
-
-  static Matrix const& null();
-  static Matrix const& identity();
-  
+	static Matrix const& null();
+	static Matrix const& identity();
+	
 private: // members
-
-  double data_[16];
+	double data_[16];
 };
 
 Matrix operator*  ( Matrix const&, Matrix const&  );

@@ -43,6 +43,7 @@ INCLUDE =\
 	-I/opt/local/include/ \
 	-I/private/var/lib/unittest++/src/ \
 	-I$(INC_PATH)/datatypes/ \
+	-I$(INC_PATH)/shape/ \
 	-I$(INC_PATH)/file/ \
 	-I$(INC_PATH)/glut/ \
 	$(NULL)
@@ -74,6 +75,7 @@ HEADER =\
 	$(INC_PATH)/datatypes/ray.hpp \
 	$(INC_PATH)/datatypes/matrix.hpp \
 	$(INC_PATH)/datatypes/orthonormalbasis.hpp \
+	$(INC_PATH)/shape/shape.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)

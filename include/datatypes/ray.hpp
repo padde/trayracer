@@ -11,6 +11,9 @@
 
 class Ray
 {
+public: // enums, typedefs
+	typedef float scalar_t;
+
 public: // c'tors, d'tor
 	Ray ();
 	Ray ( const Ray& r );
@@ -24,7 +27,7 @@ public: // methods
 	const Vector& dir () const;
 	Vector&       dir ( const Vector& v );
 	
-	Point point_at_parameter ( const float& param );
+	Point point_at_parameter ( const scalar_t& param );
 	
 	void print_on (std::ostream& os) const;
 	
