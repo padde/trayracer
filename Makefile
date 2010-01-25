@@ -72,6 +72,8 @@ HEADER =\
 	$(INC_PATH)/datatypes/point.hpp \
 	$(INC_PATH)/datatypes/vector.hpp \
 	$(INC_PATH)/datatypes/ray.hpp \
+	$(INC_PATH)/datatypes/matrix.hpp \
+	$(INC_PATH)/datatypes/orthonormalbasis.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
@@ -107,6 +109,8 @@ TEST_SOURCE =\
 	$(SRC_PATH)/test/test_point.cpp \
 	$(SRC_PATH)/test/test_vector.cpp \
 	$(SRC_PATH)/test/test_ray.cpp \
+	$(SRC_PATH)/test/test_matrix.cpp \
+	$(SRC_PATH)/test/test_orthonormalbasis.cpp \
 	$(NULL)
 
 TEST_OBJECT =$(TEST_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)

@@ -1,10 +1,12 @@
+// i/f header
+#include "ray.hpp"
+
 // system header
 #include <ostream>
 
 // project header
-#include "point.hpp"
-#include "vector.hpp"
-#include "ray.hpp"
+#include <point.hpp>
+#include <vector.hpp>
 
 
 Ray::Ray () :

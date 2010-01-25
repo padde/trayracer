@@ -1,6 +1,9 @@
 #ifndef BUW_VECTOR_HPP
 #define BUW_VECTOR_HPP
 
+// system header
+#include <ostream>
+
 // forward declarations
 class Point;
 
@@ -21,8 +24,9 @@ public: // methods
 	value_t&       operator[] (unsigned int index);
 	const value_t& operator[] (unsigned int index) const;
 	
-	value_t length () const;
-	void    unify  ();
+	value_t length         () const;
+	value_t squared_length () const;
+	void    unify          ();
 	
 	Vector& operator=  (const Vector& v);
 	void    operator+= (const Vector& v);
@@ -54,6 +58,8 @@ private: // members
 	value_t data_[3]; // x,y,z
 	
 };
+
+Vector unify ( const Vector& v );
 
 
 #endif //BUW_VECTOR_HPP 

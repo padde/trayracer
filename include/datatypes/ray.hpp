@@ -1,9 +1,12 @@
 #ifndef BUW_RAY_HPP
 #define BUW_RAY_HPP
 
-// forward declarations
-class Point;
-class Vector;
+// system header
+#include <ostream>
+
+// project header
+#include <point.hpp>
+#include <vector.hpp>
 
 
 class Ray
@@ -19,7 +22,7 @@ public: // methods
 	Point&       origin ( const Point& p );
 	
 	const Vector& dir () const;
-	Vector&        dir ( const Vector& v );
+	Vector&       dir ( const Vector& v );
 	
 	Point point_at_parameter ( const float& param );
 	

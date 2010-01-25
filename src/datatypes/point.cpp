@@ -1,9 +1,12 @@
+// i/f header
+#include "point.hpp"
+
 // system header
 #include <ostream>
+#include <cassert>
 
 // project header
-#include "point.hpp"
-#include "vector.hpp"
+#include <vector.hpp>
 
 
 Point::Point ()
@@ -41,12 +44,14 @@ Point::~Point ()
 Point::value_t&
 Point::operator[](unsigned int index)
 {
+	assert ( index >= 0 && index < 3 );
 	return data_[index];
 }
 
 const Point::value_t&
 Point::operator[](unsigned int index) const
 {
+	assert ( index >= 0 && index < 3 );
 	return data_[index];
 }
 

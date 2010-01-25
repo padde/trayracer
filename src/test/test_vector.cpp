@@ -64,6 +64,14 @@ TEST ( vector__const_index_operator )
 	CHECK_EQUAL(3.0f, v[2]);
 }
 
+
+TEST ( vector__should_compute_squared_length )
+{
+	Vector v(1,2,3);
+	
+	CHECK_CLOSE(14.0f, v.squared_length(), 0.0000001);
+}
+
 TEST ( vector__should_compute_length )
 {
 	Vector v(1,2,3);
@@ -162,7 +170,7 @@ TEST ( vector__should_swap )
 	CHECK_EQUAL(3.0f, w[2]);
 }
 
-TEST ( should__print_on_ostream )
+TEST ( vector__should__print_on_ostream )
 {
 	Vector v(1.2, 3.4, 5.6);
 	std::stringstream ss(std::stringstream::out);

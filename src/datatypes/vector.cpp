@@ -1,11 +1,13 @@
+// i/f header
+#include "vector.hpp"
+
 // system header
 #include <ostream>
 #include <cmath>
 #include <cassert>
 
 // project header
-#include "vector.hpp"
-#include "point.hpp"
+#include <point.hpp>
 
 
 Vector::Vector ()
@@ -49,15 +51,25 @@ Vector::~Vector ()
 Vector::value_t&
 Vector::operator[] (unsigned int index)
 {
-	assert( index >= 0 && index <=2 );
+	assert( index >= 0 && index < 3 );
 	return data_[index];
 }
 
 const Vector::value_t&
 Vector::operator[] (unsigned int index) const
 {
-	assert( index >= 0 && index <=2 );
+	assert( index >= 0 && index < 3 );
 	return data_[index];
+}
+
+Vector::value_t
+Vector::squared_length () const
+{
+	return (
+		pow(data_[0], 2) +
+		pow(data_[1], 2) +
+		pow(data_[2], 2)
+	);
 }
 
 Vector::value_t
@@ -218,6 +230,14 @@ operator<< (std::ostream& os, Vector const& v)
 	std::ostream::sentry const cerberus(os);
 	if (cerberus) v.print_on(os);
 	return os;
+}
+
+Vector
+unify ( const Vector& v )
+{
+	Vector tmp(v);
+	tmp.unify();
+	return tmp;
 }
 
 
