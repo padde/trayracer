@@ -4,6 +4,7 @@
 
 // project header
 #include "point.hpp"
+#include "vector.hpp"
 
 
 TEST ( point__standard_constructor )
@@ -25,14 +26,15 @@ TEST ( point__copy_constructor )
 	CHECK_EQUAL(3.0f, q[2]);
 }
 
-// TEST ( point__vector_constructor )
-// {
-// 	Point p;
-// 	
-// 	CHECK_EQUAL(0.0f, p[x]);
-// 	CHECK_EQUAL(0.0f, p[y]);
-// 	CHECK_EQUAL(0.0f, p[z]);
-// }
+TEST ( point__vector_constructor )
+{
+	Vector v(1,2,3);
+	Point p(v);
+	
+	CHECK_EQUAL(1.0f, p[0]);
+	CHECK_EQUAL(2.0f, p[1]);
+	CHECK_EQUAL(3.0f, p[2]);
+}
 
 TEST ( point__value_t_constructor )
 {
@@ -65,6 +67,16 @@ TEST ( point__const_index_operator )
 	CHECK_EQUAL(5.6f, p[2]);
 }
 
+TEST ( point__assignment_operator )
+{
+	Point p(1.2, 3.4, 5.6);
+	Point q = p;
+	
+	CHECK_EQUAL(1.2f, q[0]);
+	CHECK_EQUAL(3.4f, q[1]);
+	CHECK_EQUAL(5.6f, q[2]);
+}
+
 TEST ( point__unary_point_plus_operator )
 {
 	Point p(1.2, 3.4, 5.6);
@@ -89,27 +101,39 @@ TEST ( point__unary_point_minus_operator )
 	CHECK_EQUAL(1.0f, p[2]);
 }
 
-TEST ( point__assignment_operator )
+TEST ( point__vector_assignment_operator )
 {
-	Point p(1.2, 3.4, 5.6);
-	Point q = p;
+	Vector v(1.2, 3.4, 5.6);
+	Point p = v;
 	
 	CHECK_EQUAL(1.2f, p[0]);
 	CHECK_EQUAL(3.4f, p[1]);
 	CHECK_EQUAL(5.6f, p[2]);
 }
 
+TEST ( point__unary_vector_plus_operator )
+{
+	Point p(1.2, 3.4, 5.6);
+	Vector v(9.8, 7.6, 5.4);
+	
+	p += v;
+	
+	CHECK_EQUAL(11.0f, p[0]);
+	CHECK_EQUAL(11.0f, p[1]);
+	CHECK_EQUAL(11.0f, p[2]);
+}
 
-
-// TEST ( point__unary_vector_plus_operator )
-// {
-// 	
-// }
-
-// TEST ( point__unary_vector_minus_operator )
-// {
-// 	
-// }
+TEST ( point__unary_vector_minus_operator )
+{
+	Point p(1.2, 3.4, 5.6);
+	Vector v(0.2, 2.4, 4.6);
+	
+	p -= v;
+	
+	CHECK_EQUAL(1.0f, p[0]);
+	CHECK_EQUAL(1.0f, p[1]);
+	CHECK_EQUAL(1.0f, p[2]);
+}
 
 TEST ( point__should_swap )
 {
@@ -159,15 +183,29 @@ TEST ( point__binary_point_minus_operator )
 	CHECK_EQUAL(1.0f, r[2]);
 }
 
-// TEST ( point__binary_vector_plus_operator )
-// {
-// 	
-// }
+TEST ( point__binary_vector_plus_operator )
+{
+	Point p(1.2, 3.4, 5.6);
+	Vector v(8.8, 6.6, 4.4);
+	
+	Point q = p + v;
+	
+	CHECK_EQUAL(10.0f, q[0]);
+	CHECK_EQUAL(10.0f, q[1]);
+	CHECK_EQUAL(10.0f, q[2]);
+}
 
-// TEST ( point__binary_vector_minus_operator )
-// {
-// 	
-// }
+TEST ( point__binary_vector_minus_operator )
+{
+	Point p(1.2, 3.4, 5.6);
+	Point v(0.2, 2.4, 4.6);
+	
+	Point q = p - v;
+	
+	CHECK_EQUAL(1.0f, q[0]);
+	CHECK_EQUAL(1.0f, q[1]);
+	CHECK_EQUAL(1.0f, q[2]);
+}
 
 TEST ( point__equality_operator )
 {

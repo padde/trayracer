@@ -2,8 +2,8 @@
 #include <ostream>
 
 // project header
-#include "Point.hpp"
-// #include "Vector.hpp"
+#include "point.hpp"
+#include "vector.hpp"
 
 
 Point::Point ()
@@ -20,13 +20,13 @@ Point::Point (const Point& p)
 	data_[2] = p.data_[2];
 }
 
-// Point::Point (const Vector& v)
-// {
-// 	data_[0] = v[x];
-// 	data_[1] = v[y];
-// 	data_[2] = v[z];
-// 	
-// }
+Point::Point (const Vector& v)
+{
+	data_[0] = v[0];
+	data_[1] = v[1];
+	data_[2] = v[2];
+	
+}
 
 Point::Point (const Point::value_t& x, const Point::value_t& y, const Point::value_t& z)
 {
@@ -74,21 +74,29 @@ Point::operator-= (const Point& p)
 	data_[2] -= p.data_[2];
 }
 
-// void
-// Point::operator+= (const Vector& v)
-// {
-// 	data_[0] += v[0];
-// 	data_[1] += v[1];
-// 	data_[2] += v[2];
-// }
-// 
-// void
-// Point::operator-= (const Vector& v)
-// {
-// 	data_[0] -= v[0];
-// 	data_[1] -= v[1];
-// 	data_[2] -= v[2];
-// }
+Point&
+Point::operator= (const Vector& v)
+{
+	Point tmp(v[0], v[1], v[2]);
+	swap(tmp);
+	return *this;
+}
+
+void
+Point::operator+= (const Vector& v)
+{
+	data_[0] += v[0];
+	data_[1] += v[1];
+	data_[2] += v[2];
+}
+
+void
+Point::operator-= (const Vector& v)
+{
+	data_[0] -= v[0];
+	data_[1] -= v[1];
+	data_[2] -= v[2];
+}
 
 void
 Point::swap (Point& p)
@@ -107,30 +115,34 @@ Point::print_on (std::ostream& os) const
 /* friend */ Point
 operator+ (const Point& lhs, const Point& rhs)
 {
-	Point result(lhs);
-	result += rhs;
-	return result;
+	Point tmp(lhs);
+	tmp += rhs;
+	return tmp;
 }
 
 /* friend */ Point
 operator- (const Point& lhs, const Point& rhs)
 {
-	Point result(lhs);
-	result -= rhs;
-	return result;
+	Point tmp(lhs);
+	tmp -= rhs;
+	return tmp;
 }
 
-// /* friend */ Point
-// operator+ (const Point& p1, const Vector& p2)
-// {
-// 	
-// }
-// 
-// /* friend */ Point
-// operator- (const Point& p1, const Vector& p2)
-// {
-// 	
-// }
+/* friend */ Point
+operator+ (const Point& p, const Vector& v)
+{
+	Point tmp(p);
+	tmp += v;
+	return tmp;
+}
+
+/* friend */ Point
+operator- (const Point& p, const Vector& v)
+{
+	Point tmp(p);
+	tmp -= v;
+	return tmp;
+}
 
 /* friend */ bool
 operator== (const Point& lhs, const Point& rhs)

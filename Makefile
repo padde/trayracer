@@ -70,6 +70,7 @@ HEADER =\
 	$(INC_PATH)/datatypes/rgb.hpp \
 	$(INC_PATH)/datatypes/pixel.hpp \
 	$(INC_PATH)/datatypes/point.hpp \
+	$(INC_PATH)/datatypes/vector.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
@@ -103,6 +104,7 @@ main: $(OBJECT) $(MAIN_OBJECT)
 TEST_SOURCE =\
 	$(SRC_PATH)/test/test.cpp \
 	$(SRC_PATH)/test/test_point.cpp \
+	$(SRC_PATH)/test/test_vector.cpp \
 	$(NULL)
 
 TEST_OBJECT =$(TEST_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
