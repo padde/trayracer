@@ -77,6 +77,7 @@ HEADER =\
 	$(INC_PATH)/datatypes/orthonormalbasis.hpp \
 	$(INC_PATH)/shape/shape.hpp \
 	$(INC_PATH)/shape/sphere.hpp \
+	$(INC_PATH)/shape/triangle.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)

@@ -103,7 +103,8 @@ void
 glutwindow::write(const pixel& p) 
 {
   // flip pixels, because of opengl glDrawPixels
-  size_t buf_pos = (height_*width_) - (width_*p.y + (width_-p.x));
+  // size_t buf_pos = (height_*width_) - (width_*p.y + (width_-p.x));
+  size_t buf_pos = p.x + width_*p.y;
   if (buf_pos >= buffer_.size() || (int)buf_pos < 0) {
     std::cerr << "Fatal Error glutwindow::write(pixel p) : pixel out of image : " << (int)p.x << "," << (int)p.y << std::endl;
   } else {

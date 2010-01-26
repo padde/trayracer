@@ -29,7 +29,7 @@ bool Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& 
 	
 	double a = dot( ray.dir(), ray.dir() );
 	double b = dot( ray.dir(), tmp ) * 2;
-	double c = dot( tmp, tmp ) * pow( radius_, 2);
+	double c = dot( tmp, tmp ) - pow( radius_, 2);
 	
 	double discriminant = pow(b,2) - 4*a*c;
 	
@@ -41,8 +41,9 @@ bool Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& 
 		if ( t < tmin )
 			t = ( -b + discriminant ) / ( 2*a );
 		
-		if ( t < tmin or t > tmax )
+		if ( t < tmin or t > tmax ) {
 			return false;
+		}
 		
 		// hit detected
 		hitrec.t = t;
@@ -52,8 +53,7 @@ bool Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& 
 		
 		return true;
 	}
-	
-	
+
 	return false;
 }
 
