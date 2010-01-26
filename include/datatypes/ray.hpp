@@ -17,7 +17,8 @@ public: // enums, typedefs
 public: // c'tors, d'tor
 	Ray ();
 	Ray ( const Ray& r );
-	Ray ( const Point& p, const Vector& v );
+	Ray ( const Point& origin, const Point& target );
+	Ray ( const Point& origin, const Vector& dir );
 	~Ray ();
 	
 public: // methods

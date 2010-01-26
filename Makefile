@@ -76,6 +76,7 @@ HEADER =\
 	$(INC_PATH)/datatypes/matrix.hpp \
 	$(INC_PATH)/datatypes/orthonormalbasis.hpp \
 	$(INC_PATH)/shape/shape.hpp \
+	$(INC_PATH)/shape/sphere.hpp \
 	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
@@ -90,12 +91,12 @@ OBJECT =$(SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 # main
 
 MAIN_SOURCE =\
-	$(SRC_PATH)/main.cpp \
+	$(SRC_PATH)/try.cpp \
 	$(NULL)
 
 MAIN_OBJECT =$(MAIN_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 
-MAIN_OUTPUT =$(OBJ_PATH)/main.out
+MAIN_OUTPUT =$(OBJ_PATH)/try.out
 
 main: $(OBJECT) $(MAIN_OBJECT)
 	$(CXX) $(OBJECT) $(MAIN_OBJECT) $(LIB) $(LIB_PATH) -o $(MAIN_OUTPUT)

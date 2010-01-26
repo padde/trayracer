@@ -10,18 +10,19 @@
 
 
 Ray::Ray () :
-	origin_(0,0,0),
-	dir_   (0,0,0)
+	origin_(0,0,0), dir_(0,0,0)
 {}
 
 Ray::Ray ( const Ray& r ) :
-	origin_(r.origin_),
-	dir_   (r.dir_)
+	origin_(r.origin_), dir_(r.dir_)
 {}
 
-Ray::Ray ( const Point& p, const Vector& v ) :
-	origin_(p),
-	dir_   (v)
+Ray::Ray ( const Point& origin, const Point& target ) :
+	origin_(origin), dir_( target - origin )
+{}
+
+Ray::Ray ( const Point& origin, const Vector& dir ) :
+	origin_(origin), dir_(dir)
 {}
 
 Ray::~Ray ()
