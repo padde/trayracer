@@ -74,7 +74,6 @@ HEADER =\
 	$(INC_PATH)/datatypes/vector.hpp \
 	$(INC_PATH)/datatypes/ray.hpp \
 	$(INC_PATH)/datatypes/matrix.hpp \
-	$(INC_PATH)/datatypes/orthonormalbasis.hpp \
 	$(INC_PATH)/shape/shape.hpp \
 	$(INC_PATH)/shape/sphere.hpp \
 	$(INC_PATH)/shape/triangle.hpp \
@@ -114,7 +113,6 @@ TEST_SOURCE =\
 	$(SRC_PATH)/test/test_vector.cpp \
 	$(SRC_PATH)/test/test_ray.cpp \
 	$(SRC_PATH)/test/test_matrix.cpp \
-	$(SRC_PATH)/test/test_orthonormalbasis.cpp \
 	$(NULL)
 
 TEST_OBJECT =$(TEST_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
@@ -132,7 +130,7 @@ test: $(OBJECT) $(TEST_OBJECT)
 
 build: test main
 
-cleanbuild: realclean build clean
+cleanbuild: realclean build
 
 
 
