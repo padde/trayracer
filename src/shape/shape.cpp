@@ -9,11 +9,16 @@
 // #include <material.hpp>
 
 Shape::Shape () :
-	name_(""), material_(NULL)
+	name_(""), material_ptr_(NULL)
+{}
+
+
+Shape::Shape ( std::string name, Matrix trans ) :
+	name_(name), trans_(trans)
 {}
 
 Shape::Shape ( std::string name, Material* material ) :
-	name_(name), material_(material)
+	name_(name), material_ptr_(material)
 {}
 
 /* virtual */
@@ -32,20 +37,8 @@ Shape::name ( const std::string& name )
 	name_ = name;
 }
 
-const Matrix&
-Shape::trans () const
-{
-	return trans_;
-}
-
 void
-Shape::trans ( const Matrix& trans )
-{
-	trans_ = trans;
-}
-
-void
-Shape::trans_mult ( const Matrix& trans )
+Shape::transform ( const Matrix& trans )
 {
 	trans_ *= trans;
 }

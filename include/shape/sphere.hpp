@@ -13,7 +13,7 @@ class Sphere : public Shape
 {
 public: // c'tors, d'tor
 	Sphere ();
-	Sphere ( const Point& center, const float& radius );
+	Sphere ( const float& radius );
 	~Sphere ();
 	
 public: // methods
@@ -21,7 +21,6 @@ public: // methods
 	bool hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const;
 	
 private:
-	Point center_;
 	float radius_;
 };
 

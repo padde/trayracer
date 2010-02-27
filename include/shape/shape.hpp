@@ -31,17 +31,16 @@ public: // enums, typedefs
 
 public: // c'tors, d'tor
 	Shape ();
+	Shape ( std::string name, Matrix trans );
 	Shape ( std::string name, Material* material );
-	Shape ( std::string name, Material* material, Matrix* trans );
+	Shape ( std::string name, Material* material, Matrix trans );
 	virtual ~Shape ();
 
 public: // methods
 	const std::string& name () const;  // name_ getter
 	void name ( const std::string& );  // name_ setter
 	
-	const Matrix& trans () const;      // trans_ getter
-	void trans ( const Matrix& );      // trans_ setter
-	void trans_mult ( const Matrix& ); // trans_ setter, multiplicate trans_ with given matrix
+	void transform ( const Matrix& ); // multiplicate trans_ with given matrix
 
 public: // virtual methods
 	virtual bool hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const = 0; // compute intersections with given ray, store result in hitrec
@@ -49,7 +48,9 @@ public: // virtual methods
 
 private:
 	std::string name_;
-	Material*   material_;
+	Material*   material_ptr_;
+
+protected:
 	Matrix      trans_;
 };
 

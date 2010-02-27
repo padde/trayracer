@@ -486,6 +486,13 @@ make_rotation_z ( double a )
 	return values;
 }
 
+/*
+Matrix make_rotation ( double a, Vector const& v )
+{
+	
+}
+*/
+
 Point
 operator* ( Matrix const& lhs, Point const& rhs)
 {

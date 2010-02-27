@@ -7,6 +7,7 @@
 // project header
 #include <point.hpp>
 #include <vector.hpp>
+#include <matrix.hpp>
 
 
 Ray::Ray () :
@@ -52,6 +53,12 @@ Ray::dir ( const Vector& v )
 {
 	dir_ = v;
 	return dir_;
+}
+
+Ray
+Ray::transform ( const Matrix& trans ) const
+{
+	return Ray( trans * origin_, trans * dir_ );
 }
 
 Point

@@ -11,6 +11,7 @@
 #include <shape.hpp>
 #include <sphere.hpp>
 #include <triangle.hpp>
+#include <matrix.hpp>
 #include <compositeshape.hpp>
 
 
@@ -26,18 +27,14 @@ public :
 		const float fmax = std::numeric_limits<float>::max();
 		Vector viewdir(0,0,-1);
 		
-		// some arbitrary colors
-		rgb white  (1.0, 1.0, 1.0);
-		rgb black  (0.0, 0.0, 0.0);
-		rgb red    (0.9, 0.2, 0.1);
-		rgb orange (1.0, 0.7, 0.0);
-		rgb yellow (1.0, 1.0, 0.0);
-		rgb green  (0.1, 0.8, 0.1);
-		rgb blue   (0.0, 0.0, 1.0);
-		rgb violet (0.5, 0.0, 0.9);
-		
 		// some basic scene elements
-		Shape* sphere = new Sphere( Point(250,250,-1000), 150 );
+		Matrix trans( make_translation(-250,-250,1000) );
+		Matrix scale( make_scale(0.5,1.2,1.5) );
+		
+		Shape* sphere = new Sphere( 150 );
+		sphere->transform(trans);
+		sphere->transform(scale);
+		
 		Shape* triangle = new Triangle( Point(300,600,-800), Point(0,100,-1000), Point(450,20,-1000) );
 		
 		// storing elements in composite
@@ -46,7 +43,7 @@ public :
 		shapes.push( triangle );
 		
 		// background color;
-		rgb bgcolor = black;
+		rgb bgcolor(0,0,0);
 		
 		
 		// for all pixels of the window
@@ -82,7 +79,7 @@ int main(int argc, char* argv[])
 	const std::size_t width = 500;
 	const std::size_t height = 500;
 	
-	glutwindow::init(width, height, 100, 100, "Debug Shapes", argc, argv);
+	glutwindow::init(width, height, 100, 100, "Raytracer", argc, argv);
 	
 	rt_application app;
 	boost::thread thr(boost::bind(&rt_application::raytrace, &app));

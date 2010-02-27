@@ -56,6 +56,9 @@ Matrix make_scale       ( Vector const& );
 Matrix make_rotation_x  ( double );
 Matrix make_rotation_y  ( double );
 Matrix make_rotation_z  ( double );
+/*
+Matrix make_rotation    ( double, Vector const& );
+*/
 
 double determinant   ( Matrix const& );
 Matrix inverse       ( Matrix const& );

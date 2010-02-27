@@ -7,6 +7,7 @@
 // project header
 #include <point.hpp>
 #include <vector.hpp>
+#include <matrix.hpp>
 
 
 class Ray
@@ -27,6 +28,8 @@ public: // methods
 	
 	const Vector& dir () const;
 	Vector&       dir ( const Vector& v );
+	
+	Ray transform ( const Matrix& trans ) const;
 	
 	Point point_at_parameter ( const scalar_t& param );
 	
