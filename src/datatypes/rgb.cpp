@@ -97,6 +97,38 @@ rgb::operator+=(rgb const& a)
 }
 
 
+/* friend */ rgb&
+operator* (const rgb& lhs, const float& rhs)
+{
+  rgb tmp(lhs);
+  tmp.data_[0] *= rhs;
+  tmp.data_[1] *= rhs;
+  tmp.data_[2] *= rhs;
+  return tmp;
+}
+
+/* friend */ rgb&
+operator* (const float& lhs, const rgb& rhs)
+{
+  return (rhs * lhs);
+}
+
+/* friend */ rgb&
+operator/ (const rgb& lhs, const float& rhs)
+{
+  rgb tmp(lhs);
+  tmp.data_[0] /= rhs;
+  tmp.data_[1] /= rhs;
+  tmp.data_[2] /= rhs;
+  return tmp;
+}
+
+/* friend */ rgb&
+operator/ (const float& lhs, const rgb& rhs)
+{
+  return (rhs * lhs);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 rgb 
 operator+(rgb const& a, rgb const& b) 
