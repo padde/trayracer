@@ -49,7 +49,7 @@ bool Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& 
 		hitrec.t = t;
 		hitrec.hit = true;
 		hitrec.normal = unify( ray.origin() + t*ray.dir() - center_ );
-		hitrec.color = rgb(1,0,0);
+		hitrec.color = rgb(0,1,0);
 		
 		return true;
 	}
@@ -58,7 +58,7 @@ bool Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& 
 }
 
 bool
-Sphere::shadow_hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
+Sphere::hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
 {
 	Vector tmp =  ray.origin() - center_;
 	

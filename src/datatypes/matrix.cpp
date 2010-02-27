@@ -490,10 +490,6 @@ Point
 operator* ( Matrix const& lhs, Point const& rhs)
 {
 	Point tmp;
-	// tmp[0] = lhs[0] *rhs[0] + lhs[1] *rhs[1] + lhs[2] *rhs[2] + lhs[3] *rhs[3];
-	// tmp[1] = lhs[4] *rhs[0] + lhs[5] *rhs[1] + lhs[6] *rhs[2] + lhs[7] *rhs[3];
-	// tmp[2] = lhs[8] *rhs[0] + lhs[9] *rhs[1] + lhs[10]*rhs[2] + lhs[11]*rhs[3];
-	// tmp[3] = lhs[12]*rhs[0] + lhs[13]*rhs[1] + lhs[14]*rhs[2] + lhs[15]*rhs[3];
 	tmp[0] = lhs[0] *rhs[0] + lhs[1] *rhs[1] + lhs[2] *rhs[2] + lhs[3] ;
 	tmp[1] = lhs[4] *rhs[0] + lhs[5] *rhs[1] + lhs[6] *rhs[2] + lhs[7] ;
 	tmp[2] = lhs[8] *rhs[0] + lhs[9] *rhs[1] + lhs[10]*rhs[2] + lhs[11];
@@ -504,10 +500,6 @@ Vector
 operator* ( Matrix const& lhs, Vector const& rhs)
 {
 	Vector tmp;
-	// tmp[0] = lhs[0] *rhs[0] + lhs[1] *rhs[1] + lhs[2] *rhs[2] + lhs[3] *rhs[3];
-	// tmp[1] = lhs[4] *rhs[0] + lhs[5] *rhs[1] + lhs[6] *rhs[2] + lhs[7] *rhs[3];
-	// tmp[2] = lhs[8] *rhs[0] + lhs[9] *rhs[1] + lhs[10]*rhs[2] + lhs[11]*rhs[3];
-	// tmp[3] = lhs[12]*rhs[0] + lhs[13]*rhs[1] + lhs[14]*rhs[2] + lhs[15]*rhs[3];
 	tmp[0] = lhs[0] *rhs[0] + lhs[1] *rhs[1] + lhs[2] *rhs[2];
 	tmp[1] = lhs[4] *rhs[0] + lhs[5] *rhs[1] + lhs[6] *rhs[2];
 	tmp[2] = lhs[8] *rhs[0] + lhs[9] *rhs[1] + lhs[10]*rhs[2];

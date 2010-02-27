@@ -18,8 +18,8 @@ public: // c'tors, d'tor
 	~Triangle ();
 	
 public: // methods
-	bool hit        ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const;
-	bool shadow_hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const;
+	bool hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const;
+	bool hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const;
 	
 private: // member
 	Point a_;

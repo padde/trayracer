@@ -7,9 +7,12 @@
 #include <boost/bind.hpp>
 #include <GL/glut.h>
 
+#include <rgb.hpp>
 #include <shape.hpp>
 #include <sphere.hpp>
 #include <triangle.hpp>
+#include <compositeshape.hpp>
+
 
 class rt_application 
 {
@@ -18,14 +21,33 @@ public :
 	{
 		glutwindow& gw = glutwindow::instance();
 		
-		HitRecord rec; // store hit data
-		bool is_hit;   // have we had a hit?
-		float tmax;    // max distance that is checked for hits, for hidden surface determination 
-		Vector viewdir(0,0,-1); // the direction that we are looking to
+		HitRecord rec;
+		float tmax;
+		const float fmax = std::numeric_limits<float>::max();
+		Vector viewdir(0,0,-1);
+		
+		// some arbitrary colors
+		rgb white  (1.0, 1.0, 1.0);
+		rgb black  (0.0, 0.0, 0.0);
+		rgb red    (0.9, 0.2, 0.1);
+		rgb orange (1.0, 0.7, 0.0);
+		rgb yellow (1.0, 1.0, 0.0);
+		rgb green  (0.1, 0.8, 0.1);
+		rgb blue   (0.0, 0.0, 1.0);
+		rgb violet (0.5, 0.0, 0.9);
 		
 		// some basic scene elements
-		Sphere sphere( Point(250,250,-1000), 150 );
-		Triangle triangle( Point(300,600,-800), Point(0,100,-1000), Point(450,20,-1000) );
+		Shape* sphere = new Sphere( Point(250,250,-1000), 150 );
+		Shape* triangle = new Triangle( Point(300,600,-800), Point(0,100,-1000), Point(450,20,-1000) );
+		
+		// storing elements in composite
+		CompositeShape shapes;
+		shapes.push( sphere );
+		shapes.push( triangle );
+		
+		// background color;
+		rgb bgcolor = black;
+		
 		
 		// for all pixels of the window
 		for (std::size_t y = 0; y < gw.height(); ++y)
@@ -35,27 +57,15 @@ public :
 				pixel p(x,y);
 				
 				Ray ray( Point(x,y,0), viewdir ); // current ray
-				tmax = 100000;  // reset tmax
-				is_hit = false; // reset is_hit
+				tmax = fmax;                      // reset tmax
 				
-				// color spheres in blue
-				if ( sphere.hit( ray, 0, tmax, rec) ) {
-					p.color = rgb(0.2,0.2,0.8);
+				if ( shapes.hit( ray, 0, tmax, rec) )
+				{
+					p.color = rec.color;
 					tmax = rec.t;
-					is_hit = true;
 				}
+				else p.color = bgcolor;
 				
-				// color triangles in yellow
-				if ( triangle.hit( ray, 0, tmax, rec) ) {
-					p.color = rgb(0.8,0.8,0.2);
-					tmax = rec.t;
-					is_hit = true;
-				}
-				
-				// if no hit => background. color black
-				if ( ! is_hit ) p.color = rgb(0,0,0);
-				
-				// write pixel to screen
 				gw.write(p);
 			}
 		}

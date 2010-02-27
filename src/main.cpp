@@ -47,7 +47,7 @@ public :
 		}
 		
 		// save final image
-		pw.save();
+		// pw.save();
 	}
 	
 private : // attributes

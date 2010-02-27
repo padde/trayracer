@@ -79,7 +79,7 @@ bool Triangle::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord
 	return false;
 }
 
-bool Triangle::shadow_hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
+bool Triangle::hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
 {
 	float A = a_[0] - b_[0];
 	float B = a_[1] - b_[1];

@@ -25,3 +25,27 @@ Shape::name () const
 {
 	return name_;
 }
+
+void
+Shape::name ( const std::string& name )
+{
+	name_ = name;
+}
+
+const Matrix&
+Shape::trans () const
+{
+	return trans_;
+}
+
+void
+Shape::trans ( const Matrix& trans )
+{
+	trans_ = trans;
+}
+
+void
+Shape::trans_mult ( const Matrix& trans )
+{
+	trans_ *= trans;
+}
