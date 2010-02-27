@@ -14,6 +14,7 @@ class Sphere : public Shape
 public: // c'tors, d'tor
 	Sphere ();
 	Sphere ( const float& radius );
+	Sphere ( const Point& center, const float& radius );
 	~Sphere ();
 	
 public: // methods
@@ -22,6 +23,7 @@ public: // methods
 	
 private:
 	float radius_;
+	Point center_;
 };
 
 #endif //BUW_SPHERE_HPP 

@@ -97,7 +97,7 @@ rgb::operator+=(rgb const& a)
 }
 
 
-/* friend */ rgb&
+/* friend */ rgb
 operator* (const rgb& lhs, const float& rhs)
 {
   rgb tmp(lhs);
@@ -107,13 +107,13 @@ operator* (const rgb& lhs, const float& rhs)
   return tmp;
 }
 
-/* friend */ rgb&
+/* friend */ rgb
 operator* (const float& lhs, const rgb& rhs)
 {
   return (rhs * lhs);
 }
 
-/* friend */ rgb&
+/* friend */ rgb
 operator/ (const rgb& lhs, const float& rhs)
 {
   rgb tmp(lhs);
@@ -123,7 +123,7 @@ operator/ (const rgb& lhs, const float& rhs)
   return tmp;
 }
 
-/* friend */ rgb&
+/* friend */ rgb
 operator/ (const float& lhs, const rgb& rhs)
 {
   return (rhs * lhs);

@@ -25,8 +25,10 @@ Triangle::Triangle ( const Point& a, const Point& b, const Point& c ) :
 Triangle::~Triangle ()
 {}
 
-bool Triangle::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const
+bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const
 {
+	Ray ray = original_ray.transform(trans_);
+	
 	float A = a_[0] - b_[0];
 	float B = a_[1] - b_[1];
 	float C = a_[2] - b_[2];
@@ -79,8 +81,10 @@ bool Triangle::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord
 	return false;
 }
 
-bool Triangle::hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
+bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 {
+	Ray ray = original_ray.transform(trans_);
+	
 	float A = a_[0] - b_[0];
 	float B = a_[1] - b_[1];
 	float C = a_[2] - b_[2];

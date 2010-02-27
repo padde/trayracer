@@ -25,6 +25,9 @@ public : // methods
 	double const& operator[]    ( unsigned ) const;
 	double&       operator[]    ( unsigned );
 	Matrix&       operator*=    ( Matrix const& );
+	Matrix&       operator*=    ( double );
+	Matrix&       operator+=    ( Matrix const& );
+	Matrix&       operator-=    ( Matrix const& );
 	double        determinant   ( ) const;
 	bool          invert        ( );
 	void          transpose     ( );
@@ -38,14 +41,16 @@ private: // members
 	double data_[16];
 };
 
-Matrix operator*  ( Matrix const&, Matrix const&  );
-Matrix operator*  ( Matrix const&, double         );
-Matrix operator*  ( double,        Matrix const&  );
-Matrix operator/  ( Matrix const&, double         );
-Point  operator*  ( Matrix const&, Point const& );
-Vector operator*  ( Matrix const&, Vector const&);
-bool   operator== ( Matrix const&, Matrix const&  );
-bool   operator!= ( Matrix const&, Matrix const&  );
+Matrix operator+  ( Matrix const&, Matrix const& );
+Matrix operator-  ( Matrix const&, Matrix const& );
+Matrix operator*  ( Matrix const&, Matrix const& );
+Matrix operator*  ( Matrix const&, double        );
+Matrix operator*  ( double,        Matrix const& );
+Matrix operator/  ( Matrix const&, double        );
+Point  operator*  ( Matrix const&, Point const&  );
+Vector operator*  ( Matrix const&, Vector const& );
+bool   operator== ( Matrix const&, Matrix const& );
+bool   operator!= ( Matrix const&, Matrix const& );
 
 std::ostream& operator<< ( std::ostream&, Matrix const&  );
 
@@ -56,9 +61,7 @@ Matrix make_scale       ( Vector const& );
 Matrix make_rotation_x  ( double );
 Matrix make_rotation_y  ( double );
 Matrix make_rotation_z  ( double );
-/*
-Matrix make_rotation    ( double, Vector const& );
-*/
+Matrix make_rotation    ( Vector const&, double );
 
 double determinant   ( Matrix const& );
 Matrix inverse       ( Matrix const& );

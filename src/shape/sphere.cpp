@@ -23,6 +23,10 @@ Sphere::Sphere ( const float& radius ) :
 	radius_(radius)
 {}
 
+Sphere::Sphere ( const Point& center, const float& radius ) :
+	 radius_(radius), center_(center)
+{}
+
 Sphere::~Sphere ()
 {}
 
@@ -32,7 +36,7 @@ bool Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, Hi
 	Ray ray = original_ray.transform(trans_);
 	
 	// some helper variables
-	Vector org = ray.origin();
+	Vector org = ray.origin() - center_;
 	Vector dir = ray.dir();
 	float a = dot(dir, dir);
 	float b = dot(dir, org) * 2;
@@ -52,7 +56,7 @@ bool Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, Hi
 			// hit detected
 			hitrec.t      = t;
 			hitrec.hit    = true;
-			hitrec.normal = unify( ray.origin() + t*ray.dir());
+			hitrec.normal = unify( t*ray.dir() + org );
 			hitrec.color  = rgb(1,1,0);
 			return true;
 		}
@@ -68,7 +72,7 @@ Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 	Ray ray = original_ray.transform(trans_);
 	
 	// some helper variables
-	Vector org = ray.origin();
+	Vector org = ray.origin() - center_;
 	Vector dir = ray.dir();
 	float a = dot(dir, dir);
 	float b = dot(dir, org) * 2;

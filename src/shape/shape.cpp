@@ -40,5 +40,7 @@ Shape::name ( const std::string& name )
 void
 Shape::transform ( const Matrix& trans )
 {
-	trans_ *= trans;
+	Matrix tmp(trans);
+	tmp.invert();
+	trans_ *= tmp;
 }

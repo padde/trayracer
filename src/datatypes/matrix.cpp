@@ -194,6 +194,85 @@ Matrix::operator*=(Matrix const& rhs)
 	return *this;
 }
 
+
+Matrix&
+Matrix::operator*=( double rhs )
+{
+	Matrix tmp;
+	
+	tmp.data_[ 0] *= rhs;
+	tmp.data_[ 1] *= rhs;
+	tmp.data_[ 2] *= rhs;
+	tmp.data_[ 3] *= rhs;
+	tmp.data_[ 4] *= rhs;
+	tmp.data_[ 5] *= rhs;
+	tmp.data_[ 6] *= rhs;
+	tmp.data_[ 7] *= rhs;
+	tmp.data_[ 8] *= rhs;
+	tmp.data_[ 9] *= rhs;
+	tmp.data_[10] *= rhs;
+	tmp.data_[11] *= rhs;
+	tmp.data_[12] *= rhs;
+	tmp.data_[13] *= rhs;
+	tmp.data_[14] *= rhs;
+	tmp.data_[15] *= rhs;
+	
+	swap(tmp);
+	return *this;
+}
+
+Matrix&
+Matrix::operator+=(Matrix const& rhs)
+{
+	Matrix tmp;
+	
+	tmp.data_[ 0] += rhs.data_[ 0];
+	tmp.data_[ 1] += rhs.data_[ 1];
+	tmp.data_[ 2] += rhs.data_[ 2];
+	tmp.data_[ 3] += rhs.data_[ 3];
+	tmp.data_[ 4] += rhs.data_[ 4];
+	tmp.data_[ 5] += rhs.data_[ 5];
+	tmp.data_[ 6] += rhs.data_[ 6];
+	tmp.data_[ 7] += rhs.data_[ 7];
+	tmp.data_[ 8] += rhs.data_[ 8];
+	tmp.data_[ 9] += rhs.data_[ 9];
+	tmp.data_[10] += rhs.data_[10];
+	tmp.data_[11] += rhs.data_[11];
+	tmp.data_[12] += rhs.data_[12];
+	tmp.data_[13] += rhs.data_[13];
+	tmp.data_[14] += rhs.data_[14];
+	tmp.data_[15] += rhs.data_[15];
+	
+	swap(tmp);
+	return *this;
+}
+
+Matrix&
+Matrix::operator-=(Matrix const& rhs)
+{
+	Matrix tmp;
+	
+	tmp.data_[ 0] -= rhs.data_[ 0];
+	tmp.data_[ 1] -= rhs.data_[ 1];
+	tmp.data_[ 2] -= rhs.data_[ 2];
+	tmp.data_[ 3] -= rhs.data_[ 3];
+	tmp.data_[ 4] -= rhs.data_[ 4];
+	tmp.data_[ 5] -= rhs.data_[ 5];
+	tmp.data_[ 6] -= rhs.data_[ 6];
+	tmp.data_[ 7] -= rhs.data_[ 7];
+	tmp.data_[ 8] -= rhs.data_[ 8];
+	tmp.data_[ 9] -= rhs.data_[ 9];
+	tmp.data_[10] -= rhs.data_[10];
+	tmp.data_[11] -= rhs.data_[11];
+	tmp.data_[12] -= rhs.data_[12];
+	tmp.data_[13] -= rhs.data_[13];
+	tmp.data_[14] -= rhs.data_[14];
+	tmp.data_[15] -= rhs.data_[15];
+	
+	swap(tmp);
+	return *this;
+}
+
 double
 Matrix::determinant() const
 {
@@ -282,23 +361,18 @@ void
 Matrix::transpose()
 {
 	Matrix tmp(*this);
-	
-	// data_[ 0] = tmp.data_[ 0];
 	data_[ 1] = tmp.data_[ 4];
 	data_[ 2] = tmp.data_[ 8];
 	data_[ 3] = tmp.data_[12];
 	data_[ 4] = tmp.data_[ 1];
-	// data_[ 5] = tmp.data_[ 5];
 	data_[ 6] = tmp.data_[ 9];
 	data_[ 7] = tmp.data_[13];
 	data_[ 8] = tmp.data_[ 2];
 	data_[ 9] = tmp.data_[ 6];
-	// data_[10] = tmp.data_[10];
 	data_[11] = tmp.data_[14];
 	data_[12] = tmp.data_[ 3];
 	data_[13] = tmp.data_[ 7];
 	data_[14] = tmp.data_[11];
-	// data_[15] = tmp.data_[15];
 }
 
 bool
@@ -330,26 +404,50 @@ operator*(Matrix const& lhs, Matrix const& rhs)
 	return Matrix(lhs) *= rhs;
 }
 
+Matrix
+operator*(Matrix const& lhs, double rhs)
+{
+	return Matrix(lhs) *= rhs;
+}
+
+Matrix
+operator*(double lhs, Matrix const& rhs)
+{
+	return rhs * lhs;
+}
+
+Matrix
+operator+(Matrix const& lhs, Matrix const& rhs)
+{
+	return Matrix(lhs) += rhs;
+}
+
+Matrix
+operator-(Matrix const& lhs, Matrix const& rhs)
+{
+	return Matrix(lhs) -= rhs;
+}
+
 bool
 operator==(Matrix const& lhs, Matrix const& rhs)
 {
 	return bool(
-		lhs[ 0]   == rhs[ 0] &&
-		lhs[ 1]   == rhs[ 1] &&
-		lhs[ 2]   == rhs[ 2] &&
-		lhs[ 3]   == rhs[ 3] &&
-		lhs[ 4]   == rhs[ 4] &&
-		lhs[ 5]   == rhs[ 5] &&
-		lhs[ 6]   == rhs[ 6] &&
-		lhs[ 7]   == rhs[ 7] &&
-		lhs[ 8]   == rhs[ 8] &&
-		lhs[ 9]   == rhs[ 9] &&
-		lhs[10]   == rhs[10] &&
-		lhs[11]   == rhs[11] &&
-		lhs[12]   == rhs[12] &&
-		lhs[13]   == rhs[13] &&
-		lhs[14]   == rhs[14] &&
-		lhs[15]   == rhs[15] );
+		lhs[ 0] == rhs[ 0] &&
+		lhs[ 1] == rhs[ 1] &&
+		lhs[ 2] == rhs[ 2] &&
+		lhs[ 3] == rhs[ 3] &&
+		lhs[ 4] == rhs[ 4] &&
+		lhs[ 5] == rhs[ 5] &&
+		lhs[ 6] == rhs[ 6] &&
+		lhs[ 7] == rhs[ 7] &&
+		lhs[ 8] == rhs[ 8] &&
+		lhs[ 9] == rhs[ 9] &&
+		lhs[10] == rhs[10] &&
+		lhs[11] == rhs[11] &&
+		lhs[12] == rhs[12] &&
+		lhs[13] == rhs[13] &&
+		lhs[14] == rhs[14] &&
+		lhs[15] == rhs[15] );
 }
 
 bool
@@ -486,12 +584,34 @@ make_rotation_z ( double a )
 	return values;
 }
 
-/*
-Matrix make_rotation ( double a, Vector const& v )
+Matrix make_rotation ( Vector const& v, double a )
 {
+	Vector u   = unify(v);
+	double c   = cos(a);
+	double s   = sin(a);
+	double omc = 1-c;
+	double ux  = u[0];
+	double uy  = u[1];
+	double uz  = u[2];
+	double ux2 = ux*ux;
+	double uy2 = uy*uy;
+	double uz2 = uz*uz;
+	double uxy = ux*uy;
+	double uxz = ux*uz;
+	double uyz = uy*uz;
+	double uxs = ux*s;
+	double uys = uy*s;
+	double uzs = uz*s;
 	
+	double const values[16] = {
+		ux2+(1-ux2)*c, uxy*omc-uzs,   uxz*omc+uys,   0.0,
+		uxy*omc+uzs,   uy2+(1-uy2)*c, uyz*omc-uxs,   0.0,
+		uxz*omc-uys,   uyz*omc+uxs,   uz2+(1-uz2)*c, 0.0,
+		0.0,           0.0,           0.0,           1.0
+	};
+	
+	return values;
 }
-*/
 
 Point
 operator* ( Matrix const& lhs, Point const& rhs)
