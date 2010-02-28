@@ -42,6 +42,12 @@ namespace {
 			(a1 * b3 * c2) - (a2 * b1 * c3) - (a3 * b2 * c1));
 	}
 	
+	double
+	deg_to_rad(double angle)
+	{
+		// a deg -> a*(180/pi) rad
+		return angle * 0.0174533;
+	}
 }
 
 
@@ -547,7 +553,7 @@ make_scale ( Vector const& v)
 	};
 	return values;
 }
-
+/*
 Matrix
 make_rotation_x ( double a )
 {
@@ -582,10 +588,11 @@ make_rotation_z ( double a )
 		0.0   ,  0.0   , 0.0, 1.0
 	};
 	return values;
-}
+}*/
 
 Matrix make_rotation ( Vector const& v, double a )
 {
+	a = deg_to_rad(a);
 	Vector u   = unify(v);
 	double c   = cos(a);
 	double s   = sin(a);

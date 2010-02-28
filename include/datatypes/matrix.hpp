@@ -58,9 +58,9 @@ Matrix make_translation ( double, double, double );
 Matrix make_translation ( Vector const& );
 Matrix make_scale       ( double, double, double );
 Matrix make_scale       ( Vector const& );
-Matrix make_rotation_x  ( double );
-Matrix make_rotation_y  ( double );
-Matrix make_rotation_z  ( double );
+// Matrix make_rotation_x  ( double );
+// Matrix make_rotation_y  ( double );
+// Matrix make_rotation_z  ( double );
 Matrix make_rotation    ( Vector const&, double );
 
 double determinant   ( Matrix const& );

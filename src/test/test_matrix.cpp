@@ -71,6 +71,7 @@ TEST ( matrix__should_make_scale_with_Vector )
 	CHECK_EQUAL(expected, m);
 }
 
+/*
 TEST ( matrix__should_make_rotation_x )
 {
 	double a = 45 * M_PI / 180;
@@ -117,7 +118,7 @@ TEST ( matrix__should_make_rotation_z )
 	Matrix expected(values);
 	
 	CHECK_EQUAL(expected, m);
-}
+}*/
 
 TEST ( matrix__should_multiplicate_scale_with_Vector )
 {
