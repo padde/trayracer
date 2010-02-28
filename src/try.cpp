@@ -12,6 +12,7 @@
 #include <shape.hpp>
 #include <sphere.hpp>
 #include <triangle.hpp>
+#include <box.hpp>
 #include <matrix.hpp>
 #include <compositeshape.hpp>
 
@@ -35,18 +36,19 @@ public :
 		sphere->transform(translate);
 		
 		Shape* triangle = new Triangle( Point(300,600,-800), Point(0,100,-1000), Point(450,20,-1000) );
-		Matrix rotate( make_rotation( Vector(0,0,1), 0.1 ) );
-		// Matrix rotate( make_rotation_z(0.1) );
+		Matrix rotate( make_rotation( Vector(3,2,1), 0.01 ) );
 		triangle->transform(rotate);
 		
-		rgb bgcolor(0,0,0);
+		Shape* box = new Box( Point(0,0,0), Point(10,10,10) );
+		
+		rgb bgcolor(0.1,0.1,0.1);
 		
 		// storing elements in composite
 		CompositeShape shapes;
+		shapes.push( box );
 		shapes.push( sphere );
 		shapes.push( triangle );
 		
-		while(true) {
 		triangle->transform(rotate);
 		// for all pixels of the window
 		for (std::size_t y = 0; y < gw.height(); ++y) {
@@ -80,7 +82,7 @@ public :
 				Ray ray( Point(x,y,0), viewdir ); // current ray
 				tmax = fmax;                      // reset tmax
 				
-				if ( shapes.hit( ray, 0, tmax, rec) ) {
+				if ( shapes.hit(ray, 0, tmax, rec) ) {
 					p.color = rec.color;
 					tmax = rec.t;
 				} else {
@@ -89,7 +91,7 @@ public :
 				
 				gw.write(p);
 			}
-		}}
+		}
 	}
 	
 };

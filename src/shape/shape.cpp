@@ -37,7 +37,7 @@ Shape::name ( const std::string& name )
 	name_ = name;
 }
 
-void
+/* virtual */ void
 Shape::transform ( const Matrix& trans )
 {
 	Matrix tmp(trans);

@@ -40,7 +40,7 @@ public: // methods
 	const std::string& name () const;  // name_ getter
 	void name ( const std::string& );  // name_ setter
 	
-	void transform ( const Matrix& ); // multiplicate trans_ with given matrix
+	virtual void transform ( const Matrix& ); // multiplicate trans_ with given matrix
 
 public: // virtual methods
 	virtual bool hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const = 0; // compute intersections with given ray, store result in hitrec

@@ -52,13 +52,11 @@ CompositeShape::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecor
 bool
 CompositeShape::hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const
 {
-	bool is_hit;
+	bool is_hit(false);
 	
 	// go through all shapes and check for hits
-	for ( unsigned i=0; i < shapes_.size(); ++i )
-	{
-		if ( shapes_[i]->hit(ray, tmin, tmax) )
-		{
+	for ( unsigned i=0; i < shapes_.size(); ++i ) {
+		if ( shapes_[i]->hit(ray, tmin, tmax) ) {
 			is_hit = true;
 		}
 	}
@@ -70,6 +68,14 @@ void
 CompositeShape::push ( Shape* shape )
 {
 	shapes_.push_back(shape);
+}
+
+void
+CompositeShape::transform ( const Matrix& trans )
+{
+	for ( unsigned i=0; i < shapes_.size(); ++i ) {
+		shapes_[i]->transform(trans);
+	}
 }
 
 const Shape*
