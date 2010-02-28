@@ -50,6 +50,8 @@ public: // friends
 	friend bool operator!= (const Vector& lhs, const Vector& rhs);
 	
 	friend value_t dot   (const Vector& lhs, const Vector& rhs);
+	friend value_t dot   (const Point& lhs, const Vector& rhs);
+	friend value_t dot   (const Vector& lhs, const Point& rhs);
 	friend Vector  cross (const Vector& lhs, const Vector& rhs); 
 	
 	friend std::ostream& operator<< (std::ostream& os, Vector const& v);

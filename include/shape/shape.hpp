@@ -32,11 +32,10 @@ public: // enums, typedefs
 public: // c'tors, d'tor
 	Shape ();
 	Shape ( std::string name, Matrix trans );
-	Shape ( std::string name, Material* material );
 	Shape ( std::string name, Material* material, Matrix trans );
 	virtual ~Shape ();
 
-public: // methods
+public: // methods8
 	const std::string& name () const;  // name_ getter
 	void name ( const std::string& );  // name_ setter
 	

@@ -27,30 +27,32 @@ public :
 		
 		// initial variables
 		HitRecord rec;
-		float tmax;
 		const float fmax = std::numeric_limits<float>::max();
+		float tmax = fmax;
+		float tmin = 0.00000001;
 		Vector viewdir(0,0,-1);
 		
 		
 		///////////////////// scene elements ////////////////////////
 		
-		Shape* sphere    = new Sphere(150);
-		Matrix translate = make_translation(250,250,-1000);
-		sphere->transform(translate);
+		// objects
+		Shape* sphere   = new Sphere   ( Point(250,250,-1000), 150);
+		Shape* triangle = new Triangle ( Point(300,600, -800), Point(0  ,100,-1000), Point(450,20,-1000) );
+		// Shape* box      = new Box      ( Point(50,50,-900 ), Point(100,100,-1200) );
 		
-		Shape* triangle = new Triangle( Point(300,600,-800), Point(0,100,-1000), Point(450,20,-1000) );
-		Matrix rotate   = make_rotation( Vector(3,2,1), 360 );
-		triangle->transform(rotate);
+		// transformations
+		Matrix rotate    = make_rotation ( Vector(1,3,1), 0.001 );
+		// Matrix translate = make_translation ( 20, 2, 1 );
+		// box->transform(rotate);
 		
-		Shape* box = new Box( Point(0,0,0), Point(10,10,10) );
-		
+		// background color
 		rgb bgcolor(0.1,0.1,0.1);
 		
-		// storing elements in composite
-		CompositeShape shapes;
-		shapes.push( sphere );
-		shapes.push( triangle );
-		shapes.push( box );
+		// store elements in composite
+		CompositeShape* shapes = new CompositeShape;
+		shapes->push( sphere );
+		shapes->push( triangle );
+		// shapes->push( box );
 		
 		
 		////////////// actual raytracing happens here ///////////////
@@ -79,7 +81,7 @@ public :
 				Ray ray( Point(x,y,0), viewdir ); // current ray
 				tmax = fmax;                      // reset tmax
 				
-				if ( shapes.hit(ray,0,tmax,rec) )
+				if ( shapes->hit(ray,tmin,tmax,rec) )
 					p.color = rec.color;
 				else
 					p.color = bgcolor;

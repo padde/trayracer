@@ -14,11 +14,11 @@ Shape::Shape () :
 
 
 Shape::Shape ( std::string name, Matrix trans ) :
-	name_(name), trans_(trans)
+	name_(name), material_ptr_(NULL), trans_(trans)
 {}
 
-Shape::Shape ( std::string name, Material* material ) :
-	name_(name), material_ptr_(material)
+Shape::Shape ( std::string name, Material* material, Matrix trans ) :
+	name_(name), material_ptr_(material), trans_(trans)
 {}
 
 /* virtual */

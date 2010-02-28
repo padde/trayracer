@@ -215,6 +215,19 @@ dot (const Vector& lhs, const Vector& rhs)
 		lhs.data_[2] * rhs.data_[2] );
 }
 
+
+/* friend */ Vector::value_t
+dot (const Point& lhs, const Vector& rhs)
+{
+	return dot(Vector(lhs),rhs);
+}
+
+/* friend */ Vector::value_t
+dot (const Vector& lhs, const Point& rhs)
+{
+	return dot(lhs,Vector(rhs));
+}
+
 /* friend */ Vector
 cross (const Vector& lhs, const Vector& rhs)
 {

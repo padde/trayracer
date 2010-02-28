@@ -24,7 +24,7 @@ Sphere::Sphere ( const float& radius ) :
 {}
 
 Sphere::Sphere ( const Point& center, const float& radius ) :
-	 radius_(radius), center_(center)
+	radius_(radius), center_(center)
 {}
 
 Sphere::~Sphere ()
@@ -51,7 +51,7 @@ bool Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, Hi
 		if ( t < tmin )
 			t = ( -b + discriminant ) / ( 2*a );
 		
-		if ( t >= tmin and t <= tmax )
+		if ( t > tmin and t < tmax )
 		{
 			// hit detected
 			hitrec.t      = t;
@@ -87,7 +87,7 @@ Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 		if ( t < tmin )
 			t = ( -b + discriminant ) / ( 2*a );
 		
-		return ( t >= tmin and t <= tmax );
+		return ( t > tmin and t < tmax );
 	}
 	
 	return false;
