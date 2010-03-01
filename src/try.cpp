@@ -37,13 +37,14 @@ public :
 		
 		// objects
 		Shape* sphere   = new Sphere   ( Point(250,250,-1000), 150);
-		Shape* triangle = new Triangle ( Point(300,600, -800), Point(0  ,100,-1000), Point(450,20,-1000) );
-		// Shape* box      = new Box      ( Point(50,50,-900 ), Point(100,100,-1200) );
+		Shape* triangle = new Triangle ( Point(300,450, -800), Point(0  ,100,-1000), Point(450,20,-1000) );
+		Shape* box      = new Box      ( Point(100,100,-750 ), Point(350,350,-1050) );
 		
-		// transformations
-		Matrix rotate    = make_rotation ( Vector(1,3,1), 0.001 );
-		// Matrix translate = make_translation ( 20, 2, 1 );
-		// box->transform(rotate);
+		Matrix m = make_rotation( Vector (1,2,-1), 10 );
+		Matrix n = make_translation( 100,0,-90 );
+		box->transform(m);
+		box->transform(n);
+		
 		
 		// background color
 		rgb bgcolor(0.1,0.1,0.1);
@@ -52,30 +53,13 @@ public :
 		CompositeShape* shapes = new CompositeShape;
 		shapes->push( sphere );
 		shapes->push( triangle );
-		// shapes->push( box );
-		
+		shapes->push( box );
 		
 		////////////// actual raytracing happens here ///////////////
 		
 		for (std::size_t y = 0; y < gw.height(); ++y) {
 			for (std::size_t x = 0; x < gw.width(); ++x) {
 				pixel p(x,y);
-				
-				/*// with antialiasing
-				for (int i=1; i<=5; ++i) {
-					for (int j=1; j<=5; ++j) {
-						float newx = x+(i-2)*0.2;
-						float newy = y+(j-2)*0.2;
-						Ray ray( Point(newx,newy,0), viewdir );
-						tmax = fmax;
-						int index = (i+3*j);
-						
-						if ( shapes.hit(ray,0,tmax,rec) )
-							p.color = (p.color*(index-1)+rec.color)/index;
-						else
-							p.color = (p.color*(index-1)+bgcolor)/index;
-					}
-				}*/
 				
 				// without antialiasing
 				Ray ray( Point(x,y,0), viewdir ); // current ray
@@ -86,6 +70,23 @@ public :
 				else
 					p.color = bgcolor;
 				
+				/*
+				// with antialiasing
+				for (int i=1; i<=5; ++i) {
+					for (int j=1; j<=5; ++j) {
+						float newx = x+(i-2)*0.2;
+						float newy = y+(j-2)*0.2;
+						Ray ray( Point(newx,newy,0), viewdir );
+						tmax = fmax;
+						int index = (i+3*j);
+						
+						if ( shapes->hit(ray,0,tmax,rec) )
+							p.color = (p.color*(index-1)+rec.color)/index;
+						else
+							p.color = (p.color*(index-1)+bgcolor)/index;
+					}
+				}
+				*/
 				// write pixel to window
 				gw.write(p);
 			}

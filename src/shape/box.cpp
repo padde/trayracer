@@ -3,6 +3,7 @@
 
 // system header
 #include <iostream>
+#include <limits>
 
 // project header
 #include <shape.hpp>
@@ -10,7 +11,7 @@
 namespace {
 	// internal stuff
 	
-	const double epsilon = 0.00000001;
+	const double epsilon = std::numeric_limits<double>::epsilon() * 96;
 	
 	const Vector normals[6] = {
 		Vector(-1, 0, 0), 
@@ -27,7 +28,16 @@ Box::Box ()
 
 Box::Box ( const Point& a, const Point& b ) :
 	a_(a), b_(b)
-{}
+{
+	if (a_[0] > b_[0])
+		std::swap(a_[0], b_[0]);
+	
+	if (a_[1] > b_[1])
+		std::swap(a_[1], b_[1]);
+	
+	if (a_[2] > b_[2])
+		std::swap(a_[2], b_[2]);
+}
 
 Box::~Box ()
 {}
@@ -38,11 +48,7 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 	// transform ray to object space
 	Ray ray = original_ray.transform(trans_);
 	
-	Point p1(a_);
-	Point p2(b_);
-	
-	if (p1[0] > p2[0])
-		std::swap(p1, p2); 
+	Point p1(a_), p2(b_);
 	
 	double ox = ray.origin()[0];
 	double oy = ray.origin()[1];
@@ -73,6 +79,9 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 		ty_max = (p1[1] - oy) * b;
 	}
 	
+	if (tx_min > ty_max or ty_min > tx_max)
+		return false;
+	
 	double c = 1.0 / dz;
 	if (c >= 0) {
 		tz_min = (p1[2] - oz) * c;
@@ -82,6 +91,9 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 		tz_max = (p1[2] - oz) * c;
 	}
 	
+	if (tx_min > tz_max or tz_min > tx_max)
+		return false;
+		
 	// find largest entering t value
 	if (tx_min > ty_min) {
 		t0 = tx_min;
@@ -92,8 +104,8 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 	}
 	
 	if (tz_min > t0) {
-	  t0 = tz_min;
-	  face_in = (c >= 0.0) ? 2 : 5;
+		t0 = tz_min;
+		face_in = (c >= 0.0) ? 2 : 5;
 	}
 	
 	// find smallest exiting t value
@@ -110,21 +122,22 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	if (t1 > tmin and t1 < tmax) {
+	
+	// if (t1 > epsilon and t1 < tmax) {
+	if (t0 < t1 and t1 > epsilon and t0 > tmin and t0 < tmax) {
 		// hit detected
+		
 		if (t0 > epsilon) { // ray hits outside
 			tmin = t0;
-			tmax = t1;
 			hitrec.normal = normals[face_in];   
 		} else {
 			tmin = t1;
-			tmax = t0;
 			hitrec.normal = normals[face_out]; 
 		}
-		hitrec.t      = tmax;
+		hitrec.t      = tmin;
 		hitrec.hit    = true;
-		hitrec.color  = rgb(0.1,0.1,0.6);
-		return true ;
+		hitrec.color  = rgb(1,0,0);
+		return true;
 	}
 	
 	// if ( t >= tmin and t <= tmax )

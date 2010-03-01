@@ -67,13 +67,13 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	if ( t >= tmin and t <= tmax )
+	if ( t > tmin and t < tmax )
 	{
 		// hit detected
 		hitrec.t = t;
 		hitrec.hit = true;
 		hitrec.normal = unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
-		hitrec.color = rgb(1,0,0);
+		hitrec.color = rgb(1,1,0);
 		
 		return true;
 	}
@@ -123,5 +123,5 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax )
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	return ( t >= tmin and t <= tmax );
+	return ( t > tmin and t < tmax );
 }

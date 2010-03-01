@@ -57,7 +57,7 @@ bool Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, Hi
 			hitrec.t      = t;
 			hitrec.hit    = true;
 			hitrec.normal = unify( t*ray.dir() + org );
-			hitrec.color  = rgb(1,1,0);
+			hitrec.color  = rgb(0.1,0.1,0.6);
 			return true;
 		}
 	}
