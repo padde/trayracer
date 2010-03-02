@@ -2,20 +2,23 @@
 
 // system header
 #include <GL/glut.h>
+#include <png++/image.hpp>
+#include <png++/rgb_pixel.hpp>
 
 // project header
 #include <glutwindow.hpp>
 #include <pixel.hpp>
 #include <rgb.hpp>
 #include <camera.hpp>
+#include <tracer.hpp>
 #include <raycast.hpp>
+#include <barebone.hpp>
 
 
 
 
 Scene::Scene ()
 {
-	cameras_.push_back(new Camera(500,500,0.0));
 	tracer_ptr_ = new RayCast(this);
 	bgcolor_    = rgb(0,0,0);
 }
@@ -41,9 +44,9 @@ void Scene::push ( Material* material )
 	materials_.push_back(material);
 }
 
-void Scene::push ( Camera* camera_ptr )
+void Scene::set ( Camera* camera_ptr )
 {
-	cameras_.push_back(camera_ptr);
+	camera_ptr_ = camera_ptr;
 }
 
 void Scene::set ( rgb bgcolor )
@@ -76,24 +79,36 @@ Scene::bgcolor ()
 	return bgcolor_;
 }
 
-void Scene::render ( /*std::string cam_name,*/ std::string filename )
+void Scene::render ( std::string filename )
 {
 	glutwindow& gw = glutwindow::instance();
+	std::size_t width  = gw.width();
+	std::size_t height = gw.height();
 	
-	Camera* camera = cameras_[0];
+	png::image< png::rgb_pixel > png(width,height);
 	
 	// loop through all pixels of the viewplane
-	for (std::size_t y = 0; y < gw.height(); ++y)
+	for (std::size_t y = 0; y < height; ++y)
 	{
-		for (std::size_t x = 0; x < gw.width(); ++x)
+		for (std::size_t x = 0; x < width; ++x)
 		{
-			// create pixel and ray
-			pixel p   ( x,y );
-			Ray   ray ( camera->make_ray(x,y) );
-			
-			// trace the ray and write pixel to window
+			// create pixel and trace ray
+			pixel p (x,y);
+			Ray ray = camera_ptr_->make_ray(x,y);
 			p.color = tracer_ptr_->trace(ray);
+			
+			// write pixel to window
 			gw.write(p);
+			
+			// write pixel to png file
+			int r = p.color[rgb::r] * 255;
+			int g = p.color[rgb::g] * 255;
+			int b = p.color[rgb::b] * 255;
+			png[height-y-1][x] = png::rgb_pixel(r,g,b);
 		}	
 	}
+	
+	// save png image
+	png.write(filename);
+	std::cout << "image saved as " << filename << std::endl;
 }

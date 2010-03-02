@@ -53,7 +53,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 	
 	float beta = ( J*EIHF + K*GFDI + L*DHEG ) / denom;
 	
-	if ( beta <= 0.0f or beta >= 1.0f )
+	if ( beta <= 0.0 or beta >= 1.0 )
 		return false;
 	
 	float AKJB = A*K - J*B;
@@ -62,7 +62,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 	
 	float gamma = ( I*AKJB + H*JCAL + G*BLKC ) / denom;
 	
-	if ( gamma <= 0.0f or beta + gamma >= 1.0f )
+	if ( gamma <= 0.0 or beta + gamma >= 1.0 )
 		return false;
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
@@ -109,7 +109,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax )
 	
 	float beta = ( J*EIHF + K*GFDI + L*DHEG ) / denom;
 	
-	if ( beta <= 0.0f or beta >= 1.0f )
+	if ( beta <= 0.0 or beta >= 1.0 )
 		return false;
 	
 	float AKJB = A*K - J*B;
@@ -118,7 +118,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax )
 	
 	float gamma = ( I*AKJB + H*JCAL + G*BLKC ) / denom;
 	
-	if ( gamma <= 0.0f or beta + gamma >= 1.0f )
+	if ( gamma <= 0.0 or beta + gamma >= 1.0 )
 		return false;
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;

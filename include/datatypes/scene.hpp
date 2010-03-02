@@ -26,7 +26,6 @@ class Scene
 public: // enums, typedefs
 	typedef std::vector< Light*    > light_container;
 	typedef std::vector< Material* > material_container;
-	typedef std::vector< Camera*   > camera_container;
 
 public: // c'tors, d'tor
 	Scene ();
@@ -36,8 +35,8 @@ public: // methods
 	void push ( Shape*    shape_ptr    );
 	void push ( Light*    light_ptr    );
 	void push ( Material* material_ptr );
-	void push ( Camera*   camera_ptr   );
 	
+	void set ( Camera*  camera_ptr  );
 	void set ( rgb      bgcolor     );
 	void set ( Tracer*  tracer_ptr  );
 	void set ( Sampler* sampler_ptr );
@@ -45,12 +44,12 @@ public: // methods
 	Shape* shapes  ();
 	rgb    bgcolor ();
 	
-	void render ( /*std::string cam_name,*/ std::string filename );
+	void render ( std::string filename );
 	
 private:
 	Tracer*            tracer_ptr_;
 	Sampler*           sampler_ptr_;
-	camera_container   cameras_;
+	Camera*            camera_ptr_;
 	CompositeShape     shapes_;
 	light_container    lights_;
 	material_container materials_;
