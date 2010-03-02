@@ -3,6 +3,9 @@
 #include <boost/thread/thread.hpp>
 #include <boost/bind.hpp>
 #include <GL/glut.h>
+#include <png++/image.hpp>
+#include <png++/rgb_pixel.hpp>
+#include <ctime>
 
 // project header
 #include <glutwindow.hpp>
@@ -22,14 +25,17 @@ class rt_application
 public :
 	void raytrace() const 
 	{
-		// open a new GLUT window
+		// open a new GLUT window and a new PNG image
 		glutwindow& gw = glutwindow::instance();
+		std::size_t width  = gw.width();
+		std::size_t height = gw.height();
+		png::image< png::rgb_pixel > png(width,height);
 		
 		// initial variables
 		HitRecord rec;
 		const float fmax = std::numeric_limits<float>::max();
-		float tmax = fmax;
-		float tmin = 0.00000001;
+		float       tmax = fmax;
+		float       tmin = 0.0;
 		Vector viewdir(0,0,-1);
 		
 		
@@ -41,6 +47,7 @@ public :
 		Shape* box      = new Box      ( Point(100,100,-750 ), Point(350,350,-1050) );
 		
 		Matrix m = make_rotation( Vector (1,2,-1), 10 );
+		Matrix r = make_rotation( Vector (225,225,-900), 10 );
 		Matrix n = make_translation( 100,0,-90 );
 		box->transform(m);
 		box->transform(n);
@@ -57,8 +64,8 @@ public :
 		
 		////////////// actual raytracing happens here ///////////////
 		
-		for (std::size_t y = 0; y < gw.height(); ++y) {
-			for (std::size_t x = 0; x < gw.width(); ++x) {
+		for (std::size_t y = 0; y < height; ++y) {
+			for (std::size_t x = 0; x < width; ++x) {
 				pixel p(x,y);
 				
 				// without antialiasing
@@ -80,17 +87,36 @@ public :
 						tmax = fmax;
 						int index = (i+3*j);
 						
-						if ( shapes->hit(ray,0,tmax,rec) )
+						if ( shapes->hit(ray,tmin,tmax,rec) )
 							p.color = (p.color*(index-1)+rec.color)/index;
 						else
 							p.color = (p.color*(index-1)+bgcolor)/index;
 					}
 				}
 				*/
+				
 				// write pixel to window
 				gw.write(p);
-			}
+				
+				// set pixel in png
+				int r = p.color[rgb::r] * 255;
+				int g = p.color[rgb::g] * 255;
+				int b = p.color[rgb::b] * 255;
+				std::size_t new_y = height - y - 1;
+				png[new_y][x] = png::rgb_pixel(r,g,b);
+			}	
 		}
+		
+		// specify filename for png output
+		time_t t = time (NULL);
+		struct tm * lt = localtime ( &t );
+		char time_str [80];
+		strftime(time_str,80,"%Y-%m-%d__%H-%M-%S",lt);
+		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
+		
+		// write pixels to png image
+		png.write(filename);
+		std::cout << "image saved as " << filename << std::endl;
 	}
 };
 

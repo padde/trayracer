@@ -5,6 +5,7 @@
 *~
 
 # Objects and output files
+images/
 build/
 **/*.o
 **/*.out

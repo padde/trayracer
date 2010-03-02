@@ -14,6 +14,7 @@
 # ~$ sudo port install mesa
 # ~$ sudo port install boost
 # ~$ sudo port install unittest-cpp
+# ~$ sudo port install pngpp
 
 
 
@@ -52,7 +53,7 @@ INCLUDE =\
 ################################################################################
 # linker
 
-LIB =-lGL -lglut -lunittest++ -lboost_thread-mt
+LIB =-lGL -lglut -lunittest++ -lboost_thread-mt -lpng
 LIB_PATH =-L/opt/local/lib/
 
 
