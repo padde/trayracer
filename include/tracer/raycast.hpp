@@ -7,18 +7,17 @@
 #include <ray.hpp>
 #include <rgb.hpp>
 #include <tracer.hpp>
-// #include <scene.hpp>
-class Scene; // TODO: switch fwd declaration with include
+#include <scene.hpp>
 
 
-class Raycast : public Tracer
+class RayCast : public Tracer
 {
 public: // c'tors, d'tor
-	Raycast ( Scene* scene_ptr );
-	~Raycast ();
+	RayCast ( Scene* scene_ptr );
+	~RayCast ();
 
 public: // virtual methods
-	rgb trace ( const Ray& ray );
+	rgb trace ( const Ray& ray ) const;
 };
 
 #endif //BUW_RAYCAST_HPP

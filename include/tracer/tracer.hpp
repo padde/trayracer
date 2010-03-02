@@ -6,9 +6,9 @@
 // project header
 #include <ray.hpp>
 #include <rgb.hpp>
-// #include <scene.hpp>
-class Scene; // TODO: switch fwd declaration with include
 
+// fwd declarations
+class Scene;
 
 class Tracer
 {

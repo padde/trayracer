@@ -1,24 +1,22 @@
 #ifndef BUW_BAREBONE_HPP
 #define BUW_BAREBONE_HPP
 
-// system header
-
 // project header
 #include <ray.hpp>
 #include <rgb.hpp>
 #include <tracer.hpp>
-// #include <scene.hpp>
-class Scene; // TODO: switch fwd declaration with include
+#include <scene.hpp>
 
 
-class Barebone : public Tracer
+
+class BareBone : public Tracer
 {
 public: // c'tors, d'tor
-	Barebone ( Scene* scene_ptr );
-	~Barebone ();
+	BareBone ( Scene* scene_ptr );
+	~BareBone ();
 
 public: // virtual methods
-	rgb trace ( const Ray& ray );
+	rgb trace ( const Ray& ray ) const;
 };
 
 #endif //BUW_BAREBONE_HPP
