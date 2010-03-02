@@ -9,7 +9,6 @@
 
 // project header
 #include <glutwindow.hpp>
-#include <ppmwriter.hpp>
 #include <pixel.hpp>
 #include <rgb.hpp>
 #include <shape.hpp>

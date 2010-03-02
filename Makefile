@@ -80,7 +80,6 @@ HEADER =\
 	$(INC_PATH)/shape/triangle.hpp \
 	$(INC_PATH)/shape/box.hpp \
 	$(INC_PATH)/shape/compositeshape.hpp \
-	$(INC_PATH)/file/ppmwriter.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
 
