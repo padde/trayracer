@@ -94,12 +94,12 @@ OBJECT =$(SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 # main
 
 MAIN_SOURCE =\
-	$(SRC_PATH)/try.cpp \
+	$(SRC_PATH)/main.cpp \
 	$(NULL)
 
 MAIN_OBJECT =$(MAIN_SOURCE:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 
-MAIN_OUTPUT =$(OBJ_PATH)/try.out
+MAIN_OUTPUT =$(OBJ_PATH)/main.out
 
 main: $(OBJECT) $(MAIN_OBJECT)
 	$(CXX) $(OBJECT) $(MAIN_OBJECT) $(LIB) $(LIB_PATH) -o $(MAIN_OUTPUT)
