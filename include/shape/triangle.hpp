@@ -1,20 +1,23 @@
 #ifndef BUW_TRIANGLE_HPP
 #define BUW_TRIANGLE_HPP
 
+// system header
+#include <string>
+
 // project header
 #include <point.hpp>
 #include <rgb.hpp>
 #include <ray.hpp>
 #include <shape.hpp>
-// #include <material.hpp>
+#include <hitrecord.hpp>
+#include <material.hpp>
 
 
 
 class Triangle : public Shape
 {
 public: // c'tors, d'tor
-	Triangle ();
-	Triangle ( const Point& a, const Point& b, const Point& c );
+	Triangle ( std::string name, const Point& a, const Point& b, const Point& c, Material* material );
 	~Triangle ();
 	
 public: // methods

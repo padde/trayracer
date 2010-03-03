@@ -3,22 +3,22 @@
 
 // system header
 #include <cmath>
-#include <iostream>
+#include <string>
 
 // project header
 #include <point.hpp>
 #include <vector.hpp>
+#include <matrix.hpp>
 #include <rgb.hpp>
 #include <ray.hpp>
 #include <shape.hpp>
+#include <hitrecord.hpp>
+#include <material.hpp>
 
 
 
-Triangle::Triangle () :
-	a_(0,0,0), b_(0,0,0), c_(0,0,0)
-{}
-
-Triangle::Triangle ( const Point& a, const Point& b, const Point& c ) :
+Triangle::Triangle ( std::string name, const Point& a, const Point& b, const Point& c, Material* material ) :
+	Shape( name, material ),
 	a_(a), b_(b), c_(c)
 {}
 
@@ -73,7 +73,9 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 		hitrec.t = t;
 		hitrec.hit = true;
 		hitrec.normal = unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
-		hitrec.color = rgb(1,1,0);
+		hitrec.material_ptr = material_ptr_;
+		hitrec.hitpoint     = ray.origin() + tmin * ray.dir();
+		hitrec.ray          = ray;
 		
 		return true;
 	}

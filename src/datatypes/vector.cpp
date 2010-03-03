@@ -167,6 +167,14 @@ operator- (const Vector& lhs, const Vector& rhs)
 }
 
 /* friend */ Vector
+operator- (const Vector& rhs)
+{
+	Vector tmp(0,0,0);
+	tmp -= rhs;
+	return tmp;
+}
+
+/* friend */ Vector
 operator* (const Vector::value_t& scalar, const Vector& rhs)
 {
 	return rhs * scalar;

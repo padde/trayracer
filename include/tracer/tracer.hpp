@@ -1,14 +1,14 @@
 #ifndef BUW_TRACER_HPP
 #define BUW_TRACER_HPP
 
-// system header
-
 // project header
 #include <ray.hpp>
 #include <rgb.hpp>
 
 // fwd declarations
 class Scene;
+
+
 
 class Tracer
 {

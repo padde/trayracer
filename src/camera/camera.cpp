@@ -2,6 +2,7 @@
 
 // project header
 #include <ray.hpp>
+#include <pixel.hpp>
 #include <point.hpp>
 #include <vector.hpp>
 
@@ -23,8 +24,8 @@ Camera::~Camera ()
 {}
 
 Ray
-Camera::make_ray ( std::size_t x, std::size_t y ) const
+Camera::ray_for_pixel ( const pixel p ) const
 {
 	// FIXME: make eye camera
-	return Ray( Point(x,y,0), Vector(0,0,-1) );
+	return Ray( Point(p.x,p.y,0), Vector(0,0,-1) );
 }

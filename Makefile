@@ -46,6 +46,9 @@ INCLUDE =\
 	-I$(INC_PATH)/camera/ \
 	-I$(INC_PATH)/datatypes/ \
 	-I$(INC_PATH)/shape/ \
+	-I$(INC_PATH)/material/ \
+	-I$(INC_PATH)/brdf/ \
+	-I$(INC_PATH)/light/ \
 	-I$(INC_PATH)/tracer/ \
 	-I$(INC_PATH)/file/ \
 	-I$(INC_PATH)/glut/ \
@@ -79,11 +82,19 @@ HEADER =\
 	$(INC_PATH)/datatypes/ray.hpp \
 	$(INC_PATH)/datatypes/matrix.hpp \
 	$(INC_PATH)/datatypes/scene.hpp \
+	$(INC_PATH)/datatypes/hitrecord.hpp \
 	$(INC_PATH)/shape/shape.hpp \
 	$(INC_PATH)/shape/sphere.hpp \
 	$(INC_PATH)/shape/triangle.hpp \
 	$(INC_PATH)/shape/box.hpp \
 	$(INC_PATH)/shape/compositeshape.hpp \
+	$(INC_PATH)/material/material.hpp \
+	$(INC_PATH)/material/matte.hpp \
+	$(INC_PATH)/brdf/brdf.hpp \
+	$(INC_PATH)/brdf/lambertian.hpp \
+	$(INC_PATH)/light/light.hpp \
+	$(INC_PATH)/light/ambientlight.hpp \
+	$(INC_PATH)/light/pointlight.hpp \
 	$(INC_PATH)/tracer/tracer.hpp \
 	$(INC_PATH)/tracer/raycast.hpp \
 	$(INC_PATH)/tracer/barebone.hpp \

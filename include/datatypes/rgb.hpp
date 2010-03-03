@@ -27,6 +27,7 @@ public : // methods
   rgb& operator= (const rgb&);
   void operator+=(const rgb&);
 
+  friend rgb operator* (const rgb&, const rgb&);
   friend rgb operator* (const rgb&, const float&);
   friend rgb operator* (const float&, const rgb&);
 

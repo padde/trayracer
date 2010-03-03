@@ -3,6 +3,7 @@
 
 // project header
 #include <ray.hpp>
+#include <pixel.hpp>
 
 // system header
 #include <string>
@@ -16,7 +17,7 @@ public: // ctor's, d'tor
 	~Camera ();
 
 public: // methods
-	Ray make_ray ( std::size_t x, std::size_t y ) const;
+	Ray ray_for_pixel ( const pixel p ) const;
 
 private:
 	std::string name_;

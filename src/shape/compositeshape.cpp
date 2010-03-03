@@ -3,17 +3,23 @@
 
 // system header
 #include <vector>
-#include <iostream>
+#include <string>
 
 // project header
 #include <ray.hpp>
 #include <shape.hpp>
+#include <hitrecord.hpp>
 
 
-using namespace std;
+// system header
+#include <iostream>
 
 
 CompositeShape::CompositeShape ()
+{}
+
+CompositeShape::CompositeShape ( std::string name ) :
+	Shape(name)
 {}
 
 /* virtual */
@@ -24,7 +30,7 @@ bool
 CompositeShape::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const
 {
 	bool is_hit;
-	HitRecord tmprec;
+	HitRecord tmprec = hitrec;
 	
 	// go through all shapes and check for hits
 	for ( unsigned i=0; i < shapes_.size(); ++i )
@@ -39,12 +45,7 @@ CompositeShape::hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecor
 	// we don't want to change the original hitrec for every shape,
 	// so we only store the values there once to save time
 	if ( is_hit )
-	{
-		hitrec.hit    = tmprec.hit;
-		hitrec.t      = tmprec.t;
-		hitrec.color  = tmprec.color;
-		hitrec.normal = tmprec.normal;
-	}
+		hitrec = tmprec;
 	
 	return is_hit;
 }

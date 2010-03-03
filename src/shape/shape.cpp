@@ -7,18 +7,21 @@
 
 // project header
 // #include <material.hpp>
+class Material; // FIXME
+
+
 
 Shape::Shape () :
 	name_(""), material_ptr_(NULL)
 {}
 
 
-Shape::Shape ( std::string name, Matrix trans ) :
-	name_(name), material_ptr_(NULL), trans_(trans)
+Shape::Shape ( std::string name ) :
+	name_(name), material_ptr_(NULL)
 {}
 
-Shape::Shape ( std::string name, Material* material, Matrix trans ) :
-	name_(name), material_ptr_(material), trans_(trans)
+Shape::Shape ( std::string name, Material* material ) :
+	name_(name), material_ptr_(material)
 {}
 
 /* virtual */

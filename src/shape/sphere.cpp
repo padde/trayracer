@@ -3,7 +3,7 @@
 
 // system header
 #include <cmath>
-#include <iostream>
+#include <string>
 
 // project header
 #include <point.hpp>
@@ -12,18 +12,13 @@
 #include <rgb.hpp>
 #include <ray.hpp>
 #include <shape.hpp>
+#include <hitrecord.hpp>
+#include <material.hpp>
 
-using namespace std;
 
-Sphere::Sphere () :
-	radius_(0)
-{}
 
-Sphere::Sphere ( const float& radius ) :
-	radius_(radius)
-{}
-
-Sphere::Sphere ( const Point& center, const float& radius ) :
+Sphere::Sphere ( std::string name, const Point& center, const float& radius, Material* material ) :
+	Shape( name, material ),
 	radius_(radius), center_(center)
 {}
 
@@ -57,7 +52,9 @@ bool Sphere::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, Hi
 			hitrec.t      = t;
 			hitrec.hit    = true;
 			hitrec.normal = unify( t*ray.dir() + org );
-			hitrec.color  = rgb(0.1,0.1,0.6);
+			hitrec.material_ptr = material_ptr_;
+			hitrec.hitpoint     = ray.origin() + t * ray.dir();
+			hitrec.ray          = ray;
 			return true;
 		}
 	}

@@ -7,8 +7,9 @@
 #include <matrix.hpp>
 #include <shape.hpp>
 #include <compositeshape.hpp>
-//#include <light.hpp>
-//#include <material.hpp>
+#include <light.hpp>
+#include <ambientlight.hpp>
+#include <material.hpp>
 #include <rgb.hpp>
 #include <camera.hpp>
 #include <tracer.hpp>
@@ -17,15 +18,13 @@
 // system header
 #include <vector>
 
-class Light;
-class Material;
 class Sampler;
 
 class Scene
 {
 public: // enums, typedefs
-	typedef std::vector< Light*    > light_container;
-	typedef std::vector< Material* > material_container;
+	typedef std::vector< Light*    > light_container_t;
+	typedef std::vector< Material* > material_container_t;
 
 public: // c'tors, d'tor
 	Scene ();
@@ -40,20 +39,22 @@ public: // methods
 	void set ( rgb      bgcolor     );
 	void set ( Tracer*  tracer_ptr  );
 	void set ( Sampler* sampler_ptr );
+	void set ( AmbientLight* ambient_ptr );
 	
-	Shape* shapes  ();
-	rgb    bgcolor ();
+	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax, HitRecord& hitrec );
+	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax );
 	
 	void render ( std::string filename );
 	
-private:
-	Tracer*            tracer_ptr_;
-	Sampler*           sampler_ptr_;
-	Camera*            camera_ptr_;
-	CompositeShape     shapes_;
-	light_container    lights_;
-	material_container materials_;
-	rgb                bgcolor_;
+public:
+	Tracer*              tracer_ptr;
+	Sampler*             sampler_ptr;
+	Camera*              camera_ptr;
+	AmbientLight*        ambient_ptr;
+	CompositeShape       shapes;
+	light_container_t    lights;
+	material_container_t materials;
+	rgb                  bgcolor;
 };
 
 #endif //BUW_SCENE_HPP

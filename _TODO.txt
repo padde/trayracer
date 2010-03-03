@@ -1,6 +1,15 @@
 2010-01-25 21:00
 Patrick Oscity
 
+TODO: Hitrec triangle
+TODO: camera
+TODO: tests???
+
+-----
+
+2010-01-25 21:00
+Patrick Oscity
+
 TODO: Tests für OrthonormalBasis vervollständigen
 TODO: Tests für Shape schreiben, wenn abgeleitete Klassen implementiert sind
 

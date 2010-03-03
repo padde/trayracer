@@ -42,6 +42,7 @@ public: // methods
 public: // friends
 	friend Vector operator+ (const Vector& lhs, const Vector& rhs);
 	friend Vector operator- (const Vector& lhs, const Vector& rhs);
+	friend Vector operator- (const Vector& rhs);
 	friend Vector operator* (const value_t& scalar, const Vector& rhs);
 	friend Vector operator* (const Vector& lhs, const value_t& scalar);
 	friend Vector operator/ (const Vector& lhs, const value_t& scalar);

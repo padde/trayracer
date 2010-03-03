@@ -2,6 +2,7 @@
 
 // project header
 #include <tracer.hpp>
+#include <hitrecord.hpp>
 
 namespace {
 	const float floatmax = std::numeric_limits<float>::max();
@@ -19,12 +20,12 @@ RayCast::~RayCast ()
 rgb
 RayCast::trace ( const Ray& ray ) const
 {
-	HitRecord rec;
-	float     tmax = floatmax;
-	float     tmin = 0.0;
+	HitRecord rec(scene_ptr_);
+	float tmax = floatmax;
+	float tmin = 0.0;
 	
-	if ( scene_ptr_->shapes()->hit(ray,tmin,tmax,rec) )
-		return rec.color;
-	
-	return scene_ptr_->bgcolor();
+	if ( scene_ptr_->shapes.hit(ray,tmin,tmax,rec) )
+		return rec.material_ptr->shade(rec);
+	else
+		return scene_ptr_->bgcolor;
 }

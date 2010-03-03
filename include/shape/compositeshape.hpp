@@ -1,14 +1,20 @@
 #ifndef BUW_COMPOSITESHAPE_HPP
 #define BUW_COMPOSITESHAPE_HPP
 
-#include <vector>
+// system header
+#include <string>
 
-#include "shape.hpp"
+// project header
+#include <vector>
+#include <hitrecord.hpp>
+#include <shape.hpp>
+
 
 class CompositeShape : public Shape
 {
 public: // c'tors, d'tor
 	CompositeShape ();
+	CompositeShape ( std::string name );
 	virtual ~CompositeShape ();
 
 public: // methods

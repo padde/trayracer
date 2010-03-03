@@ -8,19 +8,8 @@
 #include <rgb.hpp>
 #include <ray.hpp>
 #include <matrix.hpp>
-// #include <material.hpp>
-class Material; // FIXME: uncomment above line and delete this one, when material is implemented
-
-
-
-// struct for recording hits
-struct HitRecord
-{
-	bool   hit;
-	float  t;
-	rgb    color;
-	Vector normal;
-};
+#include <hitrecord.hpp>
+#include <material.hpp>
 
 
 
@@ -31,11 +20,11 @@ public: // enums, typedefs
 
 public: // c'tors, d'tor
 	Shape ();
-	Shape ( std::string name, Matrix trans );
-	Shape ( std::string name, Material* material, Matrix trans );
+	Shape ( std::string name );
+	Shape ( std::string name, Material* material );
 	virtual ~Shape ();
 
-public: // methods8
+public: // methods
 	const std::string& name () const;  // name_ getter
 	void name ( const std::string& );  // name_ setter
 	
@@ -47,9 +36,9 @@ public: // virtual methods
 
 private:
 	std::string name_;
-	Material*   material_ptr_;
 
-protected:
+protected:	
+	Material*   material_ptr_;
 	Matrix      trans_;
 };
 

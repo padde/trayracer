@@ -4,6 +4,7 @@
 #include <GL/glut.h>
 #include <png++/image.hpp>
 #include <png++/rgb_pixel.hpp>
+#include <iostream>
 
 // project header
 #include <glutwindow.hpp>
@@ -13,70 +14,64 @@
 #include <tracer.hpp>
 #include <raycast.hpp>
 #include <barebone.hpp>
+#include <light.hpp>
+#include <ambientlight.hpp>
 
 
 
 
-Scene::Scene ()
+Scene::Scene () :
+	tracer_ptr (NULL),
+	sampler_ptr (NULL),
+	ambient_ptr (NULL),
+	bgcolor    (0.0,0.0,0.0)
 {
-	tracer_ptr_ = new RayCast(this);
-	bgcolor_    = rgb(0,0,0);
+	tracer_ptr = new RayCast(this);
 }
 
 Scene::~Scene ()
 {
-	// delete camera_ptr_;
-	// delete tracer_ptr_;
+	delete tracer_ptr;
 }
 
 void Scene::push ( Shape* shape )
 {
-	shapes_.push(shape);
+	shapes.push(shape);
 }
 
 void Scene::push ( Light* light )
 {
-	lights_.push_back(light);
+	lights.push_back(light);
 }
 
 void Scene::push ( Material* material )
 {
-	materials_.push_back(material);
+	materials.push_back(material);
 }
 
-void Scene::set ( Camera* camera_ptr )
+void Scene::set ( Camera* ptr )
 {
-	camera_ptr_ = camera_ptr;
+	camera_ptr = ptr;
 }
 
-void Scene::set ( rgb bgcolor )
+void Scene::set ( rgb col )
 {
-	bgcolor_ = bgcolor;
+	bgcolor = col;
 }
 
-void Scene::set ( Tracer* tracer_ptr )
+void Scene::set ( Tracer* ptr )
 {
-	// delete tracer_ptr_;
-	tracer_ptr_ = tracer_ptr;
+	tracer_ptr = ptr;
 }
 
-void Scene::set ( Sampler* sampler_ptr )
+void Scene::set ( Sampler* ptr )
 {
-	// delete sampler_ptr_;
-	sampler_ptr_ = sampler_ptr;
+	sampler_ptr = ptr;
 }
 
-	
-Shape*
-Scene::shapes ()
+void Scene::set ( AmbientLight* ptr )
 {
-	return &shapes_;
-}
-
-rgb
-Scene::bgcolor ()
-{
-	return bgcolor_;
+	ambient_ptr = ptr;
 }
 
 void Scene::render ( std::string filename )
@@ -94,8 +89,8 @@ void Scene::render ( std::string filename )
 		{
 			// create pixel and trace ray
 			pixel p (x,y);
-			Ray ray = camera_ptr_->make_ray(x,y);
-			p.color = tracer_ptr_->trace(ray);
+			Ray ray = camera_ptr->ray_for_pixel(p);
+			p.color = tracer_ptr->trace(ray);
 			
 			// write pixel to window
 			gw.write(p);

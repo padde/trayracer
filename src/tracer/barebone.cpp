@@ -16,11 +16,12 @@ BareBone::~BareBone ()
 rgb
 BareBone::trace ( const Ray& ray ) const
 {
+	HitRecord rec(scene_ptr_);
 	float tmax = floatmax;
 	float tmin = 0.0;
 	
-	if ( scene_ptr_->shapes()->hit(ray,tmin,tmax) )
-		return rgb(1,1,1);
+	if ( scene_ptr_->shapes.hit(ray,tmin,tmax,rec) )
+		return rec.color;
 	
-	return rgb(0,0,0);
+	return scene_ptr_->bgcolor;
 }

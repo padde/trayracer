@@ -98,6 +98,17 @@ rgb::operator+=(rgb const& a)
 
 
 /* friend */ rgb
+operator* (const rgb& lhs, const rgb& rhs)
+{
+  rgb tmp(lhs);
+  tmp.data_[0] *= rhs.data_[0];
+  tmp.data_[1] *= rhs.data_[1];
+  tmp.data_[2] *= rhs.data_[2];
+  return tmp;
+}
+
+
+/* friend */ rgb
 operator* (const rgb& lhs, const float& rhs)
 {
   rgb tmp(lhs);
