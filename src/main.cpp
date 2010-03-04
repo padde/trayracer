@@ -21,6 +21,7 @@
 #include <raycast.hpp>
 #include <material.hpp>
 #include <matte.hpp>
+#include <phong.hpp>
 #include <light.hpp>
 #include <ambientlight.hpp>
 #include <pointlight.hpp>
@@ -36,40 +37,42 @@ public :
 		
 		// create materials
 		Material* red    = new Matte("red"   , 1.0, 0.5, rgb(1,0,0));
-		Material* blue   = new Matte("blue"  , 0.5, 0.5, rgb(1,1,1));
+		Material* blue   = new Matte("blue"  , 0.5, 0.5, rgb(0,0,1));
 		Material* yellow = new Matte("yellow", 0.5, 1.0, rgb(1,1,0));
+		
+		Material* glossy = new Phong("bling", 1.0, 1.0, 0.05, 0.5, rgb(0.1, 0.9, 0.3));
 		
 		// create objects
 		Shape* sphere   = new Sphere (
 			"sphere",             /* name     */
-			Point(250,250,-1000), /* center   */
-			150,                  /* radius   */
-			blue                  /* material */
+			Point(0,0,-1500), /* center   */
+			350,                  /* radius   */
+			glossy                  /* material */
 		);
 		
-		Shape* triangle = new Triangle (
-			"triangle",
-			Point(300,450, -800), /* point a  */
-			Point(  0,100,-1000), /* point b  */
-			Point(450, 20,-1000), /* point c  */
-			yellow                /* material */
-		);
-		
+		// Shape* triangle = new Triangle (
+		// 	"triangle",
+		// 	Point(300,450,-1500), /* point a  */
+		// 	Point(  0,100,-1000), /* point b  */
+		// 	Point(450, 20,-1000), /* point c  */
+		// 	yellow                /* material */
+		// );
+		// 
 		Shape* box = new Box (
 			"box",                /* name     */
-			Point(100,100, -750), /* point a  */
+			Point(0,0,-700), /* point a  */
 			Point(350,350,-1050), /* point b  */
 			red                   /* material */
 		);
 		
+		
 		// create transformations
-		Matrix m = make_rotation( Vector (1,2,-1), 10 );
-		Matrix r = make_rotation( Vector (225,225,-900), 10 );
-		Matrix n = make_translation( 100,0,-90 );
+		Matrix r = make_rotation( Vector (350,350,-1050), 90 );
+		Matrix n = make_translation( -100,-300,0 );
 		
 		// transform objects
-		box->transform(m);
 		box->transform(n);
+		box->transform(r);
 		
 		// set background color
 		rgb bgcolor(0.03,0.03,0.03);
@@ -77,14 +80,15 @@ public :
 		// store shapes in composite
 		CompositeShape* shapes = new CompositeShape("shapes");
 		
-		shapes->push( sphere );
-		//shapes->push( triangle );
-		//shapes->push( box );
+		 shapes->push( sphere );
+		// shapes->push( triangle );
+		// shapes->push( box );
+		
 		
 		// define ambient light, must be of type AmbientLight*
 		AmbientLight* ambient = new AmbientLight (
 			"ambient", /* name      */
-			0.1,       /* intensity */
+			0.15,       /* intensity */
 			rgb(1,1,1) /* color     */
 		);
 		
@@ -92,30 +96,30 @@ public :
 		Light* pointlight = new PointLight (
 			"plt",            /* name      */
 			1,              /* intensity */
-			rgb(1,0,0),   /* color     */
-			Point(0,500,-700) /* position  */
+			rgb(1,1,1),   /* color     */
+			Point(-500,500,-1000) /* position  */
 		);
 		
-		Light* pointlight2 = new PointLight (
-			"plt2",            /* name      */
-			1,              /* intensity */
-			rgb(0,0,1),   /* color     */
-			Point(500,500,-500) /* position  */
-		);
-		
-		Light* pointlight3 = new PointLight (
-			"plt2",            /* name      */
-			1,              /* intensity */
-			rgb(0,1,0),   /* color     */
-			Point(250,200,-500) /* position  */
-		);
+		// Light* pointlight2 = new PointLight (
+		// 	"plt2",            /* name      */
+		// 	1,              /* intensity */
+		// 	rgb(0,0,1),   /* color     */
+		// 	Point(500,500,-500) /* position  */
+		// );
+		// 
+		// Light* pointlight3 = new PointLight (
+		// 	"plt2",            /* name      */
+		// 	1,              /* intensity */
+		// 	rgb(0,1,0),   /* color     */
+		// 	Point(250,200,-500) /* position  */
+		// );
 		
 		// make a camera and use it
 		Camera* cam = new Camera (
 			"cam1",      /* name       */
 			gw.width(),  /* x-res      */
 			gw.height(), /* y-res      */
-			20.0         /* view angle */
+			60         /* view angle */
 		);
 		
 		// add elements to scene
@@ -124,8 +128,8 @@ public :
 		scene->set(bgcolor);
 		scene->set(ambient);
 		scene->push(pointlight);
-		scene->push(pointlight2);
-		scene->push(pointlight3);
+		// scene->push(pointlight2);
+		// scene->push(pointlight3);
 		scene->set(cam);
 		
 		// use barebone tracer

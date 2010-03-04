@@ -26,13 +26,13 @@ Lambertian::~Lambertian()
 {}
 
 rgb
-Lambertian::f ( const HitRecord& sr, const Vector& wo, const Vector& wi ) const
+Lambertian::f ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const
 {
 	return kd_ * cd_ * inv_pi;
 }
 
 rgb
-Lambertian::rho ( const HitRecord& sr, const Vector& wo ) const
+Lambertian::rho ( const HitRecord& hitrec, const Vector& wo ) const
 {
 	return kd_ * cd_;
 }

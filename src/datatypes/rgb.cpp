@@ -2,6 +2,7 @@
 #include "rgb.hpp"
 
 // header, system
+#include <algorithm>
 #include <iostream>
 
 // header, project
@@ -57,6 +58,21 @@ rgb::print(std::ostream& os) const
   os << '(' << data_[0] << '|' << data_[1] << '|' << data_[2] << ')' << std::endl;
 }
 
+
+rgb&
+rgb::max_to_one()
+{
+	float max = std::max( data_[0], std::max( data_[1], data_[2] ) );
+	
+	if ( max > 1.0 )
+	{
+		data_[0] /= max;
+		data_[1] /= max;
+		data_[2] /= max;
+	}
+	
+	return *this;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////

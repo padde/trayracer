@@ -21,7 +21,7 @@ BareBone::trace ( const Ray& ray ) const
 	float tmin = 0.0;
 	
 	if ( scene_ptr_->shapes.hit(ray,tmin,tmax,rec) )
-		return rec.color;
+		return rgb(1,1,1);
 	
 	return scene_ptr_->bgcolor;
 }

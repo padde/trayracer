@@ -90,8 +90,10 @@ HEADER =\
 	$(INC_PATH)/shape/compositeshape.hpp \
 	$(INC_PATH)/material/material.hpp \
 	$(INC_PATH)/material/matte.hpp \
+	$(INC_PATH)/material/phong.hpp \
 	$(INC_PATH)/brdf/brdf.hpp \
 	$(INC_PATH)/brdf/lambertian.hpp \
+	$(INC_PATH)/brdf/specular.hpp \
 	$(INC_PATH)/light/light.hpp \
 	$(INC_PATH)/light/ambientlight.hpp \
 	$(INC_PATH)/light/pointlight.hpp \

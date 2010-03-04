@@ -22,7 +22,7 @@ public: // methods
 private:
 	std::string name_;
 	std::size_t width_, height_;
-	float fov_x_;
+	float angle_;
 	float vpd_;
 };
 

@@ -90,7 +90,7 @@ void Scene::render ( std::string filename )
 			// create pixel and trace ray
 			pixel p (x,y);
 			Ray ray = camera_ptr->ray_for_pixel(p);
-			p.color = tracer_ptr->trace(ray);
+			p.color = tracer_ptr->trace(ray).max_to_one();
 			
 			// write pixel to window
 			gw.write(p);
