@@ -31,8 +31,8 @@ public: // methods
 	virtual void transform ( const Matrix& ); // multiplicate trans_ with given matrix
 
 public: // virtual methods
-	virtual bool hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const = 0; // compute intersections with given ray, store result in hitrec
-	virtual bool hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const = 0;                    // no hitrec for saving time
+	virtual bool hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const = 0; // compute intersections with given ray, store result in hitrec
+	virtual bool hit ( const Ray& ray, interval_t& tmin ) const = 0;                    // no hitrec for saving time
 
 private:
 	std::string name_;

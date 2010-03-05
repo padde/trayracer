@@ -109,17 +109,16 @@ public :
 		Material* green  = new Matte("", 1.0, 1.0, rgb(0.1, 0.7, 0.3));
 		Material* white  = new Matte("", 1.0, 1.0, rgb(1.0, 1.0, 1.0));
 		
-		Material* ivory  = new Phong("", 0.9, 1.0, 0.8, 15, rgb(1.0, 1.0, 0.98));
+		Material* ivory  = new Phong("", 0.8, 1.0, 0.1, 0.1, rgb(1.0, 1.0, 0.98));
 		
 		// walls
-		Shape* wall_left    = new Box("", Point( 500,-550,    0), Point( 550, 550, -1000), green);
-		Shape* wall_right   = new Box("", Point(-500,-550,    0), Point(-550, 550, -1000), red  );
+		Shape* wall_right   = new Box("", Point( 500,-550,    0), Point( 550, 550, -1000), green);
+		Shape* wall_left    = new Box("", Point(-500,-550,    0), Point(-550, 550, -1000), red  );
 		Shape* wall_top     = new Box("", Point(-500, 500,    0), Point( 500, 550, -1000), white);
 		Shape* wall_bottom  = new Box("", Point(-500,-500,    0), Point( 500,-550, -1000), white);
 		Shape* wall_back    = new Box("", Point(-550,-550,-1000), Point( 550, 550, -1050), white);
-		Shape* sphere_left  = new Sphere("", Point(-310,-330,-820), 180, ivory);
-		Shape* sphere_right = new Sphere("", Point( 310,-320,-300), 180, ivory);
-		// Shape* box = new Box ( "", Point(50, -450, -50), Point(-200, -200, -300), ivory );
+		Shape* sphere_left  = new Sphere("", Point(-300,-320,-600), 180, ivory);
+		Shape* sphere_right = new Sphere("", Point( 250,-300,-300), 200, ivory);
 		
 		// set background color
 		rgb bgcolor(0.03,0.03,0.03);
@@ -133,13 +132,12 @@ public :
 		shapes->push(wall_back);
 		shapes->push(sphere_left);
 		shapes->push(sphere_right);
-		// shapes->push(box);
 		
 		// define ambient light, must be of type AmbientLight*
-		AmbientLight* amb = new AmbientLight ("amb", 0.3, rgb(1,1,0.9));
+		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
 		
 		// define point light
-		Light* p1 = new PointLight ("p1", 1.0, rgb(1.0,1.0,0.98), Point(0,300,-500));
+		Light* p1 = new PointLight ("", 0.9, rgb(1.0,1.0,0.9), Point(   0, 300,-400));
 		
 		// make a camera
 		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 30);
@@ -162,6 +160,61 @@ public :
 		// render the scene
 		scene->render(filename);
 	}
+	
+	/*
+	void color_shadows() const
+	{
+		// get glwindow instance (for size)
+		glutwindow& gw = glutwindow::instance();
+		
+		// create materials
+		Material* white  = new Matte ("", 1, 1, rgb(1,1,1));
+		
+		// walls
+		Shape* wall_back = new Box    ("", Point(-1000,-1000,-1000), Point( 1000, 1000, -1050), white);
+		Shape* sphere    = new Sphere ("", Point(    0, -500, -800),                       180, white);
+		
+		// set background color
+		rgb bgcolor(0,0,0);
+		
+		// store shapes in composite
+		CompositeShape* shapes = new CompositeShape("");
+
+		shapes->push(wall_back);
+		shapes->push(sphere);
+		
+		// define ambient light, must be of type AmbientLight*
+		AmbientLight* amb = new AmbientLight ("", 0, rgb(1,1,1));
+		
+		// define point light
+		Light* p1 = new PointLight ("", 1, rgb(1,0,0), Point(   0, 200,-300));
+		Light* p2 = new PointLight ("", 1, rgb(0,1,0), Point( 200,-200,-300));
+		Light* p3 = new PointLight ("", 1, rgb(0,0,1), Point(-200,-200,-300));
+		
+		// make a camera
+		Camera* cam = new Camera ("", gw.width(), gw.height(), 30);
+		
+		// add elements to scene
+		Scene* scene = new Scene();
+		scene->push(shapes);
+		scene->set(bgcolor);
+		scene->set(amb);
+		scene->push(p1);
+		scene->push(p2);
+		scene->push(p3);
+		scene->set(cam);
+		
+		// preparations for filename
+		time_t      t = time(NULL);
+		struct tm* lt = localtime(&t);
+		char time_str [80];
+		strftime(time_str,80,"%Y-%m-%d__%H-%M-%S",lt);
+		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
+		
+		// render the scene
+		scene->render(filename);
+	}
+	*/
 };
 
 

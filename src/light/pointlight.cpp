@@ -12,12 +12,6 @@
 
 
 
-namespace {
-	const float floatmax = std::numeric_limits<float>::max();
-}
-
-
-
 PointLight::PointLight ( std::string name ) :
 	Light     (name),
 	ls_       (0.0),
@@ -48,9 +42,23 @@ PointLight::L ( HitRecord& hitrec ) const
 }
 
 bool 
-PointLight::in_shadow ( const Ray& ray, const HitRecord& hitrec ) const
+PointLight::in_shadow ( const Ray& s_ray, const HitRecord& hitrec ) const
 {
-	return ( hitrec.scene_ptr->shapes.hit(ray, 0, floatmax) );
+	float t = 0;
+	float d = (s_ray.origin() - position_).length();
+	
+	std::size_t count_obj = hitrec.scene_ptr->shapes.size();
+	
+	// go through all shapes and check for hits
+	for ( unsigned i=0; i < count_obj; ++i )
+	{
+		if ( hitrec.scene_ptr->shapes[i]->hit(s_ray, t) and t < d )
+		{
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 Point

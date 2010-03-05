@@ -117,18 +117,18 @@ Point::print_on (std::ostream& os) const
 	os << "Point (" << data_[0] << "," << data_[1] << "," << data_[2] << ")"; 
 }
 
-/* friend */ Point
+/* friend */ Vector
 operator+ (const Point& lhs, const Point& rhs)
 {
-	Point tmp(lhs);
+	Vector tmp(lhs);
 	tmp += rhs;
 	return tmp;
 }
 
-/* friend */ Point
+/* friend */ Vector
 operator- (const Point& lhs, const Point& rhs)
 {
-	Point tmp(lhs);
+	Vector tmp(lhs);
 	tmp -= rhs;
 	return tmp;
 }

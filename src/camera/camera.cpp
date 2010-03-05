@@ -9,7 +9,6 @@
 // system header
 #include <string>
 #include <cmath>
-#include <iostream>
 
 
 
@@ -47,7 +46,7 @@ Camera::ray_for_pixel ( const pixel p ) const
 	Point  origin    = Point  ( 0, 0, 1800 );
 	Vector direction = Vector ( s * ( p.x - 0.5 * (width_ )), /* x value */
 	                            s * ( p.y - 0.5 * (height_)), /* y value */
-	                            - vpd_ );                           /* z value */
+	                            - vpd_ );                     /* z value */
 	
 	return Ray ( origin, direction );
 }

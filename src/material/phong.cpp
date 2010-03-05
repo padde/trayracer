@@ -44,13 +44,18 @@ Phong::shade ( HitRecord& hitrec ) const
 		
 		if ( ndotwi > 0.0 )
 		{
-			/*Ray sray(hitrec.hitpoint, hitrec.scene_ptr->lights[i]->position());
-			if ( ! hitrec.scene_ptr->lights[i]->in_shadow(sray, hitrec) )
-			{*/
+			// shoot ray from hint point to light source
+			Ray s_ray( hitrec.hitpoint, wi);
+			
+			// check if s_ray hits an object
+			bool in_shadow = hitrec.scene_ptr->lights[i]->in_shadow(s_ray, hitrec);
+			
+			if ( ! in_shadow )
+			{
 				L += ( diffuse_brdf_ptr_->f (hitrec, wo, wi)  +
 				       specular_brdf_ptr_->f(hitrec, wo, wi)
 				     ) * hitrec.scene_ptr->lights[i]->L(hitrec) * ndotwi;
-			/*}*/
+			}
 		}
 	}
 	

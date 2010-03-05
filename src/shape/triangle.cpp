@@ -25,7 +25,7 @@ Triangle::Triangle ( std::string name, const Point& a, const Point& b, const Poi
 Triangle::~Triangle ()
 {}
 
-bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const
+bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
 	Ray ray = original_ray.transform(trans_);
 	
@@ -67,7 +67,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	if ( t > tmin and t < tmax )
+	if ( t > tmin )
 	{
 		// hit detected
 		hitrec.t = t;
@@ -83,7 +83,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 	return false;
 }
 
-bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
+bool Triangle::hit ( const Ray& original_ray, interval_t& tmin ) const
 {
 	Ray ray = original_ray.transform(trans_);
 	
@@ -125,5 +125,5 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax )
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	return ( t > tmin and t < tmax );
+	return ( t > tmin );
 }

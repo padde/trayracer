@@ -79,6 +79,7 @@ void Scene::render ( std::string filename )
 	glutwindow& gw = glutwindow::instance();
 	std::size_t width  = gw.width();
 	std::size_t height = gw.height();
+	float gamma = 2;
 	
 	png::image< png::rgb_pixel > png(width,height);
 	
@@ -90,7 +91,8 @@ void Scene::render ( std::string filename )
 			// create pixel and trace ray
 			pixel p (x,y);
 			Ray ray = camera_ptr->ray_for_pixel(p);
-			p.color = tracer_ptr->trace(ray).max_to_one();
+			p.color = tracer_ptr->trace(ray) * gamma;
+			p.color.max_to_one();
 			
 			// write pixel to window
 			gw.write(p);

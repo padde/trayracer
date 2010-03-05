@@ -13,7 +13,7 @@
 
 
 namespace {
-	const double epsilon = std::numeric_limits<double>::epsilon() * 96;
+	const double epsilon = 0.001;
 	const Vector normals[6] = {
 		Vector(-1,  0,  0), 
 		Vector( 0, -1,  0),
@@ -43,7 +43,7 @@ Box::~Box ()
 {}
 
 bool
-Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const
+Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
 	// transform ray to object space
 	Ray ray = original_ray.transform(trans_);
@@ -53,13 +53,13 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 	double ox = ray.origin()[0];
 	double oy = ray.origin()[1];
 	double oz = ray.origin()[2];
+	
 	double dx = ray.dir()[0];
 	double dy = ray.dir()[1];
 	double dz = ray.dir()[2];
-	double t0, t1;
+	
 	double tx_min, ty_min, tz_min;
 	double tx_max, ty_max, tz_max;
-	int face_in, face_out;
 	
 	double a = 1.0 / dx;
 	if (a >= 0) {
@@ -91,6 +91,9 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 		tz_max = (p1[2] - oz) * c;
 	}
 	
+	double t0, t1;
+	int face_in, face_out;
+	
 	if (tx_min > tz_max or tz_min > tx_max)
 		return false;
 	
@@ -120,7 +123,7 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	if (t0 < t1 and t1 > epsilon and t0 > tmin and t0 < tmax) {
+	if (t0 < t1 and t1 > epsilon) {
 		// hit detected
 		
 		if (t0 > epsilon) { // ray hits outside
@@ -143,7 +146,7 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 }
 
 bool
-Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
+Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 {
 	// transform ray to object space
 	Ray ray = original_ray.transform(trans_);
@@ -220,5 +223,16 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	return (t0 < t1 and t1 > epsilon and t0 > tmin and t0 < tmax);
+	if (t0 < t1 and t1 > epsilon and t1 < tmin)
+	{
+		if (t0 > epsilon) {
+			tmin = t0;
+		} else {
+			tmin = t1;
+		}
+		
+		return true;
+	}
+	
+	return false;
 }

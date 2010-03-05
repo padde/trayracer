@@ -21,8 +21,8 @@ public: // c'tors, d'tor
 	~Box ();
 	
 public: // methods
-	bool hit ( const Ray& ray, interval_t tmin, interval_t tmax, HitRecord& hitrec ) const;
-	bool hit ( const Ray& ray, interval_t tmin, interval_t tmax ) const;
+	bool hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const;
+	bool hit ( const Ray& ray, interval_t& tmin ) const;
 	
 private: // member
 	Point a_;

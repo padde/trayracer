@@ -39,8 +39,8 @@ public: // methods
 	void print_on (std::ostream& os) const;
 	
 public: // friends
-	friend Point operator+ (const Point& lhs, const Point& rhs);
-	friend Point operator- (const Point& lhs, const Point& rhs);
+	friend Vector operator+ (const Point& lhs, const Point& rhs);
+	friend Vector operator- (const Point& lhs, const Point& rhs);
 	
 	friend Point operator+ (const Point& lhs, const Vector& rhs);
 	friend Point operator- (const Point& lhs, const Vector& rhs);
