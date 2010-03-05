@@ -8,6 +8,8 @@
 // system header
 #include <string>
 
+// fwd declarations
+class Scene;
 
 
 class Camera
@@ -17,7 +19,10 @@ public: // ctor's, d'tor
 	~Camera ();
 
 public: // methods
-	Ray ray_for_pixel ( const pixel p ) const;
+	void render ( std::string filename ) const;
+
+public:
+	Scene* scene_ptr;
 
 private:
 	std::string name_;

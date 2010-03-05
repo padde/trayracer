@@ -46,6 +46,7 @@ INCLUDE =\
 	-I$(INC_PATH)/camera/ \
 	-I$(INC_PATH)/datatypes/ \
 	-I$(INC_PATH)/shape/ \
+	-I$(INC_PATH)/scene/ \
 	-I$(INC_PATH)/material/ \
 	-I$(INC_PATH)/brdf/ \
 	-I$(INC_PATH)/light/ \
@@ -81,13 +82,13 @@ HEADER =\
 	$(INC_PATH)/datatypes/vector.hpp \
 	$(INC_PATH)/datatypes/ray.hpp \
 	$(INC_PATH)/datatypes/matrix.hpp \
-	$(INC_PATH)/datatypes/scene.hpp \
 	$(INC_PATH)/datatypes/hitrecord.hpp \
 	$(INC_PATH)/shape/shape.hpp \
 	$(INC_PATH)/shape/sphere.hpp \
 	$(INC_PATH)/shape/triangle.hpp \
 	$(INC_PATH)/shape/box.hpp \
 	$(INC_PATH)/shape/compositeshape.hpp \
+	$(INC_PATH)/scene/scene.hpp \
 	$(INC_PATH)/material/material.hpp \
 	$(INC_PATH)/material/matte.hpp \
 	$(INC_PATH)/material/phong.hpp \

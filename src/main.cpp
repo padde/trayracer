@@ -137,10 +137,10 @@ public :
 		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
 		
 		// define point light
-		Light* p1 = new PointLight ("", 0.9, rgb(1.0,1.0,0.9), Point(   0, 300,-400));
+		Light* p1 = new PointLight ("", 0.9, rgb(1.0,1.0,0.9), Point(   0, 300,-500));
 		
 		// make a camera
-		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 30);
+		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 31);
 		
 		// add elements to scene
 		Scene* scene = new Scene();
@@ -158,7 +158,7 @@ public :
 		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
 		
 		// render the scene
-		scene->render(filename);
+		cam->render(filename);
 	}
 	
 	/*

@@ -18,7 +18,7 @@
 // system header
 #include <vector>
 
-class Sampler;
+
 
 class Scene
 {
@@ -38,17 +38,13 @@ public: // methods
 	void set ( Camera*  camera_ptr  );
 	void set ( rgb      bgcolor     );
 	void set ( Tracer*  tracer_ptr  );
-	void set ( Sampler* sampler_ptr );
 	void set ( AmbientLight* ambient_ptr );
 	
 	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax, HitRecord& hitrec );
 	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax );
 	
-	void render ( std::string filename );
-	
 public:
 	Tracer*              tracer_ptr;
-	Sampler*             sampler_ptr;
 	Camera*              camera_ptr;
 	AmbientLight*        ambient_ptr;
 	CompositeShape       shapes;

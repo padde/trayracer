@@ -5,10 +5,15 @@
 #include <pixel.hpp>
 #include <point.hpp>
 #include <vector.hpp>
+#include <glutwindow.hpp>
+#include <scene.hpp>
 
 // system header
 #include <string>
 #include <cmath>
+#include <GL/glut.h>
+#include <png++/image.hpp>
+#include <png++/rgb_pixel.hpp>
 
 
 
@@ -38,15 +43,51 @@ Camera::Camera ( std::string name, std::size_t width, std::size_t height, float 
 Camera::~Camera ()
 {}
 
-Ray
-Camera::ray_for_pixel ( const pixel p ) const
+void
+Camera::render ( std::string filename ) const
 {
-	float s = 1; // pixel size
+	glutwindow& gw = glutwindow::instance();
+	std::size_t width  = gw.width();
+	std::size_t height = gw.height();
+	float gamma = 2.0;
 	
-	Point  origin    = Point  ( 0, 0, 1800 );
-	Vector direction = Vector ( s * ( p.x - 0.5 * (width_ )), /* x value */
-	                            s * ( p.y - 0.5 * (height_)), /* y value */
-	                            - vpd_ );                     /* z value */
+	png::image< png::rgb_pixel > png(width,height);
 	
-	return Ray ( origin, direction );
+	// loop through all pixels of the viewplane
+	for (std::size_t y = 0; y < height; ++y)
+	{
+		for (std::size_t x = 0; x < width; ++x)
+		{
+			// create pixel
+			pixel p (x,y);
+			
+			// create ray
+			Point  origin    = Point  ( 0, 0, 1800 );
+			Vector direction = Vector ( p.x - 0.5 * (width_ ), /* x value */
+			                            p.y - 0.5 * (height_), /* y value */
+			                            - vpd_ );              /* z value */
+			Ray ray( origin, direction );
+			
+			p.color = scene_ptr->tracer_ptr->trace(ray);
+			
+			// add gamma, clamp colors
+			p.color *= gamma;
+			p.color.max_to_one();
+			
+			// write pixel to window
+			gw.write(p);
+			
+			// write pixel to png file
+			int r = p.color[rgb::r] * 255;
+			int g = p.color[rgb::g] * 255;
+			int b = p.color[rgb::b] * 255;
+			png[height-y-1][x] = png::rgb_pixel(r,g,b);
+			
+			
+		}
+	}
+	
+	// save png image
+	png.write(filename);
+	std::cout << "image saved as " << filename << std::endl;
 }
