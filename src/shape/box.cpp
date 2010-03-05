@@ -15,12 +15,12 @@
 namespace {
 	const double epsilon = std::numeric_limits<double>::epsilon() * 96;
 	const Vector normals[6] = {
-		Vector(-1, 0, 0), 
-		Vector(0, -1, 0),
-		Vector(0, 0, -1),
-		Vector(1, 0, 0),
-		Vector(0, 1, 0),
-		Vector(0, 0, 1) };
+		Vector(-1,  0,  0), 
+		Vector( 0, -1,  0),
+		Vector( 0,  0, -1),
+		Vector( 1,  0,  0),
+		Vector( 0,  1,  0),
+		Vector( 0,  0,  1) };
 }
 
 
@@ -134,7 +134,7 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, HitRecord&
 		hitrec.hit          = true;
 		hitrec.material_ptr = material_ptr_;
 		hitrec.hitpoint     = ray.origin() + tmin * ray.dir();
-		hitrec.ray          = ray;
+		hitrec.ray          = original_ray;
 		
 		return true;
 	}
@@ -159,6 +159,7 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 	double t0, t1;
 	double tx_min, ty_min, tz_min;
 	double tx_max, ty_max, tz_max;
+	int face_in, face_out;
 	
 	double a = 1.0 / dx;
 	if (a >= 0) {
@@ -195,22 +196,28 @@ Box::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax ) const
 	
 	if (tx_min > ty_min) {
 		t0 = tx_min;
+		face_in = (a >= 0.0) ? 0 : 3; 
 	} else {
 		t0 = ty_min;
+		face_in = (b >= 0.0) ? 1 : 4;
 	}
 	
 	if (tz_min > t0) {
 		t0 = tz_min;
+		face_in = (c >= 0.0) ? 2 : 5;
 	}
 	
 	if (tx_max < ty_max) {
 	  t1 = tx_max;
+	  face_out = (a >= 0.0) ? 3 : 0;
 	} else {
 	  t1 = ty_max;
+	  face_out = (b >= 0.0) ? 4 : 1;
 	}
 	
 	if (tz_max < t1) {
 	  t1 = tz_max;
+	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
 	return (t0 < t1 and t1 > epsilon and t0 > tmin and t0 < tmax);

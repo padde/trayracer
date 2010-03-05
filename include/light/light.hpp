@@ -7,6 +7,7 @@
 // project header
 #include <rgb.hpp>
 #include <vector.hpp>
+#include <point.hpp>
 #include <hitrecord.hpp>
 
 
@@ -20,6 +21,9 @@ public: // c'tors, d'tor
 public: // methods
 	virtual Vector get_direction ( HitRecord& hitrec ) const = 0;
 	virtual rgb    L             ( HitRecord& hitrec ) const = 0;
+	virtual bool   in_shadow     ( const Ray& ray, const HitRecord& hitrec ) const;
+	virtual Point  position      () const;
+
 
 protected: // protected members
 	bool shadows;

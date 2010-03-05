@@ -8,7 +8,7 @@
 #include <hitrecord.hpp>
 #include <material.hpp>
 #include <scene.hpp>
-#include <ambientlight.hpp>
+
 
 
 Matte::Matte ( std::string name, const float ka, const float kd, const rgb cd ) :
@@ -39,9 +39,16 @@ Matte::shade ( HitRecord& hitrec ) const
 		Vector wi     = hitrec.scene_ptr->lights[i]->get_direction(hitrec);
 		float  ndotwi = dot(hitrec.normal, wi);
 		
-		if (ndotwi > 0.0)
-			L += diffuse_brdf_ptr_->f(hitrec, wo, wi) *
-				hitrec.scene_ptr->lights[i]->L(hitrec) * ndotwi;
+		if ( ndotwi > 0.0 )
+		{
+			/*Ray s_ray( hitrec.hitpoint, hitrec.scene_ptr->lights[i]->position() );
+			
+			if ( ! hitrec.scene_ptr->lights[i]->in_shadow(s_ray, hitrec) )
+			{*/
+				L += diffuse_brdf_ptr_->f(hitrec, wo, wi) *
+				     hitrec.scene_ptr->lights[i]->L(hitrec) * ndotwi;
+			/*}*/
+		}
 	}
 	
 	return L;

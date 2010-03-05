@@ -72,7 +72,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t tmin, interval_t tmax, 
 		// hit detected
 		hitrec.t = t;
 		hitrec.hit = true;
-		hitrec.normal = unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
+		hitrec.normal = - unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
 		hitrec.material_ptr = material_ptr_;
 		hitrec.hitpoint     = ray.origin() + t * ray.dir();
 		hitrec.ray          = ray;

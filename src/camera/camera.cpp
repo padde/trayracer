@@ -44,7 +44,7 @@ Camera::ray_for_pixel ( const pixel p ) const
 {
 	float s = 1; // pixel size
 	
-	Point  origin    = Point  ( 0, 0, 0 );
+	Point  origin    = Point  ( 0, 0, 1800 );
 	Vector direction = Vector ( s * ( p.x - 0.5 * (width_ )), /* x value */
 	                            s * ( p.y - 0.5 * (height_)), /* y value */
 	                            - vpd_ );                           /* z value */

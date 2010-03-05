@@ -13,6 +13,7 @@ public : // enums, typedefs
 public : // c'tor
   rgb();
   rgb(rgb const&);
+  rgb(value_t const& rgb);
   rgb(value_t r, value_t g, value_t b); 
 
   ~rgb();
@@ -28,6 +29,9 @@ public : // methods
 
   rgb& operator= (const rgb&);
   void operator+=(const rgb&);
+  void operator*=(const rgb&);
+  void operator*=(const float&);
+  void operator/=(const float&);
 
   friend rgb operator* (const rgb&, const rgb&);
   friend rgb operator* (const rgb&, const float&);

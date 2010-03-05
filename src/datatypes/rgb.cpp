@@ -36,6 +36,15 @@ rgb::rgb(float r, float g, float b)
 
 
 ////////////////////////////////////////////////////////////////////////////////
+rgb::rgb(const rgb::value_t& rgb)
+{
+  data_[0] = rgb;
+  data_[1] = rgb;
+  data_[2] = rgb;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 rgb::~rgb()
 {}
 
@@ -55,7 +64,7 @@ rgb::swap(rgb& rhs)
 void
 rgb::print(std::ostream& os) const
 {
-  os << '(' << data_[0] << '|' << data_[1] << '|' << data_[2] << ')' << std::endl;
+  os << '(' << data_[0] << '|' << data_[1] << '|' << data_[2] << ')';
 }
 
 
@@ -105,33 +114,52 @@ rgb::operator=(rgb const& rhs)
 
 ////////////////////////////////////////////////////////////////////////////////
 void 
-rgb::operator+=(rgb const& a) 
+rgb::operator+=(rgb const& rhs) 
 { 
-  data_[0]+=a.data_[0];
-  data_[1]+=a.data_[1];
-  data_[2]+=a.data_[2];
+  data_[0] += rhs.data_[0];
+  data_[1] += rhs.data_[1];
+  data_[2] += rhs.data_[2];
 }
 
+void 
+rgb::operator*=(rgb const& rhs) 
+{ 
+  data_[0] *= rhs.data_[0];
+  data_[1] *= rhs.data_[1];
+  data_[2] *= rhs.data_[2];
+}
+
+void 
+rgb::operator*=(float const& rhs) 
+{ 
+  data_[0] *= rhs;
+  data_[1] *= rhs;
+  data_[2] *= rhs;
+}
+
+void 
+rgb::operator/=(float const& rhs) 
+{ 
+  data_[0] /= rhs;
+  data_[1] /= rhs;
+  data_[2] /= rhs;
+}
 
 /* friend */ rgb
 operator* (const rgb& lhs, const rgb& rhs)
 {
-  rgb tmp(lhs);
-  tmp.data_[0] *= rhs.data_[0];
-  tmp.data_[1] *= rhs.data_[1];
-  tmp.data_[2] *= rhs.data_[2];
-  return tmp;
+  rgb result(lhs);
+  result *= rhs;
+  return result;
 }
 
 
 /* friend */ rgb
 operator* (const rgb& lhs, const float& rhs)
 {
-  rgb tmp(lhs);
-  tmp.data_[0] *= rhs;
-  tmp.data_[1] *= rhs;
-  tmp.data_[2] *= rhs;
-  return tmp;
+  rgb result(lhs);
+  result *= rhs;
+  return result;
 }
 
 /* friend */ rgb
@@ -143,11 +171,9 @@ operator* (const float& lhs, const rgb& rhs)
 /* friend */ rgb
 operator/ (const rgb& lhs, const float& rhs)
 {
-  rgb tmp(lhs);
-  tmp.data_[0] /= rhs;
-  tmp.data_[1] /= rhs;
-  tmp.data_[2] /= rhs;
-  return tmp;
+  rgb result(lhs);
+  result /= rhs;
+  return result;
 }
 
 /* friend */ rgb

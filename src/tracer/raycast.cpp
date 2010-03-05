@@ -25,7 +25,10 @@ RayCast::trace ( const Ray& ray ) const
 	float tmin = 0.0;
 	
 	if ( scene_ptr_->shapes.hit(ray,tmin,tmax,rec) )
+	{
+		rec.ray = ray;
 		return rec.material_ptr->shade(rec);
-	else
-		return scene_ptr_->bgcolor;
+	}
+	
+	return scene_ptr_->bgcolor;
 }

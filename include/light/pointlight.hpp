@@ -22,8 +22,11 @@ public: // c'tors, d'tor
 public: // methods
 	Vector get_direction ( HitRecord& hitrec ) const;
 	rgb    L             ( HitRecord& hitrec ) const;
+	bool   in_shadow     ( const Ray& ray, const HitRecord& hitrec ) const;
+	Point  position      () const;
 
-private: // private members
+
+private: // members
 	float  ls_;
 	rgb    color_;
 	Point  position_;

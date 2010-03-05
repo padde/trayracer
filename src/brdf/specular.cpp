@@ -33,13 +33,14 @@ rgb
 Specular::f ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const
 {
 	rgb L;
-	float ndotwi = dot(hitrec.normal, wi);
 	
-	Vector r = -wi + 2.0 * hitrec.normal * ndotwi;
-	float rdottwo = dot(r, wo);
+	// reflection direction
+	Vector r = -wi + 2.0 * hitrec.normal * dot(hitrec.normal, wi);
+	float rdotwo = dot(r, wo);
 	
-	if ( rdottwo > 0.0 )
-		L = ks_ * cs_ * pow(rdottwo, exp_);
+	// reflection detected
+	if ( rdotwo > 0.0 )
+		L = cs_ * ks_ * pow(rdotwo, exp_);
 	
 	return L;
 }
