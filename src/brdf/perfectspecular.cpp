@@ -17,9 +17,9 @@ PerfectSpecular::~PerfectSpecular ()
 {}
 
 rgb
-PerfectSpecular::f ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const
+PerfectSpecular::f ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const
 {
-	wi = -wo + 2.0 * dot( hitrec.normal, dot(hitrec.normal, wo) );
+	wi = -wo + 2.0 * hitrec.normal * dot(hitrec.normal, wo);
 	
 	return kr_ * cr_ / dot(hitrec.normal, wi);
 }

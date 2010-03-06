@@ -15,7 +15,7 @@ public: // c'tors, d'tor
 	~PerfectSpecular ();
 
 public: // methods
-	rgb f   ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
+	rgb f   ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const;
 	rgb rho ( const HitRecord& hitrec, const Vector& wo ) const;
 	
 	void kr ( const float kr );
