@@ -16,7 +16,7 @@ public: // c'tors, d'tor
 	~BareBone ();
 
 public: // virtual methods
-	rgb trace ( const Ray& ray ) const;
+	rgb trace ( const Ray& ray, int max_depth ) const;
 };
 
 #endif //BUW_BAREBONE_HPP

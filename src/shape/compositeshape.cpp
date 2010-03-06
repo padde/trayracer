@@ -4,6 +4,7 @@
 // system header
 #include <vector>
 #include <string>
+#include <limits>
 
 // project header
 #include <ray.hpp>
@@ -53,16 +54,12 @@ CompositeShape::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) cons
 bool
 CompositeShape::hit ( const Ray& ray, interval_t& tmin ) const
 {
-	bool is_hit(false);
-	
 	// go through all shapes and check for hits
-	for ( unsigned i=0; i < shapes_.size(); ++i ) {
-		if ( shapes_[i]->hit(ray, tmin) ) {
-			is_hit = true;
-		}
-	}
+	for ( unsigned i=0; i < shapes_.size(); ++i )
+		if ( shapes_[i]->hit(ray, tmin) )
+			return true;
 	
-	return is_hit;
+	return false;
 }
 
 void

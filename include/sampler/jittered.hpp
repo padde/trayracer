@@ -1,15 +1,16 @@
-#ifndef BUW_SAMPLER_HPP
-#define BUW_SAMPLER_HPP
+#ifndef BUW_JITTERED_HPP
+#define BUW_JITTERED_HPP
 
 // system header
 #include <vector>
 
 // project header
+#include <sampler.hpp>
 #include <ray.hpp>
 
 
 
-class Sampler
+class Jittered : public Sampler
 {
 public: // c'tors, d'tor
 	Sampler ( const int num_samples, const float px );
@@ -32,4 +33,4 @@ public: // members
 	
 };
 
-#endif //BUW_SAMPLER_HPP
+#endif //BUW_JITTERED_HPP

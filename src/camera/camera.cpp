@@ -28,16 +28,21 @@ namespace {
 }
 
 
-Camera::Camera ( std::string name, std::size_t width, std::size_t height, float angle_deg ) :
-	name_   ( name   ),
-	width_  ( width  ),
-	height_ ( height )
-{	
+Camera::Camera ( std::string name, std::size_t hres, std::size_t vres, float angle_deg ) :
+	name_ ( name ),
+	hres_ ( hres ),
+	vres_ ( vres )
+{
+	// get width and height
+	glutwindow& gw = glutwindow::instance();
+	hres_ = gw.width();
+	vres_ = gw.height();
+	
 	// convert angle from deg to rad
 	angle_ = deg_to_rad(angle_deg);
 	
 	// compute view plane distance
-	vpd_ = abs ( (width_ / 2) / tan(angle_ / 2 ) );
+	vpd_ = abs ( (hres_ / 2) / tan(angle_ / 2 ) );
 }
 
 Camera::~Camera ()
@@ -47,31 +52,50 @@ void
 Camera::render ( std::string filename ) const
 {
 	glutwindow& gw = glutwindow::instance();
-	std::size_t width  = gw.width();
-	std::size_t height = gw.height();
-	float gamma = 2.0;
+	float gamma = 1/1.6;
+	float s = 1.0; // pixel size
+	int num_samples = 9;
+	int n = std::size_t(sqrt(float(num_samples)));
+	Point origin = Point ( 0, 0, 1800 );
 	
-	png::image< png::rgb_pixel > png(width,height);
+	png::image< png::rgb_pixel > png(hres_,vres_);
 	
 	// loop through all pixels of the viewplane
-	for (std::size_t y = 0; y < height; ++y)
+	for (std::size_t y = 0; y < hres_; ++y)
 	{
-		for (std::size_t x = 0; x < width; ++x)
+		for (std::size_t x = 0; x < vres_; ++x)
 		{
 			// create pixel
 			pixel p (x,y);
 			
+			/*
 			// create ray
-			Point  origin    = Point  ( 0, 0, 1800 );
-			Vector direction = Vector ( p.x - 0.5 * (width_ ), /* x value */
-			                            p.y - 0.5 * (height_), /* y value */
-			                            - vpd_ );              /* z value */
+			Vector direction = Vector ( s * (p.x - 0.5 * hres_ - 1.0),
+			                            s * (p.y - 0.5 * vres_ - 1.0),
+			                            - vpd_ );                     
 			Ray ray( origin, direction );
-			
 			p.color = scene_ptr->tracer_ptr->trace(ray);
+			*/
+			
+			
+			for (int i=0; i<n; ++i)
+			{
+				for (int j=0; j<n; ++j)
+				{
+					Vector direction = Vector ( s * (p.x - 0.5 * hres_ + ( j + 0.5) / n ),
+					                            s * (p.y - 0.5 * vres_ + ( i + 0.5) / n ),
+					                            - vpd_ );                     
+					Ray ray( origin, direction );
+					
+					p.color += scene_ptr->tracer_ptr->trace(ray);
+				}
+			}
+			p.color /= num_samples;
+			
 			
 			// add gamma, clamp colors
-			p.color *= gamma;
+			if (gamma != 1)
+				p.color.powc(gamma);
 			p.color.max_to_one();
 			
 			// write pixel to window
@@ -81,7 +105,7 @@ Camera::render ( std::string filename ) const
 			int r = p.color[rgb::r] * 255;
 			int g = p.color[rgb::g] * 255;
 			int b = p.color[rgb::b] * 255;
-			png[height-y-1][x] = png::rgb_pixel(r,g,b);
+			png[vres_-y-1][x] = png::rgb_pixel(r,g,b);
 			
 			
 		}

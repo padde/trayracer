@@ -95,6 +95,7 @@ HEADER =\
 	$(INC_PATH)/brdf/brdf.hpp \
 	$(INC_PATH)/brdf/lambertian.hpp \
 	$(INC_PATH)/brdf/specular.hpp \
+	$(INC_PATH)/brdf/perfectspecular.hpp \
 	$(INC_PATH)/light/light.hpp \
 	$(INC_PATH)/light/ambientlight.hpp \
 	$(INC_PATH)/light/pointlight.hpp \

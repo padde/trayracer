@@ -18,11 +18,10 @@ RayCast::~RayCast ()
 {}
 
 rgb
-RayCast::trace ( const Ray& ray ) const
+RayCast::trace ( const Ray& ray, int max_depth ) const
 {
 	HitRecord rec(scene_ptr_);
-	float tmax = floatmax;
-	float tmin = 0.0;
+	float tmin = floatmax;
 	
 	if ( scene_ptr_->shapes.hit(ray,tmin,rec) )
 	{

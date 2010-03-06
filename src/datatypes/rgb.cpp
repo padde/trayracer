@@ -4,6 +4,7 @@
 // header, system
 #include <algorithm>
 #include <iostream>
+#include <cmath>
 
 // header, project
 
@@ -69,7 +70,7 @@ rgb::print(std::ostream& os) const
 
 
 rgb&
-rgb::max_to_one()
+rgb::max_to_one ()
 {
 	float max = std::max( data_[0], std::max( data_[1], data_[2] ) );
 	
@@ -79,6 +80,16 @@ rgb::max_to_one()
 		data_[1] /= max;
 		data_[2] /= max;
 	}
+	
+	return *this;
+}
+
+rgb&
+rgb::powc ( float exp )
+{
+	data_[0] = pow(data_[0], exp);
+	data_[1] = pow(data_[1], exp);
+	data_[2] = pow(data_[2], exp);
 	
 	return *this;
 }

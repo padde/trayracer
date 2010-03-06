@@ -30,17 +30,17 @@
 class rt_application 
 {
 public :
-	/*void raytrace() const
+	void raytrace() const
 	{
 		// get glwindow instance (for size)
 		glutwindow& gw = glutwindow::instance();
 		
 		// create materials
-		Material* red    = new Phong("bling", 1.0, 1.0, 0.02, 0.4, rgb(0.9, 0.2, 0.1));
-		Material* yellow = new Phong("bling", 1.0, 1.0, 0.02, 0.4, rgb(1.0, 0.9, 0.3));
-		Material* green  = new Phong("bling", 1.0, 1.0, 0.02, 0.4, rgb(0.1, 0.7, 0.3));
-		Material* blue   = new Phong("bling", 1.0, 1.0, 0.02, 0.4, rgb(0.1, 0.2, 1.0));
-		Material* white  = new Phong("bling", 1.0, 1.0, 0.02, 0.7, rgb(0.9, 0.9, 0.7));
+		Material* red    = new Phong("bling", 0.8, 1.0, 1.0, 2, rgb(0.9, 0.2, 0.1));
+		Material* yellow = new Phong("bling", 0.8, 1.0, 1.0, 2, rgb(1.0, 0.9, 0.3));
+		Material* green  = new Phong("bling", 0.8, 1.0, 1.0, 2, rgb(0.1, 0.7, 0.3));
+		Material* blue   = new Phong("bling", 0.8, 1.0, 1.0, 2, rgb(0.1, 0.2, 1.0));
+		Material* white  = new Phong("bling", 0.8, 1.0, 1.0, 2, rgb(0.9, 0.9, 0.7));
 		
 		// create objects
 		Shape* s1 = new Sphere ("s1", Point(   0,   0,-1500), 350, white );
@@ -50,10 +50,9 @@ public :
 		Shape* s5 = new Sphere ("s5", Point( 400,-150,-1500), 250, green );
 		Shape* s6 = new Sphere ("s6", Point(   0, -80,-1250), 150, yellow);
 		Shape* s7 = new Sphere ("s7", Point(  80, 300,-1600), 300, red   );
-		Shape* s8 = new Sphere ("s8", Point(   0,   0,-1500), 350, green );
 		
 		// set background color
-		rgb bgcolor(0.03,0.03,0.03);
+		rgb bgcolor(0.01,0.01,0.01);
 		
 		// store shapes in composite
 		CompositeShape* shapes = new CompositeShape("shapes");
@@ -64,10 +63,9 @@ public :
 		// shapes->push(s5);
 		// shapes->push(s6);
 		// shapes->push(s7);
-		// shapes->push(s8);
 		
 		// define ambient light, must be of type AmbientLight*
-		AmbientLight* amb = new AmbientLight ("amb", 0.3, rgb(1,1,1));
+		AmbientLight* amb = new AmbientLight ("amb", 0.2, rgb(1,1,1));
 		
 		// define point light
 		Light* p1 = new PointLight ("p1", 0.6, rgb(1.0,1.0,1.0), Point(-500, 500,-1000));
@@ -75,7 +73,7 @@ public :
 		Light* p3 = new PointLight ("p3", 1.0, rgb(0.1,0.5,0.9), Point( 500, 500,-1000));
 		
 		// make a camera
-		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 40);
+		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 80);
 		
 		// add elements to scene
 		Scene* scene = new Scene();
@@ -83,8 +81,8 @@ public :
 		scene->set(bgcolor);
 		scene->set(amb);
 		scene->push(p1);
-		// scene->push(p2);
-		// scene->push(p3);
+		scene->push(p2);
+		scene->push(p3);
 		scene->set(cam);
 		
 		// preparations for filename
@@ -95,9 +93,9 @@ public :
 		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
 		
 		// render the scene
-		scene->render(filename);
+		cam->render(filename);
 	}
-	*/
+	
 	
 	void cornell_box() const
 	{
@@ -109,7 +107,7 @@ public :
 		Material* green  = new Matte("", 1.0, 1.0, rgb(0.1, 0.7, 0.3));
 		Material* white  = new Matte("", 1.0, 1.0, rgb(1.0, 1.0, 1.0));
 		
-		Material* ivory  = new Phong("", 0.8, 1.0, 0.1, 0.1, rgb(1.0, 1.0, 0.98));
+		Material* ivory  = new Phong("", 1.0, 1.0, 1.0, 3, rgb(1.0, 1.0, 0.98));
 		
 		// walls
 		Shape* wall_right   = new Box("", Point( 500,-550,    0), Point( 550, 550, -1000), green);
@@ -119,6 +117,9 @@ public :
 		Shape* wall_back    = new Box("", Point(-550,-550,-1000), Point( 550, 550, -1050), white);
 		Shape* sphere_left  = new Sphere("", Point(-300,-320,-600), 180, ivory);
 		Shape* sphere_right = new Sphere("", Point( 250,-300,-300), 200, ivory);
+		
+		Shape* triangle = new Triangle ( "", Point(-300,-300,-300), Point(0,300,-1200), Point(300,-200,-130) ,green);
+		
 		
 		// set background color
 		rgb bgcolor(0.03,0.03,0.03);
@@ -132,12 +133,13 @@ public :
 		shapes->push(wall_back);
 		shapes->push(sphere_left);
 		shapes->push(sphere_right);
+		//shapes->push(triangle);
 		
 		// define ambient light, must be of type AmbientLight*
-		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
+		AmbientLight* amb = new AmbientLight ("amb", 0.2, rgb(1,1,0.9));
 		
 		// define point light
-		Light* p1 = new PointLight ("", 0.9, rgb(1.0,1.0,0.9), Point(   0, 300,-500));
+		Light* p1 = new PointLight ("", 1.0, rgb(1.0,1.0,0.9), Point(   0, 300,-500));
 		
 		// make a camera
 		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 31);
@@ -161,7 +163,7 @@ public :
 		cam->render(filename);
 	}
 	
-	/*
+	
 	void color_shadows() const
 	{
 		// get glwindow instance (for size)
@@ -212,9 +214,9 @@ public :
 		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
 		
 		// render the scene
-		scene->render(filename);
+		cam->render(filename);
 	}
-	*/
+	
 };
 
 

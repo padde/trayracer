@@ -123,7 +123,7 @@ Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	if (t0 < t1 and t1 > epsilon) {
+	if (t0 < t1 and t1 > epsilon and t0 < tmin) {
 		// hit detected
 		
 		if (t0 > epsilon) { // ray hits outside
@@ -223,7 +223,7 @@ Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	if (t0 < t1 and t1 > epsilon and t1 < tmin)
+	if (t0 < t1 and t1 > epsilon and t0 < tmin)
 	{
 		if (t0 > epsilon) {
 			tmin = t0;

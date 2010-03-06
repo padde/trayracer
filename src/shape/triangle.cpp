@@ -4,6 +4,7 @@
 // system header
 #include <cmath>
 #include <string>
+#include <limits>
 
 // project header
 #include <point.hpp>
@@ -14,6 +15,12 @@
 #include <shape.hpp>
 #include <hitrecord.hpp>
 #include <material.hpp>
+
+
+
+namespace {
+	const float epsilon = 0.001;
+}
 
 
 
@@ -67,8 +74,9 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	if ( t > tmin )
+	if ( t < tmin and t > epsilon)
 	{
+		tmin = t;
 		// hit detected
 		hitrec.t = t;
 		hitrec.hit = true;
@@ -125,5 +133,11 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin ) const
 	
 	float t = -( F*AKJB + E*JCAL + D*BLKC ) / denom;
 	
-	return ( t > tmin );
+	if ( t > epsilon )
+	{
+		tmin = t;
+		return true;
+	}
+	
+	return false;
 }

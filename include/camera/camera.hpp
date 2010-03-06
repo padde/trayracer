@@ -15,7 +15,7 @@ class Scene;
 class Camera
 {
 public: // ctor's, d'tor
-	Camera ( std::string name, std::size_t width, std::size_t height, float fov_x );
+	Camera ( std::string name, std::size_t hres, std::size_t vres, float fov_x );
 	~Camera ();
 
 public: // methods
@@ -26,7 +26,7 @@ public:
 
 private:
 	std::string name_;
-	std::size_t width_, height_;
+	std::size_t hres_, vres_;
 	float angle_;
 	float vpd_;
 };

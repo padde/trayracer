@@ -22,7 +22,8 @@ public : // methods
   void swap(rgb&);
   void print(std::ostream& os) const;
 
-  rgb& max_to_one();
+  rgb& max_to_one ();
+  rgb& powc ( float exp );
 
   value_t&       operator[](enum component);
   const value_t& operator[](enum component) const;

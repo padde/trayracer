@@ -17,7 +17,7 @@ public: // c'tors, d'tor
 	virtual ~Tracer ();
 
 public: // virtual methods
-	virtual rgb trace ( const Ray& ray ) const = 0;
+	virtual rgb trace ( const Ray& ray, int max_depth ) const = 0;
 
 protected:
 	Scene* scene_ptr_;

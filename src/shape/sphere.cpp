@@ -49,7 +49,7 @@ bool Sphere::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const
 		discriminant = sqrt(discriminant);
 		double t = ( -b - discriminant ) / ( 2.0*a );
 		
-		if ( t > epsilon )
+		if ( t > epsilon and t < tmin )
 		{
 			// hit detected
 			tmin = t;
@@ -65,7 +65,7 @@ bool Sphere::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const
 		
 		t = ( -b + discriminant ) / ( 2.0*a );
 		
-		if ( t > epsilon )
+		if ( t > epsilon and t < tmin )
 		{
 			// hit detected
 			tmin = t;
@@ -100,7 +100,7 @@ Sphere::hit ( const Ray& original_ray, interval_t& tmin ) const
 	if ( discriminant > 0 )
 	{
 		discriminant = sqrt(discriminant);
-		double t = ( -b - discriminant ) / ( 2*a );
+		double t = ( -b - discriminant ) / ( 2.0*a );
 		
 		if ( t > epsilon )
 		{
