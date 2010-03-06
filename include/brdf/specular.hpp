@@ -17,8 +17,7 @@ public: // c'tors, d'tor
 	~Specular();
 
 	rgb f   ( const HitRecord& sr, const Vector& wo, const Vector& wi ) const;
-	rgb rho ( const HitRecord& sr, const Vector& wo ) const;
-
+	
 	void ks  ( const float ks );
 	void exp ( const float e  );
 	void cs  ( const rgb&  cs );

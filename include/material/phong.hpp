@@ -19,7 +19,7 @@ public: // c'tors, d'tor
 	~Phong();
 	
 public: // methods
-	rgb shade ( HitRecord& hitrec ) const;
+	virtual rgb shade ( HitRecord& hitrec ) const;
 	
 private: // members
 	Lambertian* ambient_brdf_ptr_;

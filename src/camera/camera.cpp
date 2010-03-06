@@ -87,7 +87,7 @@ Camera::render ( std::string filename ) const
 					                            - vpd_ );                     
 					Ray ray( origin, direction );
 					
-					p.color += scene_ptr->tracer_ptr->trace(ray);
+					p.color += scene_ptr->tracer_ptr->trace(ray, 0);
 				}
 			}
 			p.color /= num_samples;

@@ -15,8 +15,7 @@ public: // c'tors, d'tor
 	~PerfectSpecular ();
 
 public: // methods
-	rgb f   ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const;
-	rgb rho ( const HitRecord& hitrec, const Vector& wo ) const;
+	rgb sample_f ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const;
 	
 	void kr ( const float kr );
 	void cr ( const rgb&  cr );

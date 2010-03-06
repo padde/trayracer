@@ -17,17 +17,11 @@ PerfectSpecular::~PerfectSpecular ()
 {}
 
 rgb
-PerfectSpecular::f ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const
+PerfectSpecular::sample_f ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const
 {
 	wi = -wo + 2.0 * hitrec.normal * dot(hitrec.normal, wo);
 	
 	return kr_ * cr_ / dot(hitrec.normal, wi);
-}
-
-rgb
-PerfectSpecular::rho ( const HitRecord& hitrec, const Vector& wo ) const
-{
-	return black;
 }
 
 void

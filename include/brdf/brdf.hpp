@@ -14,8 +14,9 @@ public: // c'tors, d'tor
 	virtual ~BRDF();
 
 public: // methods
-	virtual rgb f   ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
-	virtual rgb rho ( const HitRecord& hitrec, const Vector& wo ) const;
+	virtual rgb f        ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
+	virtual rgb sample_f ( const HitRecord& hitrec, const Vector& wo,       Vector& wi ) const;
+	virtual rgb rho      ( const HitRecord& hitrec, const Vector& wo                   ) const;
 };
 
 #endif

@@ -8,6 +8,7 @@
 #include <camera.hpp>
 #include <tracer.hpp>
 #include <raycast.hpp>
+#include <whitted.hpp>
 #include <barebone.hpp>
 #include <light.hpp>
 #include <ambientlight.hpp>
@@ -20,7 +21,7 @@ Scene::Scene () :
 	ambient_ptr (NULL),
 	bgcolor    (0.0,0.0,0.0)
 {
-	tracer_ptr = new  RayCast(this);
+	tracer_ptr = new Whitted(this);
 }
 
 Scene::~Scene ()

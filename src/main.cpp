@@ -22,6 +22,7 @@
 #include <material.hpp>
 #include <matte.hpp>
 #include <phong.hpp>
+#include <reflective.hpp>
 #include <light.hpp>
 #include <ambientlight.hpp>
 #include <pointlight.hpp>
@@ -107,7 +108,9 @@ public :
 		Material* green  = new Matte("", 1.0, 1.0, rgb(0.1, 0.7, 0.3));
 		Material* white  = new Matte("", 1.0, 1.0, rgb(1.0, 1.0, 1.0));
 		
-		Material* ivory  = new Phong("", 1.0, 1.0, 1.0, 3, rgb(1.0, 1.0, 0.98));
+		Material* ivory  = new Phong("", 0.8, 1.0, 1.0, 3, rgb(1.0, 1.0, 0.98));
+		
+		Material* mirror = new Reflective("", 0.2, 0.2, 0.5, 10, 1.0, rgb(1.0, 1.0, 0.98));
 		
 		// walls
 		Shape* wall_right   = new Box("", Point( 500,-550,    0), Point( 550, 550, -1000), green);
@@ -115,8 +118,10 @@ public :
 		Shape* wall_top     = new Box("", Point(-500, 500,    0), Point( 500, 550, -1000), white);
 		Shape* wall_bottom  = new Box("", Point(-500,-500,    0), Point( 500,-550, -1000), white);
 		Shape* wall_back    = new Box("", Point(-550,-550,-1000), Point( 550, 550, -1050), white);
-		Shape* sphere_left  = new Sphere("", Point(-300,-320,-600), 180, ivory);
-		Shape* sphere_right = new Sphere("", Point( 250,-300,-300), 200, ivory);
+		Shape* sphere_left  = new Sphere("", Point(-300,-320,-600), 180, mirror);
+		Shape* sphere_right = new Sphere("", Point( 250,-300,-300), 200, mirror);
+		Shape* sphere_center = new Sphere("", Point( 0,-300,-800), 200, mirror);
+		Shape* sphere_small = new Sphere("", Point( 0,-400,-200), 100, mirror);
 		
 		Shape* triangle = new Triangle ( "", Point(-300,-300,-300), Point(0,300,-1200), Point(300,-200,-130) ,green);
 		
@@ -133,10 +138,66 @@ public :
 		shapes->push(wall_back);
 		shapes->push(sphere_left);
 		shapes->push(sphere_right);
+		shapes->push(sphere_center);
+		shapes->push(sphere_small);
 		//shapes->push(triangle);
 		
 		// define ambient light, must be of type AmbientLight*
-		AmbientLight* amb = new AmbientLight ("amb", 0.2, rgb(1,1,0.9));
+		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
+		
+		// define point light
+		Light* p1 = new PointLight ("", 1.0, rgb(1.0,1.0,0.9), Point(   0, 300,-500));
+		
+		// make a camera
+		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 31);
+		
+		// add elements to scene
+		Scene* scene = new Scene();
+		scene->push(shapes);
+		scene->set(bgcolor);
+		scene->set(amb);
+		scene->push(p1);
+		scene->set(cam);
+		
+		// preparations for filename
+		time_t      t = time(NULL);
+		struct tm* lt = localtime(&t);
+		char time_str [80];
+		strftime(time_str,80,"%Y-%m-%d__%H-%M-%S",lt);
+		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
+		
+		// render the scene
+		cam->render(filename);
+	}
+	
+	
+	void mirror_balls() const
+	{
+		// get glwindow instance (for size)
+		glutwindow& gw = glutwindow::instance();
+		
+		// create materials
+		Material* white  = new Matte("", 1.0, 1.0, rgb(1.0, 1.0, 1.0));
+		Material* mirror = new Reflective("", 0.8, 0.8, 0.7, 10, 1.0, rgb(1.0, 1.0, 0.98));
+		
+		// walls
+		Shape* sphere_left  = new Sphere("", Point(-400,0,-600), 400, mirror);
+		Shape* sphere_right = new Sphere("", Point( 400,0,-600), 400, mirror);
+		Shape* wall_bottom  = new Box("", Point(-500,-500,    0), Point( 500,-550, -1000), white);
+		
+		
+		
+		// set background color
+		rgb bgcolor(0.03,0.03,0.03);
+		
+		// store shapes in composite
+		CompositeShape* shapes = new CompositeShape("shapes");
+		shapes->push(sphere_left);
+		shapes->push(sphere_right);
+		shapes->push(wall_bottom);
+		
+		// define ambient light, must be of type AmbientLight*
+		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
 		
 		// define point light
 		Light* p1 = new PointLight ("", 1.0, rgb(1.0,1.0,0.9), Point(   0, 300,-500));

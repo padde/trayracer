@@ -45,12 +45,6 @@ Specular::f ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) cons
 	return L;
 }
 
-rgb
-Specular::rho ( const HitRecord& hitrec, const Vector& wo ) const
-{
-	return black;
-}
-
 void
 Specular::ks  ( const float ks )
 {

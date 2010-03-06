@@ -92,6 +92,7 @@ HEADER =\
 	$(INC_PATH)/material/material.hpp \
 	$(INC_PATH)/material/matte.hpp \
 	$(INC_PATH)/material/phong.hpp \
+	$(INC_PATH)/material/reflective.hpp \
 	$(INC_PATH)/brdf/brdf.hpp \
 	$(INC_PATH)/brdf/lambertian.hpp \
 	$(INC_PATH)/brdf/specular.hpp \

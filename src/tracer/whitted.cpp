@@ -19,7 +19,7 @@ Whitted::~Whitted ()
 rgb
 Whitted::trace ( const Ray& ray, int depth ) const
 {
-	if ( depth > 3 )
+	if ( depth > 4 )
 		return black;
 	else
 	{
