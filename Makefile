@@ -102,6 +102,7 @@ HEADER =\
 	$(INC_PATH)/tracer/tracer.hpp \
 	$(INC_PATH)/tracer/raycast.hpp \
 	$(INC_PATH)/tracer/barebone.hpp \
+	$(INC_PATH)/tracer/whitted.hpp \
 	$(INC_PATH)/glut/glutwindow.hpp \
 	$(NULL)
 

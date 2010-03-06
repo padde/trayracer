@@ -31,6 +31,7 @@ public: // member
 	Material* material_ptr; // material at hit point
 	Point     hitpoint;     // hit point
 	Scene*    scene_ptr;
+	int       depth;
 	Ray       ray;
 };
 
