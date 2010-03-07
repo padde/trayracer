@@ -1,6 +1,6 @@
 #include "whitted.hpp"
 
-
+#include <iostream>
 
 namespace {
 	const rgb black(0.0,0.0,0.0);
@@ -25,12 +25,19 @@ Whitted::trace ( const Ray& ray, int depth ) const
 	{
 		HitRecord rec(scene_ptr_);
 		float tmin = floatmax;
-
-		if ( scene_ptr_->shapes.hit(ray,tmin,rec) )
+		
+		Scene::shape_container_t::iterator it;
+		
+		// go through all shapes and check for hits
+		for ( it = scene_ptr_->shapes.begin(); it != scene_ptr_->shapes.end(); ++it )
 		{
-			rec.depth = depth;
-			rec.ray   = ray;
-			return rec.material_ptr->shade(rec);
+			if ( it->second->hit(ray,tmin,rec) )
+			{
+				rec.depth = depth;
+				rec.ray   = ray;
+				
+				return rec.material_ptr->shade(rec);
+			}
 		}
 	}
 	

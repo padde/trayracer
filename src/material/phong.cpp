@@ -11,12 +11,12 @@
 
 
 
-Phong::Phong ( std::string name, const float ka, const float kd, const float ks, const float ex, const rgb c ) :
+Phong::Phong ( std::string name, const rgb ka, const rgb kd, const rgb ks, const float ex ) :
 	Material (name)
 {
-	ambient_brdf_ptr_  = new Lambertian(ka,c);
-	diffuse_brdf_ptr_  = new Lambertian(kd,c);
-	specular_brdf_ptr_ = new Specular(ks,c,ex);
+	ambient_brdf_ptr_  = new Lambertian(1.0,ka);
+	diffuse_brdf_ptr_  = new Lambertian(1.0,kd);
+	specular_brdf_ptr_ = new Specular(1.0,ks,ex);
 }
 
 Phong::~Phong()

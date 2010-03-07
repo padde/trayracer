@@ -16,7 +16,7 @@ class PointLight : public Light
 {
 public: // c'tors, d'tor
 	PointLight ( std::string name );
-	PointLight ( std::string name, float ls, rgb color, Point position );
+	PointLight ( std::string name, Point position, rgb ls );
 	~PointLight();
 	
 public: // methods

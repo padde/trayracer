@@ -17,6 +17,7 @@
 
 // system header
 #include <vector>
+#include <map>
 
 
 
@@ -24,33 +25,45 @@ class Scene
 {
 public: // enums, typedefs
 	typedef std::vector< Light*    > light_container_t;
-	typedef std::vector< Material* > material_container_t;
+	typedef std::map< std::string, Material* > material_container_t;
+	typedef std::map< std::string, Shape*    > shape_container_t;
+	typedef std::map< std::string, Camera*   > camera_container_t;
 
 public: // c'tors, d'tor
 	Scene ();
 	~Scene ();
 	
 public: // methods
-	void push ( Shape*    shape_ptr    );
-	void push ( Light*    light_ptr    );
-	void push ( Material* material_ptr );
+	void push_shape    ( Shape*    shape_ptr    );
+	void push_light    ( Light*    light_ptr    );
+	void push_material ( Material* material_ptr );
+	void push_camera   ( Camera*  camera_ptr  );
+
+	void set_bgcolor ( rgb      bgcolor     );
+	void set_tracer  ( Tracer*  tracer_ptr  );
+	void set_ambient ( AmbientLight* ambient_ptr );
 	
-	void set ( Camera*  camera_ptr  );
-	void set ( rgb      bgcolor     );
-	void set ( Tracer*  tracer_ptr  );
-	void set ( AmbientLight* ambient_ptr );
+	Shape*    get_shape    ( const std::string name ) const;
+	Material* get_material ( const std::string name ) const;
+	Camera*   get_camera   ( const std::string name ) const;
+	
+	Shape* get_and_remove_shape ( const std::string name );
 	
 	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax, HitRecord& hitrec );
 	bool hit ( const Ray& ray, Shape::interval_t tmin, Shape::interval_t tmax );
 	
 public:
 	Tracer*              tracer_ptr;
-	Camera*              camera_ptr;
+	//camera_container_t   cameras;
 	AmbientLight*        ambient_ptr;
-	CompositeShape       shapes;
+	//CompositeShape       shapes;
 	light_container_t    lights;
-	material_container_t materials;
+	//material_container_t materials;
 	rgb                  bgcolor;
+	
+	material_container_t  materials;
+	shape_container_t     shapes;
+	camera_container_t    cameras;
 };
 
 #endif //BUW_SCENE_HPP

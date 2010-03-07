@@ -48,6 +48,7 @@ INCLUDE =\
 	-I$(INC_PATH)/shape/ \
 	-I$(INC_PATH)/scene/ \
 	-I$(INC_PATH)/material/ \
+	-I$(INC_PATH)/loader/ \
 	-I$(INC_PATH)/brdf/ \
 	-I$(INC_PATH)/light/ \
 	-I$(INC_PATH)/tracer/ \
@@ -93,6 +94,7 @@ HEADER =\
 	$(INC_PATH)/material/matte.hpp \
 	$(INC_PATH)/material/phong.hpp \
 	$(INC_PATH)/material/reflective.hpp \
+	$(INC_PATH)/loader/sdfloader.hpp \
 	$(INC_PATH)/brdf/brdf.hpp \
 	$(INC_PATH)/brdf/lambertian.hpp \
 	$(INC_PATH)/brdf/specular.hpp \

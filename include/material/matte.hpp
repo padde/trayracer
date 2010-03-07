@@ -14,7 +14,7 @@
 class Matte : public Material
 {
 public: // c'tors, d'tor
-	Matte ( std::string name, const float ka, const float kd, const rgb cd );
+	Matte ( std::string name, const rgb ka, const rgb kd );
 	~Matte();
 	
 public: // methods

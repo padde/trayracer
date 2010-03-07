@@ -11,11 +11,11 @@
 
 
 
-Matte::Matte ( std::string name, const float ka, const float kd, const rgb cd ) :
+Matte::Matte ( std::string name, const rgb ka, const rgb kd ) :
 	Material (name)
 {
-	ambient_brdf_ptr_ = new Lambertian(ka,cd);
-	diffuse_brdf_ptr_ = new Lambertian(kd,cd);
+	ambient_brdf_ptr_ = new Lambertian(1.0,ka);
+	diffuse_brdf_ptr_ = new Lambertian(1.0,kd);
 }
 
 Matte::~Matte()

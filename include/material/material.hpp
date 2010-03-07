@@ -20,6 +20,7 @@ public: // c'tors, d'tor
 	
 public: // methods
 	virtual rgb shade ( HitRecord& hitrec ) const = 0;
+	std::string name () const;
 	
 private: // members
 	std::string name_;

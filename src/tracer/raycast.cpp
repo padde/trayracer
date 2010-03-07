@@ -23,10 +23,16 @@ RayCast::trace ( const Ray& ray, int max_depth ) const
 	HitRecord rec(scene_ptr_);
 	float tmin = floatmax;
 	
-	if ( scene_ptr_->shapes.hit(ray,tmin,rec) )
+	Scene::shape_container_t::iterator it;
+	
+	// go through all shapes and check for hits
+	for ( it = scene_ptr_->shapes.begin(); it != scene_ptr_->shapes.end(); ++it )
 	{
-		rec.ray = ray;
-		return rec.material_ptr->shade(rec);
+		if ( it->second->hit(ray,tmin,rec) )
+		{
+			rec.ray = ray;
+			return rec.material_ptr->shade(rec);
+		}
 	}
 	
 	return scene_ptr_->bgcolor;

@@ -23,3 +23,9 @@ Light::position () const
 {
 	return Point(0,0,0);
 }
+
+std::string
+Light::name () const
+{
+	return name_;
+}

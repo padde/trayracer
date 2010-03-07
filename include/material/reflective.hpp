@@ -15,7 +15,7 @@
 class Reflective : public Phong
 {
 public: // c'tors, d'tor
-	Reflective ( std::string name, const float ka, const float kd, const float ks, const float exp, const float kr, const rgb cd );
+	Reflective ( std::string name, const rgb ka, const rgb kd, const rgb ks, const float exp, const rgb kr );
 	~Reflective();
 	
 public: // methods

@@ -16,7 +16,7 @@ class AmbientLight : public Light
 {
 public: // c'tors, d'tor
 	AmbientLight ( std::string name );
-	AmbientLight ( std::string name, float ls, rgb color );
+	AmbientLight ( std::string name, rgb ls );
 	~AmbientLight();
 	
 public: // methods

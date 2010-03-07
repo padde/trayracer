@@ -17,10 +17,10 @@ AmbientLight::AmbientLight ( std::string name ) :
 	color_ (1.0,1.0,1.0)
 {}
 
-AmbientLight::AmbientLight ( std::string name, float ls, rgb color ) :
+AmbientLight::AmbientLight ( std::string name, rgb ls ) :
 	Light  (name),
-	ls_    (ls),
-	color_ (color)
+	ls_    (1.0),
+	color_ (ls)
 {}
 
 AmbientLight::~AmbientLight ()

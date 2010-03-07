@@ -9,3 +9,9 @@ Material::Material ( std::string name ) :
 /* virtual */
 Material::~Material()
 {}
+
+std::string
+Material::name () const
+{
+	return name_;
+}

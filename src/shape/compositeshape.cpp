@@ -33,6 +33,7 @@ CompositeShape::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) cons
 	bool is_hit;
 	HitRecord tmprec(hitrec);
 	
+	
 	// go through all shapes and check for hits
 	for ( unsigned i=0; i < shapes_.size(); ++i )
 	{

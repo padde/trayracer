@@ -17,11 +17,18 @@ rgb
 BareBone::trace ( const Ray& ray, int max_depth ) const
 {
 	HitRecord rec(scene_ptr_);
-	float tmax = floatmax;
-	float tmin = 0.0;
+	float tmin = floatmax;
+
+	Scene::shape_container_t::iterator it;
 	
-	if ( scene_ptr_->shapes.hit(ray,tmin,rec) )
-		return rgb(1,1,1);
+	// go through all shapes and check for hits
+	for ( it = scene_ptr_->shapes.begin(); it != scene_ptr_->shapes.end(); ++it )
+	{
+		if ( it->second->hit(ray,tmin,rec) )
+		{
+			return rgb(1,1,1);
+		}
+	}
 	
 	return scene_ptr_->bgcolor;
 }

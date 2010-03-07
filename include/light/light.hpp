@@ -23,6 +23,8 @@ public: // methods
 	virtual rgb    L             ( HitRecord& hitrec ) const = 0;
 	virtual bool   in_shadow     ( const Ray& ray, const HitRecord& hitrec ) const;
 	virtual Point  position      () const;
+	
+	std::string name () const;
 
 
 protected: // protected members

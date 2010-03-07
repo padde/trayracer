@@ -6,6 +6,7 @@
 #include <ctime>
 
 // project header
+#include <sdfloader.hpp>
 #include <glutwindow.hpp>
 #include <pixel.hpp>
 #include <rgb.hpp>
@@ -31,6 +32,7 @@
 class rt_application 
 {
 public :
+	/*
 	void raytrace() const
 	{
 		// get glwindow instance (for size)
@@ -102,34 +104,34 @@ public :
 	{
 		// get glwindow instance (for size)
 		glutwindow& gw = glutwindow::instance();
+		Scene* scene = new Scene();
 		
 		// create materials
-		Material* red    = new Matte("", 1.0, 1.0, rgb(0.9, 0.2, 0.1));
-		Material* green  = new Matte("", 1.0, 1.0, rgb(0.1, 0.7, 0.3));
-		Material* white  = new Matte("", 1.0, 1.0, rgb(1.0, 1.0, 1.0));
+		Material* red    = new Matte("red",   rgb(0.9, 0.2, 0.1), rgb(0.9, 0.2, 0.1));
+		Material* green  = new Matte("green", rgb(0.1, 0.7, 0.3), rgb(0.1, 0.7, 0.3));
+		Material* white  = new Matte("white", rgb(1.0, 1.0, 1.0), rgb(1.0, 1.0, 1.0));
+		Material* ivory  = new Phong("ivory", rgb(0.8, 0.8, 0.7), rgb(1.0, 1.0, 0.9), rgb(1.0, 1.0, 0.98), 3 );
+		Material* mirror = new Reflective("mirror", rgb(1.0, 1.0, 0.98), rgb(1.0, 1.0, 0.98), rgb(1.0, 1.0, 0.98), 10, rgb(1.0, 1.0, 0.98));
 		
-		Material* ivory  = new Phong("", 0.8, 1.0, 1.0, 3, rgb(1.0, 1.0, 0.98));
+		scene->push_material(red);
+		scene->push_material(green);
+		scene->push_material(white);
+		scene->push_material(ivory);
+		scene->push_material(mirror);
 		
-		Material* mirror = new Reflective("", 0.2, 0.2, 0.5, 10, 1.0, rgb(1.0, 1.0, 0.98));
+		Material* mat = scene->get_material("green");
 		
 		// walls
-		Shape* wall_right   = new Box("", Point( 500,-550,    0), Point( 550, 550, -1000), green);
-		Shape* wall_left    = new Box("", Point(-500,-550,    0), Point(-550, 550, -1000), red  );
-		Shape* wall_top     = new Box("", Point(-500, 500,    0), Point( 500, 550, -1000), white);
-		Shape* wall_bottom  = new Box("", Point(-500,-500,    0), Point( 500,-550, -1000), white);
-		Shape* wall_back    = new Box("", Point(-550,-550,-1000), Point( 550, 550, -1050), white);
-		Shape* sphere_left  = new Sphere("", Point(-300,-320,-600), 180, mirror);
-		Shape* sphere_right = new Sphere("", Point( 250,-300,-300), 200, mirror);
-		Shape* sphere_center = new Sphere("", Point( 0,-300,-800), 200, mirror);
-		Shape* sphere_small = new Sphere("", Point( 0,-400,-200), 100, mirror);
+		Shape* wall_right   = new Box("wall_right" , Point( 500,-550,    0), Point( 550, 550, -1000), mirror);
+		Shape* wall_left    = new Box("wall_left"  , Point(-500,-550,    0), Point(-550, 550, -1000), mirror  );
+		Shape* wall_top     = new Box("wall_top"   , Point(-500, 500,    0), Point( 500, 550, -1000), mirror);
+		Shape* wall_bottom  = new Box("wall_bottom", Point(-500,-500,    0), Point( 500,-550, -1000), mirror);
+		Shape* wall_back    = new Box("wall_back"  , Point(-550,-550,-1000), Point( 550, 550, -1050), mirror);
+		Shape* sphere_left  = new Sphere("sphere_left", Point(-300,-320,-600), 180, mirror);
+		Shape* sphere_right = new Sphere("sphere_right", Point( 250,-300,-300), 200, mirror);
+		Shape* sphere_center = new Sphere("sphere_center", Point( 0,-300,-800), 200, mirror);
+		Shape* sphere_small = new Sphere("sphere_small", Point( 0,-400,-200), 100, mirror);
 		
-		Shape* triangle = new Triangle ( "", Point(-300,-300,-300), Point(0,300,-1200), Point(300,-200,-130) ,green);
-		
-		
-		// set background color
-		rgb bgcolor(0.03,0.03,0.03);
-		
-		// store shapes in composite
 		CompositeShape* shapes = new CompositeShape("shapes");
 		shapes->push(wall_left);
 		shapes->push(wall_right);
@@ -140,24 +142,24 @@ public :
 		shapes->push(sphere_right);
 		shapes->push(sphere_center);
 		shapes->push(sphere_small);
-		//shapes->push(triangle);
+		
+		scene->push_shape(shapes);
+		
+		// set background color
+		rgb bgcolor(0.03,0.03,0.03);
+		scene->set_bgcolor(bgcolor);
 		
 		// define ambient light, must be of type AmbientLight*
-		AmbientLight* amb = new AmbientLight ("amb", 0.1, rgb(1,1,0.9));
+		AmbientLight* amb = new AmbientLight ("amb", rgb(0.1,0.1,0.1));
+		scene->set_ambient(amb);
 		
 		// define point light
-		Light* p1 = new PointLight ("", 1.0, rgb(1.0,1.0,0.9), Point(   0, 300,-500));
+		Light* p1 = new PointLight ("", Point(   0, 300,-500), rgb(1.0,1.0,0.9));
+		scene->push_light(p1);
 		
 		// make a camera
 		Camera* cam = new Camera ("cam", gw.width(), gw.height(), 31);
-		
-		// add elements to scene
-		Scene* scene = new Scene();
-		scene->push(shapes);
-		scene->set(bgcolor);
-		scene->set(amb);
-		scene->push(p1);
-		scene->set(cam);
+		scene->push_camera(cam);
 		
 		// preparations for filename
 		time_t      t = time(NULL);
@@ -167,7 +169,7 @@ public :
 		std::string filename = "images/raytrace__" + std::string(time_str) + ".png";
 		
 		// render the scene
-		cam->render(filename);
+		scene->get_camera("cam")->render(filename);
 	}
 	
 	
@@ -277,7 +279,7 @@ public :
 		// render the scene
 		cam->render(filename);
 	}
-	
+	*/
 };
 
 
@@ -291,8 +293,10 @@ int main(int argc, char* argv[])
 	
 	glutwindow::init(width, height, 100, 100, "Raytracer", argc, argv);
 	
-	rt_application app;
-	boost::thread thr(boost::bind(&rt_application::cornell_box, &app));
+	sdfloader sl;
+	boost::thread thr(boost::bind(&sdfloader::load, &sl));
+	// rt_application rt;
+	// boost::thread thr(boost::bind(&rt_application::cornell_box, &rt));
 	
 	glutwindow::instance().run();
 	

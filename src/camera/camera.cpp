@@ -56,7 +56,7 @@ Camera::render ( std::string filename ) const
 	float s = 1.0; // pixel size
 	int num_samples = 9;
 	int n = std::size_t(sqrt(float(num_samples)));
-	Point origin = Point ( 0, 0, 1800 );
+	Point origin = Point ( 0, 0, 0 );
 	
 	png::image< png::rgb_pixel > png(hres_,vres_);
 	
@@ -96,6 +96,7 @@ Camera::render ( std::string filename ) const
 			// add gamma, clamp colors
 			if (gamma != 1)
 				p.color.powc(gamma);
+			// p.color *= 2;
 			p.color.max_to_one();
 			
 			// write pixel to window
@@ -114,4 +115,10 @@ Camera::render ( std::string filename ) const
 	// save png image
 	png.write(filename);
 	std::cout << "image saved as " << filename << std::endl;
+}
+
+std::string
+Camera::name () const
+{
+	return name_;
 }

@@ -19,10 +19,10 @@ PointLight::PointLight ( std::string name ) :
 	position_ ()
 {}
 
-PointLight::PointLight ( std::string name, float ls, rgb color, Point position ) :
+PointLight::PointLight ( std::string name, Point position, rgb ls ) :
 	Light     (name),
-	ls_       (ls),
-	color_    (color),
+	ls_       (1.0),
+	color_    (ls),
 	position_ (position)
 {}
 
@@ -47,16 +47,12 @@ PointLight::in_shadow ( const Ray& s_ray, const HitRecord& hitrec ) const
 	float t = 0;
 	float d = (s_ray.origin() - position_).length();
 	
-	std::size_t count_obj = hitrec.scene_ptr->shapes.size();
+	Scene::shape_container_t::iterator it;
 	
 	// go through all shapes and check for hits
-	for ( unsigned i=0; i < count_obj; ++i )
-	{
-		if ( hitrec.scene_ptr->shapes[i]->hit(s_ray, t) and t < d )
-		{
+	for ( it = hitrec.scene_ptr->shapes.begin(); it != hitrec.scene_ptr->shapes.end(); ++it )
+		if ( it->second->hit(s_ray, t) and t < d )
 			return true;
-		}
-	}
 	
 	return false;
 }

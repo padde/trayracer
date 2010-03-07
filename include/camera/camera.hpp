@@ -20,6 +20,7 @@ public: // ctor's, d'tor
 
 public: // methods
 	void render ( std::string filename ) const;
+	std::string name () const;
 
 public:
 	Scene* scene_ptr;

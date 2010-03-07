@@ -11,11 +11,11 @@
 
 
 
-Reflective::Reflective ( std::string name, const float ka, const float kd, const float ks, const float exp, const float kr, const rgb c ) :
-	Phong( name, ka, kd, ks, exp, c ),
+Reflective::Reflective ( std::string name, const rgb ka, const rgb kd, const rgb ks, const float exp, const rgb kr ) :
+	Phong( name, ka, kd, ks, exp ),
 	reflective_brdf_ptr_(NULL)
 {
-	reflective_brdf_ptr_ = new PerfectSpecular( kr, c );
+	reflective_brdf_ptr_ = new PerfectSpecular( 1.0, kr );
 }
 
 Reflective::~Reflective()

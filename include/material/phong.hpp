@@ -15,7 +15,7 @@
 class Phong : public Material
 {
 public: // c'tors, d'tor
-	Phong ( std::string name, const float ka, const float kd, const float ks, const float exp, const rgb cd );
+	Phong ( std::string name, const rgb ka, const rgb kd, const rgb ks, const float exp );
 	~Phong();
 	
 public: // methods
