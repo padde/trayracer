@@ -31,10 +31,10 @@ Sphere::Sphere ( std::string name, const Point& center, const float& radius, Mat
 Sphere::~Sphere ()
 {}
 
-bool Sphere::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const
+bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
 	// transform ray to object space
-	// Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(trans_);
 	
 	// some helper variables
 	Vector org = ray.origin() - center_;

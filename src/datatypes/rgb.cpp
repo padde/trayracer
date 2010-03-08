@@ -79,6 +79,10 @@ rgb::max_to_one ()
 		data_[0] /= max;
 		data_[1] /= max;
 		data_[2] /= max;
+		/*
+		data_[0] = 1;
+		data_[1] = 0;
+		data_[2] = 0;*/
 	}
 	
 	return *this;

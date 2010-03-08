@@ -30,7 +30,6 @@ Reflective::shade ( HitRecord& hitrec ) const
 	
 	Vector wi;
 	Vector wo = - hitrec.ray.dir();
-	// wo.unify();
 	
 	rgb fr = reflective_brdf_ptr_->sample_f(hitrec,wo,wi);
 	

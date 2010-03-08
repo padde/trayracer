@@ -1,12 +1,6 @@
 #include "perfectspecular.hpp"
 
-
-
-namespace {
-	const rgb black(0.0,0.0,0.0);
-}
-
-
+#include <cmath>
 
 PerfectSpecular::PerfectSpecular ( const float& kr, const rgb& cr ) :
 	kr_(kr),
@@ -20,8 +14,9 @@ rgb
 PerfectSpecular::sample_f ( const HitRecord& hitrec, const Vector& wo, Vector& wi ) const
 {
 	wi = -wo + 2.0 * hitrec.normal * dot(hitrec.normal, wo);
+	rgb result = kr_ * cr_ / fabs(dot(hitrec.normal, wi));
 	
-	return kr_ * cr_ / dot(hitrec.normal, wi);
+	return result;
 }
 
 void

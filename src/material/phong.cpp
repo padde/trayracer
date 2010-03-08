@@ -30,7 +30,6 @@ rgb
 Phong::shade ( HitRecord& hitrec ) const
 {
 	Vector wo = - hitrec.ray.dir();
-	wo.unify();
 	
 	rgb L = ambient_brdf_ptr_->rho(hitrec,wo) *
 		hitrec.scene_ptr->ambient_ptr->L(hitrec);

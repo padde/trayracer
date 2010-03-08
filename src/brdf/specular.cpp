@@ -8,12 +8,6 @@
 
 
 
-namespace {
-	const rgb black(0.0,0.0,0.0);
-}
-
-
-
 Specular::Specular () :
 	ks_(0.0),
 	exp_(0.0),

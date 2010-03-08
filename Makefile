@@ -39,7 +39,8 @@ OBJ_PATH =./build
 
 CXX =g++
 CXX_FLAGS =-Wall
-# CXX_FLAGS =-Wall -pedantic -O3 -fast -D NDEBUG
+# CXX_FLAGS =-Wall -pedantic -O3 -fast
+# CXX_FLAGS =-Wall -pedantic -g
 INCLUDE =\
 	-I/opt/local/include/ \
 	-I/private/var/lib/unittest++/src/ \
@@ -50,6 +51,7 @@ INCLUDE =\
 	-I$(INC_PATH)/material/ \
 	-I$(INC_PATH)/loader/ \
 	-I$(INC_PATH)/brdf/ \
+	-I$(INC_PATH)/btdf/ \
 	-I$(INC_PATH)/light/ \
 	-I$(INC_PATH)/tracer/ \
 	-I$(INC_PATH)/file/ \
@@ -94,11 +96,14 @@ HEADER =\
 	$(INC_PATH)/material/matte.hpp \
 	$(INC_PATH)/material/phong.hpp \
 	$(INC_PATH)/material/reflective.hpp \
+	$(INC_PATH)/material/transparent.hpp \
 	$(INC_PATH)/loader/sdfloader.hpp \
 	$(INC_PATH)/brdf/brdf.hpp \
 	$(INC_PATH)/brdf/lambertian.hpp \
 	$(INC_PATH)/brdf/specular.hpp \
 	$(INC_PATH)/brdf/perfectspecular.hpp \
+	$(INC_PATH)/btdf/btdf.hpp \
+	$(INC_PATH)/btdf/perfecttransmitter.hpp \
 	$(INC_PATH)/light/light.hpp \
 	$(INC_PATH)/light/ambientlight.hpp \
 	$(INC_PATH)/light/pointlight.hpp \

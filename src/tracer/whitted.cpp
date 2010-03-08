@@ -36,7 +36,7 @@ Whitted::trace ( const Ray& ray, int depth ) const
 				rec.depth = depth;
 				rec.ray   = ray;
 				
-				return rec.material_ptr->shade(rec);
+				return rec.material_ptr->shade(rec).max_to_one();
 			}
 		}
 	}
