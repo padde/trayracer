@@ -1,16 +1,4 @@
-// i/f header
 #include "box.hpp"
-
-// system header
-#include <limits>
-#include <string>
-
-// project header
-#include <shape.hpp>
-#include <material.hpp>
-#include <hitrecord.hpp>
-
-
 
 namespace {
 	const double epsilon = 0.001;

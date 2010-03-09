@@ -12,24 +12,14 @@
 class Specular : public BRDF
 {
 public: // c'tors, d'tor 
-	Specular ();
-	Specular ( const float& ks, const rgb& cs, const float& exp );
+	Specular ( const rgb& ks, const float& exp );
 	~Specular();
 
-	rgb f   ( const HitRecord& sr, const Vector& wo, const Vector& wi ) const;
-	
-	void ks  ( const float ks );
-	void exp ( const float e  );
-	void cs  ( const rgb&  cs );
-		
-	float ks  () const;
-	float exp () const;
-	rgb   cs  () const;
+	rgb f ( const HitRecord& sr, const Vector& wo, const Vector& wi ) const;
 
 private: // member
-	float ks_;
+	rgb   ks_;
 	float exp_; // exponent
-	rgb   cs_;  // color
 };
 
 #endif //BUW_SPECULAR_HPP

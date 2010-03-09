@@ -1,13 +1,7 @@
 #include "reflective.hpp"
 
-// system header
-#include <string>
-
 // project header
-#include <rgb.hpp>
-#include <hitrecord.hpp>
 #include <scene.hpp>
-#include <phong.hpp>
 
 
 
@@ -15,7 +9,7 @@ Reflective::Reflective ( std::string name, const rgb ka, const rgb kd, const rgb
 	Phong( name, ka, kd, ks, exp ),
 	reflective_brdf_ptr_(NULL)
 {
-	reflective_brdf_ptr_ = new PerfectSpecular( 1.0, kr );
+	reflective_brdf_ptr_ = new PerfectSpecular(kr);
 }
 
 Reflective::~Reflective()

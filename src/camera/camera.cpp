@@ -54,7 +54,7 @@ Camera::render ( std::string filename ) const
 	glutwindow& gw = glutwindow::instance();
 	float gamma = 1/1.6;
 	float s = 1.0; // pixel size
-	int num_samples = 9;
+	int num_samples = 1;
 	int n = std::size_t(sqrt(float(num_samples)));
 	Point origin = Point ( 0, 0, 1800 );
 	

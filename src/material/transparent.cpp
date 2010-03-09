@@ -1,10 +1,7 @@
 #include "transparent.hpp"
 
-
-
 // system header
 #include <cmath>
-#include <iostream>
 
 // project header
 #include <scene.hpp>
@@ -16,8 +13,8 @@ Transparent::Transparent ( std::string name, const rgb ka, const rgb kd, const r
 	reflective_brdf_ptr_(NULL),
 	specular_btdf_ptr_(NULL)
 {
-	reflective_brdf_ptr_ = new PerfectSpecular( 1.0, kr );
-	specular_btdf_ptr_   = new PerfectTransmitter( kt, ior );
+	reflective_brdf_ptr_ = new PerfectSpecular(kr);
+	specular_btdf_ptr_   = new PerfectTransmitter(kt,ior);
 }
 	
 

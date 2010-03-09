@@ -1,19 +1,7 @@
 #include "scene.hpp"
 
-// system header
-#include <iostream>
-#include <map>
-
 // project header
-#include <rgb.hpp>
-#include <camera.hpp>
-#include <tracer.hpp>
-#include <raycast.hpp>
 #include <whitted.hpp>
-#include <barebone.hpp>
-#include <light.hpp>
-#include <ambientlight.hpp>
-
 
 
 

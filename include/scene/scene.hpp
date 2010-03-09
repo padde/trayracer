@@ -2,18 +2,12 @@
 #define BUW_SCENE_HPP
 
 // project header
-#include <point.hpp>
-#include <vector.hpp>
-#include <matrix.hpp>
 #include <shape.hpp>
-#include <compositeshape.hpp>
 #include <light.hpp>
 #include <ambientlight.hpp>
 #include <material.hpp>
-#include <rgb.hpp>
 #include <camera.hpp>
 #include <tracer.hpp>
-//#include <sampler.hpp>
 
 // system header
 #include <vector>
@@ -24,7 +18,7 @@
 class Scene
 {
 public: // enums, typedefs
-	typedef std::vector< Light*    > light_container_t;
+	typedef std::vector< Light* >              light_container_t;
 	typedef std::map< std::string, Material* > material_container_t;
 	typedef std::map< std::string, Shape*    > shape_container_t;
 	typedef std::map< std::string, Camera*   > camera_container_t;
@@ -54,16 +48,12 @@ public: // methods
 	
 public:
 	Tracer*              tracer_ptr;
-	//camera_container_t   cameras;
 	AmbientLight*        ambient_ptr;
-	//CompositeShape       shapes;
 	light_container_t    lights;
-	//material_container_t materials;
+	material_container_t materials;
+	shape_container_t    shapes;
+	camera_container_t   cameras;
 	rgb                  bgcolor;
-	
-	material_container_t  materials;
-	shape_container_t     shapes;
-	camera_container_t    cameras;
 };
 
 #endif //BUW_SCENE_HPP

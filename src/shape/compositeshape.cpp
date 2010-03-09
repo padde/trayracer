@@ -1,23 +1,6 @@
-// i/f header
 #include "compositeshape.hpp"
 
-// system header
-#include <vector>
-#include <string>
-#include <limits>
 
-// project header
-#include <ray.hpp>
-#include <shape.hpp>
-#include <hitrecord.hpp>
-
-
-// system header
-#include <iostream>
-
-
-CompositeShape::CompositeShape ()
-{}
 
 CompositeShape::CompositeShape ( std::string name ) :
 	Shape(name)
@@ -67,12 +50,6 @@ void
 CompositeShape::push ( Shape* shape )
 {
 	shapes_.push_back(shape);
-}
-
-std::size_t
-CompositeShape::size ()
-{
-	return shapes_.size();
 }
 
 void

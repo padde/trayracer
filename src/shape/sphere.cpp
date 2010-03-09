@@ -1,25 +1,11 @@
-// i/f header
 #include "sphere.hpp"
 
 // system header
 #include <cmath>
-#include <string>
-
-// project header
-#include <point.hpp>
-#include <vector.hpp>
-#include <matrix.hpp>
-#include <rgb.hpp>
-#include <ray.hpp>
-#include <shape.hpp>
-#include <hitrecord.hpp>
-#include <material.hpp>
 
 
 
-namespace {
-	const double epsilon = 0.03;
-}
+namespace { const double epsilon = 0.01; }
 
 
 

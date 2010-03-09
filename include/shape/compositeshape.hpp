@@ -13,7 +13,6 @@
 class CompositeShape : public Shape
 {
 public: // c'tors, d'tor
-	CompositeShape ();
 	CompositeShape ( std::string name );
 	virtual ~CompositeShape ();
 
@@ -22,7 +21,6 @@ public: // methods
 	bool hit ( const Ray& ray, interval_t& tmin ) const;
 	
 	void push ( Shape* shape ); // push shape to shapes_
-	std::size_t size ( ); // get num of objects
 	void transform ( const Matrix& ); // transformation matrix setter
 	
 	const Shape* operator[] ( unsigned ) const; // shape getter

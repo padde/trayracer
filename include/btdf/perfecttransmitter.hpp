@@ -16,13 +16,7 @@ public: // c'tors, d'tor
 
 public: // methods
 	virtual rgb  sample_f ( const HitRecord& hitrec, const Vector& wo, Vector& wt ) const;
-	virtual bool tir      ( const HitRecord& hitrec                               ) const;
-	
-	void kt  ( const float& kt  );
-	void ior ( const float& ior );
-	
-	float kt  () const;
-	float ior () const;
+	virtual bool tir ( const HitRecord& hitrec ) const;
 	
 private:
 	float kt_;

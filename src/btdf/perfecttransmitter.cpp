@@ -3,13 +3,10 @@
 
 // system header
 #include <cmath>
-#include <iostream>
 
 
 
-namespace {
-	const rgb black(0.0,0.0,0.0);
-}
+namespace { const rgb black(0.0,0.0,0.0); }
 
 
 
@@ -58,28 +55,4 @@ PerfectTransmitter::tir ( const HitRecord& hitrec ) const
 	}
 	
 	return 1.0 - ( 1.0 - cos_theta_i * cos_theta_i ) / ( eta * eta ) < 0.0;
-}
-
-void 
-PerfectTransmitter::kt ( const float& kt )
-{
-	kt_ = kt;
-}
-
-void 
-PerfectTransmitter::ior ( const float& ior )
-{
-	ior_ = ior;
-}
-
-float 
-PerfectTransmitter::kt () const
-{
-	return kt_;
-}
-
-float 
-PerfectTransmitter::ior () const
-{
-	return ior_;
 }

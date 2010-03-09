@@ -1,19 +1,5 @@
-// i/f header
 #include "shape.hpp"
 
-// system header
-#include <string>    // std::string
-#include <iostream>  // NULL
-
-// project header
-// #include <material.hpp>
-class Material; // FIXME
-
-
-
-Shape::Shape () :
-	name_(""), material_ptr_(NULL)
-{}
 
 
 Shape::Shape ( std::string name ) :

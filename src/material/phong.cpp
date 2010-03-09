@@ -1,12 +1,6 @@
 #include "phong.hpp"
 
-// system header
-#include <string>
-
 // project header
-#include <rgb.hpp>
-#include <hitrecord.hpp>
-#include <material.hpp>
 #include <scene.hpp>
 
 
@@ -14,9 +8,9 @@
 Phong::Phong ( std::string name, const rgb ka, const rgb kd, const rgb ks, const float ex ) :
 	Material (name)
 {
-	ambient_brdf_ptr_  = new Lambertian(1.0,ka);
-	diffuse_brdf_ptr_  = new Lambertian(1.0,kd);
-	specular_brdf_ptr_ = new Specular(1.0,ks,ex);
+	ambient_brdf_ptr_  = new Lambertian(ka);
+	diffuse_brdf_ptr_  = new Lambertian(kd);
+	specular_brdf_ptr_ = new Specular(ks,ex);
 }
 
 Phong::~Phong()

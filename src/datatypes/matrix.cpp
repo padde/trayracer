@@ -553,42 +553,6 @@ make_scale ( Vector const& v)
 	};
 	return values;
 }
-/*
-Matrix
-make_rotation_x ( double a )
-{
-	double const values[16] = {
-		1.0, 0.0   ,  0.0   , 0.0,
-		0.0, cos(a), -sin(a), 0.0,
-		0.0, sin(a),  cos(a), 0.0,
-		0.0, 0.0   ,  0.0   , 1.0
-	};
-	return values;
-}
-
-Matrix
-make_rotation_y ( double a )
-{
-	double const values[16] = {
-		 cos(a), 0.0, sin(a), 0.0,
-		 0.0   , 1.0, 0.0   , 0.0,
-		-sin(a), 0.0, cos(a), 0.0,
-		 0.0   , 0.0, 0.0   , 1.0
-	};
-	return values;
-}
-
-Matrix
-make_rotation_z ( double a )
-{
-	double const values[16] = {
-		cos(a), -sin(a), 0.0, 0.0,
-		sin(a),  cos(a), 0.0, 0.0,
-		0.0   ,  0.0   , 1.0, 0.0,
-		0.0   ,  0.0   , 0.0, 1.0
-	};
-	return values;
-}*/
 
 Matrix make_rotation ( Vector const& v, double a )
 {

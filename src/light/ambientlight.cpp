@@ -1,14 +1,5 @@
 #include "ambientlight.hpp"
 
-// system header
-#include <string>
-
-// projet header
-#include <rgb.hpp>
-#include <vector.hpp>
-#include <hitrecord.hpp>
-#include <light.hpp>
-
 
 
 AmbientLight::AmbientLight ( std::string name ) :

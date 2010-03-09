@@ -1,8 +1,6 @@
 #include "barebone.hpp"
 
-namespace {
-	const float floatmax = std::numeric_limits<float>::max();
-}
+namespace { const float floatmax = std::numeric_limits<float>::max(); }
 
 
 

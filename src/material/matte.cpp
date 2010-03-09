@@ -1,12 +1,6 @@
 #include "matte.hpp"
 
-// system header
-#include <string>
-
 // project header
-#include <rgb.hpp>
-#include <hitrecord.hpp>
-#include <material.hpp>
 #include <scene.hpp>
 
 
@@ -14,8 +8,8 @@
 Matte::Matte ( std::string name, const rgb ka, const rgb kd ) :
 	Material (name)
 {
-	ambient_brdf_ptr_ = new Lambertian(1.0,ka);
-	diffuse_brdf_ptr_ = new Lambertian(1.0,kd);
+	ambient_brdf_ptr_ = new Lambertian(ka);
+	diffuse_brdf_ptr_ = new Lambertian(kd);
 }
 
 Matte::~Matte()

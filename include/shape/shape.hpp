@@ -19,7 +19,6 @@ public: // enums, typedefs
 	typedef float interval_t;
 
 public: // c'tors, d'tor
-	Shape ();
 	Shape ( std::string name );
 	Shape ( std::string name, Material* material );
 	virtual ~Shape ();

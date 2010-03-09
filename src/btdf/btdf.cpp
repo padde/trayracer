@@ -2,9 +2,7 @@
 
 
 
-namespace {
-	const rgb black(0.0,0.0,0.0);
-}
+namespace { const rgb black(0.0,0.0,0.0); }
 
 
 

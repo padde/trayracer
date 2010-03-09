@@ -1,7 +1,5 @@
 #include "whitted.hpp"
 
-#include <iostream>
-
 namespace {
 	const rgb black(0.0,0.0,0.0);
 	const float floatmax = std::numeric_limits<float>::max();

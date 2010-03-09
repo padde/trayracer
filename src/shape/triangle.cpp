@@ -3,24 +3,10 @@
 
 // system header
 #include <cmath>
-#include <string>
-#include <limits>
-
-// project header
-#include <point.hpp>
-#include <vector.hpp>
-#include <matrix.hpp>
-#include <rgb.hpp>
-#include <ray.hpp>
-#include <shape.hpp>
-#include <hitrecord.hpp>
-#include <material.hpp>
 
 
 
-namespace {
-	const float epsilon = 0.001;
-}
+namespace { const float epsilon = 0.001; }
 
 
 
@@ -76,11 +62,11 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 	
 	if ( t < tmin and t > epsilon)
 	{
-		tmin = t;
 		// hit detected
-		hitrec.t = t;
-		hitrec.hit = true;
-		hitrec.normal = - unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
+		tmin                = t;
+		hitrec.t            = t;
+		hitrec.hit          = true;
+		hitrec.normal       = - unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
 		hitrec.material_ptr = material_ptr_;
 		hitrec.hitpoint     = ray.origin() + t * ray.dir();
 		hitrec.ray          = ray;

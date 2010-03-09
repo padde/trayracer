@@ -26,13 +26,8 @@ public: // methods
 	
 	std::string name () const;
 
-
-protected: // protected members
-	bool shadows;
-	
 private: // private members
 	std::string name_;
-	
 };
 
 #endif //BUW_LIGHT_HPP

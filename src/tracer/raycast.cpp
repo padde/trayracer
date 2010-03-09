@@ -1,12 +1,6 @@
 #include "raycast.hpp"
 
-// project header
-#include <tracer.hpp>
-#include <hitrecord.hpp>
-
-namespace {
-	const float floatmax = std::numeric_limits<float>::max();
-}
+namespace { const float floatmax = std::numeric_limits<float>::max(); }
 
 
 

@@ -18,13 +18,12 @@ public: // c'tors, d'tor
 	PointLight ( std::string name );
 	PointLight ( std::string name, Point position, rgb ls );
 	~PointLight();
-	
+
 public: // methods
 	Vector get_direction ( HitRecord& hitrec ) const;
 	rgb    L             ( HitRecord& hitrec ) const;
 	bool   in_shadow     ( const Ray& ray, const HitRecord& hitrec ) const;
 	Point  position      () const;
-
 
 private: // members
 	float  ls_;

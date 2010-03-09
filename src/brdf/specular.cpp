@@ -8,16 +8,9 @@
 
 
 
-Specular::Specular () :
-	ks_(0.0),
-	exp_(0.0),
-	cs_(1,1,1)
-{}
-
-Specular::Specular ( const float& ks, const rgb& cs, const float& exp ) :
+Specular::Specular ( const rgb& ks, const float& exp ) :
 	ks_(ks),
-	exp_(exp),
-	cs_(cs)
+	exp_(exp)
 {}
 
 Specular::~Specular()
@@ -34,43 +27,7 @@ Specular::f ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) cons
 	
 	// reflection detected
 	if ( rdotwo > 0.0 )
-		L = cs_ * ks_ * pow(rdotwo, exp_);
+		L = ks_ * pow(rdotwo, exp_);
 	
 	return L;
-}
-
-void
-Specular::ks  ( const float ks )
-{
-	ks_ = ks;
-}
-
-void
-Specular::exp ( const float e )
-{
-	exp_ = e;
-}
-
-void
-Specular::cs ( const rgb&  cs )
-{
-	cs_ = cs;
-}
-	
-float
-Specular::ks () const
-{
-	return ks_;
-}
-
-float
-Specular::exp () const
-{
-	return exp_;
-}
-
-rgb
-Specular::cs () const
-{
-	return cs_;
 }

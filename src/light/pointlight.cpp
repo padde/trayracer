@@ -1,13 +1,6 @@
 #include "pointlight.hpp"
 
-// system header
-#include <string>
-#include <limits>
-
 // projet header
-#include <rgb.hpp>
-#include <vector.hpp>
-#include <hitrecord.hpp>
 #include <scene.hpp>
 
 

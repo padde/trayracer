@@ -15,6 +15,7 @@
 #include "sdfloader.hpp"
 #include "scene.hpp"
 #include "shape.hpp"
+#include "compositeshape.hpp"
 #include "sphere.hpp"
 #include "triangle.hpp"
 #include "box.hpp"

@@ -3,6 +3,7 @@
 
 // project header
 #include <rgb.hpp>
+#include <vector.hpp>
 #include <hitrecord.hpp>
 
 
