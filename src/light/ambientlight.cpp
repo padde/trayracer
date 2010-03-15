@@ -2,16 +2,9 @@
 
 
 
-AmbientLight::AmbientLight ( std::string name ) :
-	Light  (name),
-	ls_    (1.0),
-	color_ (1.0,1.0,1.0)
-{}
-
 AmbientLight::AmbientLight ( std::string name, rgb ls ) :
 	Light  (name),
-	ls_    (1.0),
-	color_ (ls)
+	ls_    (ls)
 {}
 
 AmbientLight::~AmbientLight ()
@@ -26,5 +19,5 @@ AmbientLight::get_direction ( HitRecord& hitrec ) const
 rgb
 AmbientLight::L ( HitRecord& hitrec ) const
 {
-	return ls_ * color_;
+	return ls_;
 }

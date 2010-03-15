@@ -11,7 +11,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Simple light source class
+//
 class Light
 {
 public: // c'tors, d'tor

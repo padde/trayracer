@@ -12,11 +12,14 @@
 class Scene;
 
 
-
-// struct for recording hits
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... struct for recording hits
+//
 class HitRecord
 {
-public: // c'tors, d'tor
+public: 
+	/// c'tor
 	HitRecord ( Scene* ptr );
 	~HitRecord ();
 
@@ -24,13 +27,21 @@ public: // methods
 	HitRecord& operator= ( HitRecord const& rhs );
 
 public: // member
-	bool      hit;          // is it a hit?
-	float     t;            // distance from ray origin
-	rgb       color;        // color (for early development stage)
-	Vector    normal;       // normal vector on surface
-	Material* material_ptr; // material at hit point
-	Point     hitpoint;     // hit point
+	//! @brief  is it a hit?
+	bool      hit;          
+	//! @brief  distance from ray origin
+	float     t;            
+	//! @brief  color (for early development stage)
+	rgb       color;        
+	//! @brief  normal vector on surface
+	Vector    normal;       
+	//! @brief  material at hit point
+	Material* material_ptr; 
+	//! @brief  hit point
+	Point     hitpoint;
+	//! @brief  linkback scene pointer     
 	Scene*    scene_ptr;
+	//! @brief  recursion depth
 	int       depth;
 	Ray       ray;
 };

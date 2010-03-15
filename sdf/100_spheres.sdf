@@ -1,0 +1,231 @@
+# materials
+define material phong red    1 0 0   1 0 0   1 0 0   10
+define material phong blue   0 0 1   0 0 1   0 0 1   10
+define material phong yellow 1 1 0   1 1 0   1 1 0   10
+define material reflective m1   0 0 0     0.1 0.1 0.1   0.2 0.2 0.2 1000  0.9 0.9 0.9
+
+define material phong m2    0.87 0.95 0.65 0.31 0.53 0.85 0.33 0.16 0.74   418
+define material phong m3    0.15 0.38 0.53 0.81 0.26 0.35 0.26 0.0 0.39   737
+define material phong m4    0.11 0.27 0.08 0.0 0.86 0.29 0.98 0.32 0.71   34
+define material phong m5    0.47 0.41 0.74 0.9 0.89 0.17 0.46 0.21 0.86   897
+define material phong m6    0.92 0.76 0.74 0.97 0.45 0.42 0.67 0.6 0.97   950
+
+
+# geometry
+# define shape sphere s1   63 -171 -530  51 yellow
+# define shape sphere s2   46 -251 -503  46 red
+# define shape sphere s3   296 421 -1191  4 yellow
+# define shape sphere s4   487 412 -1121  48 red
+# define shape sphere s5   -275 378 -916  3 blue
+# define shape sphere s6   172 97 -921  6 yellow
+# define shape sphere s7   -37 444 -658  54 yellow
+# define shape sphere s8   -35 -207 -992  35 red
+# define shape sphere s9   -115 68 -1430  44 red
+# define shape sphere s10   390 195 -975  45 red
+# define shape sphere s11   -205 49 -1028  10 yellow
+# define shape sphere s12   -470 317 -1117  5 red
+# define shape sphere s13   491 319 -1363  46 red
+# define shape sphere s14   -246 -213 -1412  51 red
+# define shape sphere s15   86 -252 -1379  52 blue
+# define shape sphere s16   -355 -22 -1149  7 green
+# define shape sphere s17   -355 122 -538  38 yellow
+# define shape sphere s18   -220 -290 -803  43 red
+# define shape sphere s19   -346 382 -1145  38 red
+# define shape sphere s20   -86 304 -799  34 green
+# define shape sphere s21   392 493 -594  46 red
+# define shape sphere s22   -366 -126 -845  17 green
+# define shape sphere s23   105 -18 -560  20 red
+# define shape sphere s24   -293 4 -1246  42 blue
+# define shape sphere s25   470 229 -1384  15 blue
+# define shape sphere s26   -109 230 -732  29 green
+# define shape sphere s27   454 -319 -742  9 blue
+# define shape sphere s28   -41 -303 -1360  33 yellow
+# define shape sphere s29   -406 -350 -999  18 yellow
+# define shape sphere s30   -310 435 -739  39 red
+# define shape sphere s31   -463 71 -1332  42 red
+# define shape sphere s32   -314 271 -1299  42 green
+# define shape sphere s33   -140 -310 -820  8 green
+# define shape sphere s34   291 -16 -922  20 red
+# define shape sphere s35   3 -438 -844  59 yellow
+# define shape sphere s36   -295 0 -905  34 yellow
+# define shape sphere s37   -245 -215 -1308  55 green
+# define shape sphere s38   -230 -249 -767  36 yellow
+# define shape sphere s39   -414 382 -623  29 red
+# define shape sphere s40   -147 -315 -627  12 yellow
+# define shape sphere s41   102 179 -1437  10 yellow
+# define shape sphere s42   221 326 -634  11 green
+# define shape sphere s43   -150 -77 -1485  17 green
+# define shape sphere s44   25 383 -1303  7 red
+# define shape sphere s45   230 -112 -1092  51 blue
+# define shape sphere s46   -486 108 -710  58 blue
+# define shape sphere s47   -241 -354 -804  21 red
+# define shape sphere s48   496 458 -871  24 yellow
+# define shape sphere s49   -231 208 -1216  27 yellow
+# define shape sphere s50   -56 211 -991  54 yellow
+# define shape sphere s51   269 -8 -954  3 red
+# define shape sphere s52   -258 434 -675  59 red
+# define shape sphere s53   403 -365 -632  40 red
+# define shape sphere s54   25 -117 -554  58 blue
+# define shape sphere s55   67 329 -693  48 red
+# define shape sphere s56   -16 -77 -1428  32 yellow
+# define shape sphere s57   458 -357 -916  41 yellow
+# define shape sphere s58   -162 330 -1381  46 yellow
+# define shape sphere s59   246 455 -962  22 blue
+# define shape sphere s60   -438 -54 -1103  9 yellow
+# define shape sphere s61   -2 -481 -536  10 green
+# define shape sphere s62   397 -86 -1032  57 green
+# define shape sphere s63   -262 -428 -748  52 green
+# define shape sphere s64   24 -71 -1159  31 yellow
+# define shape sphere s65   -447 -59 -1457  40 blue
+# define shape sphere s66   -190 -348 -1142  41 red
+# define shape sphere s67   95 -192 -681  42 green
+# define shape sphere s68   -153 -14 -1137  6 red
+# define shape sphere s69   228 368 -1406  4 green
+# define shape sphere s70   255 79 -742  45 blue
+# define shape sphere s71   352 346 -905  19 red
+# define shape sphere s72   432 -367 -1074  28 blue
+# define shape sphere s73   382 294 -1139  25 blue
+# define shape sphere s74   17 -462 -1281  52 blue
+# define shape sphere s75   360 180 -837  48 red
+# define shape sphere s76   -140 -3 -1409  0 blue
+# define shape sphere s77   -305 -393 -1387  23 blue
+# define shape sphere s78   -399 311 -1313  2 red
+# define shape sphere s79   239 244 -889  40 green
+# define shape sphere s80   38 -141 -1314  18 blue
+# define shape sphere s81   -484 322 -865  12 yellow
+# define shape sphere s82   333 117 -1299  48 green
+# define shape sphere s83   -145 -191 -591  57 red
+# define shape sphere s84   367 53 -1247  1 green
+# define shape sphere s85   341 -106 -1112  13 yellow
+# define shape sphere s86   -159 182 -752  13 yellow
+# define shape sphere s87   296 70 -620  42 red
+# define shape sphere s88   -3 84 -1325  35 green
+# define shape sphere s89   -413 8 -806  23 yellow
+# define shape sphere s90   -319 218 -823  7 blue
+# define shape sphere s91   -89 -393 -1456  39 yellow
+# define shape sphere s92   -71 -488 -592  56 blue
+# define shape sphere s93   -146 15 -1495  43 blue
+# define shape sphere s94   195 -49 -1216  25 green
+# define shape sphere s95   -199 326 -962  50 blue
+# define shape sphere s96   -323 -36 -719  56 red
+# define shape sphere s97   274 91 -1180  6 red
+# define shape sphere s98   301 -204 -522  26 blue
+# define shape sphere s99   -315 -399 -940  27 green
+# define shape sphere s100   0 187 -1279  8 yellow
+
+define shape sphere s1   -495 -578 -1101  75 m5
+define shape sphere s2   587 -305 -1100  48 m3
+define shape sphere s3   -259 159 -944  19 m1
+define shape sphere s4   239 -426 -638  26 m2
+define shape sphere s5   -202 427 -1161  23 m2
+define shape sphere s6   431 -430 -1432  33 m5
+define shape sphere s7   -398 462 -700  70 m3
+define shape sphere s8   -565 -101 -925  17 m2
+define shape sphere s9   546 650 -1401  33 m5
+define shape sphere s10   -334 -38 -509  7 m3
+define shape sphere s11   314 467 -1467  1 m1
+define shape sphere s12   250 -251 -701  49 m6
+define shape sphere s13   613 -114 -1372  40 m1
+define shape sphere s14   40 52 -656  69 m2
+define shape sphere s15   -342 690 -559  26 m1
+define shape sphere s16   -420 -90 -773  61 m3
+define shape sphere s17   -565 535 -1245  51 m3
+define shape sphere s18   304 394 -806  75 m5
+define shape sphere s19   367 659 -519  42 m3
+define shape sphere s20   -57 373 -643  45 m1
+define shape sphere s21   -300 291 -511  31 m1
+define shape sphere s22   248 -193 -1311  29 m5
+define shape sphere s23   205 -575 -1354  54 m6
+define shape sphere s24   -68 -644 -1205  8 m3
+define shape sphere s25   -593 -21 -1252  43 m3
+define shape sphere s26   -611 577 -1080  57 m2
+define shape sphere s27   -602 -180 -551  65 m2
+define shape sphere s28   -50 -319 -621  54 m1
+define shape sphere s29   421 -132 -771  36 m3
+define shape sphere s30   214 -647 -517  48 m6
+define shape sphere s31   699 468 -1392  28 m1
+define shape sphere s32   445 -263 -1240  36 m5
+define shape sphere s33   -128 233 -1411  56 m1
+define shape sphere s34   447 304 -506  17 m6
+define shape sphere s35   573 235 -1214  31 m1
+define shape sphere s36   74 490 -794  72 m5
+define shape sphere s37   -433 507 -1448  46 m3
+define shape sphere s38   -200 51 -545  22 m3
+define shape sphere s39   -488 -294 -1484  28 m3
+define shape sphere s40   303 -451 -1254  49 m3
+define shape sphere s41   545 460 -735  20 m1
+define shape sphere s42   -263 -466 -776  44 m3
+define shape sphere s43   387 144 -674  39 m1
+define shape sphere s44   222 545 -1299  32 m2
+define shape sphere s45   -449 -641 -1249  47 m3
+define shape sphere s46   67 457 -1339  24 m3
+define shape sphere s47   219 -369 -582  35 m5
+define shape sphere s48   313 454 -953  61 m1
+define shape sphere s49   -469 -87 -1022  67 m3
+define shape sphere s50   14 -392 -995  78 m1
+define shape sphere s51   303 527 -1235  30 m3
+define shape sphere s52   -141 -531 -586  55 m1
+define shape sphere s53   -38 -235 -906  47 m5
+define shape sphere s54   162 -416 -1075  50 m3
+define shape sphere s55   -606 -517 -1039  21 m3
+define shape sphere s56   -50 -508 -1203  53 m6
+define shape sphere s57   76 367 -558  42 m1
+define shape sphere s58   -659 -319 -1436  2 m3
+define shape sphere s59   251 -694 -1360  18 m2
+define shape sphere s60   475 -497 -657  68 m6
+define shape sphere s61   268 645 -814  2 m3
+define shape sphere s62   -237 -497 -890  76 m3
+define shape sphere s63   -683 -132 -1226  64 m1
+define shape sphere s64   372 -538 -1288  29 m1
+define shape sphere s65   380 -148 -633  35 m5
+define shape sphere s66   -453 494 -515  14 m1
+define shape sphere s67   -492 -241 -1245  45 m1
+define shape sphere s68   431 -275 -1340  24 m6
+define shape sphere s69   492 479 -831  8 m5
+define shape sphere s70   60 -238 -1456  44 m2
+define shape sphere s71   213 684 -1303  25 m5
+define shape sphere s72   -330 667 -577  50 m6
+define shape sphere s73   -485 -597 -1366  1 m3
+define shape sphere s74   396 125 -1288  19 m6
+define shape sphere s75   631 129 -1315  22 m3
+define shape sphere s76   -535 12 -1297  11 m6
+define shape sphere s77   407 203 -1066  37 m5
+define shape sphere s78   341 336 -1032  27 m3
+define shape sphere s79   380 263 -1006  50 m5
+define shape sphere s80   439 287 -1486  33 m1
+define shape sphere s81   230 -507 -685  70 m5
+define shape sphere s82   250 -684 -728  38 m6
+define shape sphere s83   -136 -225 -1310  58 m6
+define shape sphere s84   -174 220 -1414  19 m1
+define shape sphere s85   187 -636 -979  1 m1
+define shape sphere s86   -613 -218 -875  62 m3
+define shape sphere s87   509 339 -705  37 m3
+define shape sphere s88   482 255 -684  51 m5
+define shape sphere s89   -400 39 -1302  77 m2
+define shape sphere s90   -273 -77 -1120  73 m3
+define shape sphere s91   625 591 -827  2 m5
+define shape sphere s92   98 293 -1288  13 m5
+define shape sphere s93   696 482 -1406  4 m3
+define shape sphere s94   328 201 -599  75 m5
+define shape sphere s95   -191 -92 -714  41 m1
+define shape sphere s96   -175 -219 -834  18 m3
+define shape sphere s97   -344 -42 -1137  30 m5
+define shape sphere s98   -144 -34 -997  22 m3
+define shape sphere s99   -527 -7 -890  15 m1
+define shape sphere s100   -348 674 -1144  42 m2
+
+# composite
+define shape composite root s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 s36 s37 s38 s39 s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 s54 s55 s56 s57 s58 s59 s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 s72 s73 s74 s75 s76 s77 s78 s79 s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 s90 s91 s92 s93 s94 s95 s96 s97 s98 s99 s100
+
+	
+# lights
+define light ambient amb               0.1 0.1 0.1
+define light diffuse sun1    500 800 0  1.0 1.0 1.0
+define light diffuse sun2   -500 300 -1000  1.0 0.2 0.1
+define light diffuse sun3    0 -600 0  0.0 0.1 1.0
+
+# camera
+define camera eye 60.0 480 320
+
+# ... and go
+render eye images/100_spheres

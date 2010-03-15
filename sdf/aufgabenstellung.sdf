@@ -10,7 +10,7 @@ define shape sphere bsphere       0    0 -100    50 blue
 define shape composite root rbottom bsphere
 
 # scene xform
-# transform root scale         2 2 2
+transform root scale         2 2 2
 transform root rotate      45 0 0 1
 transform root translate       0 0 -10
 	
@@ -20,12 +20,12 @@ define light diffuse sun       500 800 0      1.0 1.0 1.0
 define light diffuse spot1 -500 800 0         0.8 0.8 0.8
 
 # camera
-define camera eye 60.0 480 320
+define camera eye 30.0 480 320
 
 
 # camera xform
-transform eye rotate -45 0 1 0
-transform eye translate 100 0 100
+# transform eye rotate -45 0 1 0
+# transform eye translate 100 0 100
 
 # ... and go
-render eye images/aufgabenstellung.png
+render eye images/aufgabenstellung

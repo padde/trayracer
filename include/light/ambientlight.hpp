@@ -11,11 +11,13 @@
 #include <light.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Ambient light source class
+//
 class AmbientLight : public Light
 {
 public: // c'tors, d'tor
-	AmbientLight ( std::string name );
 	AmbientLight ( std::string name, rgb ls );
 	~AmbientLight();
 	
@@ -24,8 +26,7 @@ public: // methods
 	rgb    L             ( HitRecord& hitrec ) const;
 
 private: // private members
-	float ls_;
-	rgb   color_;
+	rgb   ls_;
 };
 
 #endif //BUW_AMBIENTLIGHT_HPP

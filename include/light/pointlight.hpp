@@ -11,11 +11,13 @@
 #include <light.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Point light source class
+//
 class PointLight : public Light
 {
 public: // c'tors, d'tor
-	PointLight ( std::string name );
 	PointLight ( std::string name, Point position, rgb ls );
 	~PointLight();
 
@@ -26,8 +28,7 @@ public: // methods
 	Point  position      () const;
 
 private: // members
-	float  ls_;
-	rgb    color_;
+	rgb    ls_;
 	Point  position_;
 };
 

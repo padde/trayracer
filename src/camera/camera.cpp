@@ -43,6 +43,9 @@ Camera::Camera ( std::string name, std::size_t hres, std::size_t vres, float ang
 	
 	// compute view plane distance
 	vpd_ = abs ( (hres_ / 2) / tan(angle_ / 2 ) );
+	
+	
+	origin_ = Point ( 0, 0, vpd_ );
 }
 
 Camera::~Camera ()
@@ -54,9 +57,8 @@ Camera::render ( std::string filename ) const
 	glutwindow& gw = glutwindow::instance();
 	float gamma = 1/1.6;
 	float s = 1.0; // pixel size
-	int num_samples = 1;
+	int num_samples = 9;
 	int n = std::size_t(sqrt(float(num_samples)));
-	Point origin = Point ( 0, 0, 1800 );
 	
 	png::image< png::rgb_pixel > png(hres_,vres_);
 	
@@ -76,18 +78,13 @@ Camera::render ( std::string filename ) const
 					                            s * (p.y - 0.5 * vres_ + ( i + 0.5) / n ),
 					                            - vpd_ );
 					direction.unify();                     
-					Ray ray( origin, direction );
+					Ray ray( origin_, direction );
 					
 					p.color += scene_ptr->tracer_ptr->trace(ray, 0);
 				}
 			}
 			p.color /= num_samples;
-			/*
-			if ( x > 425 and x < 435 and y > 140 and y < 150 )
-			{
-				std::cout << "x=" << x << ", y=" << y << ", color=" << p.color << std::endl;
-			}
-			*/
+			
 			// add gamma, clamp colors
 			if (gamma != 1)
 				p.color.powc(gamma);

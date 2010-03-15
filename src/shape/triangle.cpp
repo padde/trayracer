@@ -1,26 +1,39 @@
 // i/f header
 #include "triangle.hpp"
 
+// project header
+#include <box.hpp>
+
 // system header
 #include <cmath>
 
 
 
-namespace { const float epsilon = 0.001; }
+namespace { const float epsilon = 0.01; }
 
 
 
 Triangle::Triangle ( std::string name, const Point& a, const Point& b, const Point& c, Material* material ) :
 	Shape( name, material ),
 	a_(a), b_(b), c_(c)
-{}
+{
+	float min_x = std::min( a_[0], std::min( b_[0], c_[0] ));
+	float min_y = std::min( a_[1], std::min( b_[1], c_[1] ));
+	float min_z = std::min( a_[2], std::min( b_[2], c_[2] ));
+	float max_x = std::max( a_[0], std::max( b_[0], c_[0] ));
+	float max_y = std::max( a_[1], std::max( b_[1], c_[1] ));
+	float max_z = std::max( a_[2], std::max( b_[2], c_[2] ));
+	
+	bbox_.first  = Point(min_x,min_y,min_z);
+	bbox_.second = Point(max_x,max_y,max_z);
+}
 
 Triangle::~Triangle ()
 {}
 
 bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
-	Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	float A = a_[0] - b_[0];
 	float B = a_[1] - b_[1];
@@ -66,10 +79,10 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 		tmin                = t;
 		hitrec.t            = t;
 		hitrec.hit          = true;
-		hitrec.normal       = - unify( cross( Vector(b_ - a_), Vector(c_ - a_) ) );
+		hitrec.normal       = unify(back_trans_ * cross(Vector(b_-a_), Vector(c_ - a_)));
 		hitrec.material_ptr = material_ptr_;
-		hitrec.hitpoint     = ray.origin() + t * ray.dir();
-		hitrec.ray          = ray;
+		hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+		hitrec.ray          = original_ray;
 		
 		return true;
 	}
@@ -79,7 +92,7 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 
 bool Triangle::hit ( const Ray& original_ray, interval_t& tmin ) const
 {
-	Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	float A = a_[0] - b_[0];
 	float B = a_[1] - b_[1];

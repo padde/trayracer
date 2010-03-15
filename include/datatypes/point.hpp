@@ -9,7 +9,10 @@
 // forward declarations
 class Vector;
 
-
+//! @author Bauhaus Uni Weimar
+//! @date ???
+//! @brief ... Basic point class
+//
 class Point
 {
 public: // enums, typedefs

@@ -7,6 +7,10 @@
 // forward declarations
 class Point;
 
+//! @author Patrick Oscity
+//! @date December 2010
+//! @brief ... Basic vector class
+//
 class Vector
 {
 public: // enums, typedefs

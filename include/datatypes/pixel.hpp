@@ -7,11 +7,16 @@
 // header, project
 #include <rgb.hpp>
 
-
+//! @author Bauhaus Uni Weimar
+//! @date ???
+//! @brief ... Basic pixel class
+//
 class pixel {
 public : // c'tor
 
-  pixel(std::size_t = 0, std::size_t = 0);
+  //! @param x x-coordinate
+  //! @param y y-coordinate
+  pixel(std::size_t = 0 x, std::size_t = 0 y);
   ~pixel();
 
 public : // methods 

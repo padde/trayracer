@@ -3,6 +3,7 @@
 
 // system header
 #include <string>
+#include <algorithm>
 
 // project header
 #include <rgb.hpp>
@@ -11,8 +12,14 @@
 #include <hitrecord.hpp>
 #include <material.hpp>
 
+// fwd declarations
+class Box;
 
 
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... abstract shape class for inheritance
+//
 class Shape
 {
 public: // enums, typedefs
@@ -28,7 +35,9 @@ public: // methods
 	void name ( const std::string& );  // name_ setter
 	
 	virtual void transform ( const Matrix& ); // multiplicate trans_ with given matrix
-
+	
+	virtual Box bbox () const;
+	
 public: // virtual methods
 	virtual bool hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const = 0; // compute intersections with given ray, store result in hitrec
 	virtual bool hit ( const Ray& ray, interval_t& tmin ) const = 0;                    // no hitrec for saving time
@@ -39,6 +48,9 @@ private:
 protected:	
 	Material*   material_ptr_;
 	Matrix      trans_;
+	Matrix      inv_trans_;
+	Matrix      back_trans_;
+	std::pair<Point,Point> bbox_;
 };
 
 #endif //BUW_SHAPE_HPP 

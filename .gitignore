@@ -7,6 +7,7 @@
 # Objects and output files
 images/
 build/
+doc/
 **/*.o
 **/*.out
 *.ppm

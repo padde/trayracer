@@ -38,9 +38,9 @@ OBJ_PATH =./build
 # compiler
 
 CXX =g++
-CXX_FLAGS =-Wall
+# CXX_FLAGS =-Wall
 # CXX_FLAGS =-Wall -pedantic -O3 -fast
-# CXX_FLAGS =-Wall -pedantic -g
+CXX_FLAGS =-Wall -pedantic -g
 INCLUDE =\
 	-I/opt/local/include/ \
 	-I/private/var/lib/unittest++/src/ \

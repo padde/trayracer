@@ -11,7 +11,10 @@
 #include <specular.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Class for materials with ambient, diffuse and specular lighting
+//
 class Phong : public Material
 {
 public: // c'tors, d'tor

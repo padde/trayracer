@@ -7,7 +7,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Bidirectional reflectance distribution function
+//
 class BRDF
 {
 public: // c'tors, d'tor

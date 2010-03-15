@@ -3,7 +3,8 @@
 // system header
 #include <cmath>
 
-
+// project header
+#include <box.hpp>
 
 namespace { const double epsilon = 0.01; }
 
@@ -12,7 +13,10 @@ namespace { const double epsilon = 0.01; }
 Sphere::Sphere ( std::string name, const Point& center, const float& radius, Material* material ) :
 	Shape( name, material ),
 	radius_(radius), center_(center)
-{}
+{
+	bbox_.first  = center_ - Vector(radius_,radius_,radius_);
+	bbox_.second = center_ + Vector(radius_,radius_,radius_);
+}
 
 Sphere::~Sphere ()
 {}
@@ -20,7 +24,7 @@ Sphere::~Sphere ()
 bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
 	// transform ray to object space
-	Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	// some helper variables
 	Vector org = ray.origin() - center_;
@@ -42,10 +46,11 @@ bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec 
 			
 			hitrec.t            = t;
 			hitrec.hit          = true;
-			hitrec.normal       = unify( t*ray.dir() + org );
 			hitrec.material_ptr = material_ptr_;
-			hitrec.hitpoint     = ray.origin() + t * ray.dir();
-			hitrec.ray          = ray;
+			hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+			hitrec.ray          = original_ray;
+			hitrec.normal       = unify(hitrec.hitpoint - back_trans_ * center_);
+			
 			return true;
 		}
 		
@@ -58,10 +63,11 @@ bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec 
 			
 			hitrec.t            = t;
 			hitrec.hit          = true;
-			hitrec.normal       = unify( t*ray.dir() + org );
 			hitrec.material_ptr = material_ptr_;
-			hitrec.hitpoint     = ray.origin() + t * ray.dir();
-			hitrec.ray          = ray;
+			hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+			hitrec.ray          = original_ray;
+			hitrec.normal       = unify(hitrec.hitpoint - back_trans_ * center_);
+			
 			return true;
 		}
 	}
@@ -73,7 +79,7 @@ bool
 Sphere::hit ( const Ray& original_ray, interval_t& tmin ) const
 {
 	// transform ray to object space
-	Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	// some helper variables
 	Vector org = ray.origin() - center_;

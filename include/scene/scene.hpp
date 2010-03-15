@@ -14,7 +14,10 @@
 #include <map>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... scene class that holds containers for all things in the world
+//
 class Scene
 {
 public: // enums, typedefs

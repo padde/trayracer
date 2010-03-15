@@ -554,8 +554,11 @@ make_scale ( Vector const& v)
 	return values;
 }
 
-Matrix make_rotation ( Vector const& v, double a )
+Matrix make_rotation ( Vector const& v_original, double a )
 {
+	Vector v(v_original);
+	v.unify();
+	
 	a = deg_to_rad(a);
 	Vector u   = unify(v);
 	double c   = cos(a);

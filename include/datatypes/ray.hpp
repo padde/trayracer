@@ -9,7 +9,10 @@
 #include <vector.hpp>
 #include <matrix.hpp>
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Point with associated vector
+//
 class Ray
 {
 public: // enums, typedefs

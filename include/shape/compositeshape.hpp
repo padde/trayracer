@@ -9,7 +9,10 @@
 #include <hitrecord.hpp>
 #include <shape.hpp>
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... composite shape for combining basic shapes to complex ones
+//
 class CompositeShape : public Shape
 {
 public: // c'tors, d'tor

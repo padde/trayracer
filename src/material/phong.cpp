@@ -37,7 +37,7 @@ Phong::shade ( HitRecord& hitrec ) const
 		
 		if ( ndotwi > 0.0 )
 		{
-			// shoot ray from hint point to light source
+			// shoot ray from hit point to light source
 			Ray s_ray( hitrec.hitpoint, wi);
 			
 			// check if s_ray hits an object

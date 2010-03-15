@@ -9,6 +9,14 @@
 
 
 
+double
+deg_to_rad(double angle)
+{
+	// a deg -> a*(180/pi) rad
+	return angle * 0.0174533;
+}
+
+
 TEST ( matrix__should_make_translation_with_arguments )
 {
 	Matrix m = make_translation(1,2,3);
@@ -71,11 +79,11 @@ TEST ( matrix__should_make_scale_with_Vector )
 	CHECK_EQUAL(expected, m);
 }
 
-/*
+
 TEST ( matrix__should_make_rotation_x )
 {
-	double a = 45 * M_PI / 180;
-	Matrix m = make_rotation_x(a);
+	double a = deg_to_rad(45);
+	Matrix m = make_rotation(Vector(1,0,0),45);
 	
 	double const values[16] = {
 		1.0, 0.0   ,  0.0   , 0.0,
@@ -90,8 +98,8 @@ TEST ( matrix__should_make_rotation_x )
 
 TEST ( matrix__should_make_rotation_y )
 {
-	double a = 45 * M_PI / 180;
-	Matrix m = make_rotation_y(a);
+	double a = deg_to_rad(45);
+	Matrix m = make_rotation(Vector(0,1,0),45);
 	
 	double const values[16] = {
 		 cos(a), 0.0, sin(a), 0.0,
@@ -106,8 +114,8 @@ TEST ( matrix__should_make_rotation_y )
 
 TEST ( matrix__should_make_rotation_z )
 {
-	double a = 45 * M_PI / 180;
-	Matrix m = make_rotation_z(a);
+	double a = deg_to_rad(45);
+	Matrix m = make_rotation(Vector(0,0,1),45);
 	
 	double const values[16] = {
 		cos(a), -sin(a), 0.0, 0.0,
@@ -118,7 +126,7 @@ TEST ( matrix__should_make_rotation_z )
 	Matrix expected(values);
 	
 	CHECK_EQUAL(expected, m);
-}*/
+}
 
 TEST ( matrix__should_multiplicate_scale_with_Vector )
 {

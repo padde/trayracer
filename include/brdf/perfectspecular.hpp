@@ -8,7 +8,10 @@
 #include <brdf.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Light model used for spot lighting
+//
 class PerfectSpecular : public BRDF
 {
 public: // c'tors, d'tor

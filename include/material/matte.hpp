@@ -10,7 +10,10 @@
 #include <lambertian.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Class for matte materials to drape shapes in
+//
 class Matte : public Material
 {
 public: // c'tors, d'tor

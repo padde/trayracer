@@ -11,7 +11,10 @@
 class HitRecord;
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... Material baseclass
+//
 class Material
 {
 public: // c'tors, d'tor

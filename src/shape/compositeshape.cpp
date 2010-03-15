@@ -1,5 +1,8 @@
 #include "compositeshape.hpp"
 
+// project header
+#include <box.hpp>
+
 
 
 CompositeShape::CompositeShape ( std::string name ) :
@@ -13,16 +16,18 @@ CompositeShape::~CompositeShape ()
 bool
 CompositeShape::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) const
 {
-	bool is_hit;
+	bool is_hit = false;
 	HitRecord tmprec(hitrec);
 	
+	// check bbox first
+	// if ( ! Shape::bbox().hit(ray,tmin,tmprec) )
+		// return false;
 	
 	// go through all shapes and check for hits
 	for ( unsigned i=0; i < shapes_.size(); ++i )
 	{
 		if ( shapes_[i]->hit(ray, tmin, tmprec) )
 		{
-			tmin = tmprec.t;
 			is_hit = true;
 		}
 	}
@@ -50,14 +55,23 @@ void
 CompositeShape::push ( Shape* shape )
 {
 	shapes_.push_back(shape);
+	
+	float min_x = std::min( shape->bbox().a()[0], bbox_.first[0] );
+	float min_y = std::min( shape->bbox().a()[1], bbox_.first[1] );
+	float min_z = std::min( shape->bbox().a()[2], bbox_.first[2] );
+	float max_x = std::max( shape->bbox().b()[0], bbox_.second[0] );
+	float max_y = std::max( shape->bbox().b()[1], bbox_.second[1] );
+	float max_z = std::max( shape->bbox().b()[2], bbox_.second[2] );
+	
+	bbox_.first  = Point(min_x,min_y,min_z);
+	bbox_.second = Point(max_x,max_y,max_z);
 }
 
 void
 CompositeShape::transform ( const Matrix& trans )
 {
-	for ( unsigned i=0; i < shapes_.size(); ++i ) {
+	for ( unsigned i=0; i < shapes_.size(); ++i )
 		shapes_[i]->transform(trans);
-	}
 }
 
 const Shape*

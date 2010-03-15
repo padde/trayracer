@@ -1,7 +1,8 @@
 #include "box.hpp"
+#include <iostream>
 
 namespace {
-	const double epsilon = 0.001;
+	const double epsilon = 0.05;
 	const Vector normals[6] = {
 		Vector(-1,  0,  0), 
 		Vector( 0, -1,  0),
@@ -25,6 +26,9 @@ Box::Box ( std::string name, const Point& a, const Point& b, Material* material 
 	
 	if (a_[2] > b_[2])
 		std::swap(a_[2], b_[2]);
+		
+	bbox_.first  = a_;
+	bbox_.second = b_;
 }
 
 Box::~Box ()
@@ -34,9 +38,7 @@ bool
 Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 {
 	// transform ray to object space
-	Ray ray = original_ray.transform(trans_);
-	
-	Point p1(a_), p2(b_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	double ox = ray.origin()[0];
 	double oy = ray.origin()[1];
@@ -51,20 +53,20 @@ Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 	
 	double a = 1.0 / dx;
 	if (a >= 0) {
-		tx_min = (p1[0] - ox) * a;
-		tx_max = (p2[0] - ox) * a;
+		tx_min = (a_[0] - ox) * a;
+		tx_max = (b_[0] - ox) * a;
 	} else {
-		tx_min = (p2[0] - ox) * a;
-		tx_max = (p1[0] - ox) * a;
+		tx_min = (b_[0] - ox) * a;
+		tx_max = (a_[0] - ox) * a;
 	}
 	
 	double b = 1.0 / dy;
 	if (b >= 0) {
-		ty_min = (p1[1] - oy) * b;
-		ty_max = (p2[1] - oy) * b;
+		ty_min = (a_[1] - oy) * b;
+		ty_max = (b_[1] - oy) * b;
 	} else {
-		ty_min = (p2[1] - oy) * b;
-		ty_max = (p1[1] - oy) * b;
+		ty_min = (b_[1] - oy) * b;
+		ty_max = (a_[1] - oy) * b;
 	}
 	
 	if (tx_min > ty_max or ty_min > tx_max)
@@ -72,11 +74,11 @@ Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 	
 	double c = 1.0 / dz;
 	if (c >= 0) {
-		tz_min = (p1[2] - oz) * c;
-		tz_max = (p2[2] - oz) * c;
+		tz_min = (a_[2] - oz) * c;
+		tz_max = (b_[2] - oz) * c;
 	} else {
-		tz_min = (p2[2] - oz) * c;
-		tz_max = (p1[2] - oz) * c;
+		tz_min = (b_[2] - oz) * c;
+		tz_max = (a_[2] - oz) * c;
 	}
 	
 	double t0, t1;
@@ -116,15 +118,16 @@ Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 		
 		if (t0 > epsilon) { // ray hits outside
 			tmin = t0;
-			hitrec.normal = normals[face_in];   
-		} else {
+			hitrec.normal = unify(back_trans_ * normals[face_in]);
+		} else {            // ray hits inside
 			tmin = t1;
-			hitrec.normal = normals[face_out]; 
+			hitrec.normal = unify(back_trans_ * normals[face_out]);
 		}
+		
 		hitrec.t            = tmin;
 		hitrec.hit          = true;
 		hitrec.material_ptr = material_ptr_;
-		hitrec.hitpoint     = ray.origin() + tmin * ray.dir();
+		hitrec.hitpoint     = (back_trans_ * ray.origin()) + tmin * ( back_trans_ * ray.dir());
 		hitrec.ray          = original_ray;
 		
 		return true;
@@ -137,7 +140,7 @@ bool
 Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 {
 	// transform ray to object space
-	Ray ray = original_ray.transform(trans_);
+	Ray ray = original_ray.transform(inv_trans_);
 	
 	Point p1(a_), p2(b_);
 	
@@ -224,3 +227,52 @@ Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 	
 	return false;
 }
+
+Point
+Box::a () const
+{
+	return a_;
+}
+
+Point
+Box::b () const
+{
+	return b_;
+}
+
+void
+Box::transform ( const Matrix& new_trans )
+{
+	using namespace std;
+	
+	Shape::transform ( new_trans );
+	
+	Point p1 ( a_[0], a_[1], a_[2] );
+	Point p2 ( a_[0], a_[1], b_[2] );
+	Point p3 ( a_[0], b_[1], a_[2] );
+	Point p4 ( a_[0], b_[1], b_[2] );
+	Point p5 ( b_[0], a_[1], a_[2] );
+	Point p6 ( b_[0], a_[1], b_[2] );
+	Point p7 ( b_[0], b_[1], a_[2] );
+	Point p8 ( b_[0], b_[1], b_[2] );
+	
+	p1 = trans_ * p1;
+	p2 = trans_ * p2;
+	p3 = trans_ * p3;
+	p4 = trans_ * p4;
+	p5 = trans_ * p5;
+	p6 = trans_ * p6;
+	p7 = trans_ * p7;
+	p8 = trans_ * p8;
+	
+	float min_x = min(p1[0],min(p2[0],min(p3[0],min(p4[0],min(p5[0],min(p6[0],min(p7[0],p8[0])))))));
+	float min_y = min(p1[1],min(p2[0],min(p3[0],min(p4[0],min(p5[0],min(p6[0],min(p7[0],p8[0])))))));
+	float min_z = min(p1[2],min(p2[0],min(p3[0],min(p4[0],min(p5[0],min(p6[0],min(p7[0],p8[0])))))));
+	float max_x = max(p1[0],max(p2[0],max(p3[0],max(p4[0],max(p5[0],max(p6[0],max(p7[0],p8[0])))))));
+	float max_y = max(p1[1],max(p2[0],max(p3[0],max(p4[0],max(p5[0],max(p6[0],max(p7[0],p8[0])))))));
+	float max_z = max(p1[2],max(p2[0],max(p3[0],max(p4[0],max(p5[0],max(p6[0],max(p7[0],p8[0])))))));
+	
+	bbox_.first  = Point(min_x,min_y,min_z);
+	bbox_.second = Point(max_x,max_y,max_z);
+}
+

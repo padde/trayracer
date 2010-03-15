@@ -12,7 +12,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... special type of phong for materials with glasslike attributes
+//
 class Transparent : public Phong
 {
 public: // c'tors, d'tor

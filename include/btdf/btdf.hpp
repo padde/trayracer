@@ -6,7 +6,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... bidirectional transmittance distribution function
+//
 class BTDF
 {
 public: // c'tors, d'tor

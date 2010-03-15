@@ -5,6 +5,10 @@
 #include <iosfwd>
 
 
+//! @author Bauhaus Uni Weimar
+//! @date ???
+//! @brief ... Basic rgb colour class
+//
 class rgb {
 public : // enums, typedefs
   enum component {r, g, b};

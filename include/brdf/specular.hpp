@@ -8,7 +8,10 @@
 #include <rgb.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Advanced light model used for spot lighting
+//
 class Specular : public BRDF
 {
 public: // c'tors, d'tor 

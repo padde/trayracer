@@ -7,7 +7,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Model for perfect specular transmission
+//
 class PerfectTransmitter : public BTDF
 {
 public: // c'tors, d'tor

@@ -4,6 +4,7 @@
 // project header
 #include <ray.hpp>
 #include <pixel.hpp>
+#include <point.hpp>
 
 // system header
 #include <string>
@@ -11,15 +12,26 @@
 // fwd declarations
 class Scene;
 
-
+//! @author Patrick Oscity
+//! @date February 2010
+//! @brief ... Camera model for viewpoint and angle
+//
 class Camera
 {
 public: // ctor's, d'tor
+	//! @brief camera constructor
+	//! @param name name of the camera for cross reference
+	//! @param hres horizontal screen resolution
+	//! @param vres vertical screen resolution
+	//! @param fov_x opening angle of the camera lense
 	Camera ( std::string name, std::size_t hres, std::size_t vres, float fov_x );
 	~Camera ();
 
 public: // methods
+	//! @brief renders the scene
+	//! @param filename directory and filename to save the picture to
 	void render ( std::string filename ) const;
+	//! @brief returns the name of the camera
 	std::string name () const;
 
 public:
@@ -30,6 +42,7 @@ private:
 	std::size_t hres_, vres_;
 	float angle_;
 	float vpd_;
+	Point origin_;
 };
 
 #endif // BUW_CAMERA_HPP

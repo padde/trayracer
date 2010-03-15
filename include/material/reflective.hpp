@@ -11,7 +11,10 @@
 #include <hitrecord.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... special type of phong for materials with mirrorlike attributes
+//
 class Reflective : public Phong
 {
 public: // c'tors, d'tor

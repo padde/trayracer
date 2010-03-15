@@ -1,5 +1,5 @@
-#ifndef SDFLOADER
-#define SDFLOADER
+#ifndef BUW_SDFLOADER
+#define BUW_SDFLOADER
 
 
 // project header
@@ -7,34 +7,54 @@
 
 using namespace std;
 
+//! @author Frank Urbainsky
+//! @date January 2010
+//! @brief ... sdf file loader and parser
+//
 class sdfloader
 {
 	public:
-	
+	//! @brief constructor
 	sdfloader();
 	
 	///////////////////////////////////////////////////////////
-	//	interface for sdfloader access
-	///////////////////////////////////////////////////////////
-	bool	load	();		// for access to ./sdf/
-	bool	load	(string&);	// for access to specific sdf file
+	//! @brief	interface for sdfloader access
+	//////////////////////////////////////////////////////////
+	
+	//! @brief for access to ./sdf/
+	bool	load	();
+	//! @brief for access to specific sdf file
+	//! @param filename filename of the sdf file to load
+	bool	load	(string& filename);
 	
 	private: //member function
 	
 	///////////////////////////////////////////////////////////	
-	//	directory listing for choosing of sdf-file
+	//! @brief directory listing for choosing of sdf-file
 	int			 getdir	(string dir ,vector<string>& files);
 	
 	///////////////////////////////////////////////////////////	
-	//	converts file on drive in 2d input vector
+	//! @brief converts file on drive in 2d input vector
 	vector< vector<string> > fileload (const char* path);
 	
 	///////////////////////////////////////////////////////////	
-	//	parses the input vector
+	//! @brief parses the input vector
 	void			 parse ( vector < vector<string> >& input);
 	
 	///////////////////////////////////////////////////////////
-	//	helper functions for parse
+	//! @brief helper functions for specific things to parse
+	void			load_phong( vector<string>& word );
+	void			load_reflective ( vector<string>& word );
+	void			load_transparent ( vector<string>& word );
+	void			load_box ( vector<string>& word );
+	void			load_sphere ( vector<string>& word );
+	void			load_composite ( vector<string>& word );
+	void			load_alight ( vector<string>& word );
+	void			load_dlight ( vector<string>& word );
+	void			load_camera (vector<string>& word);
+	void			apply_transformation( vector<string>& word );
+	void			do_render(vector<string>& word);
+	
 	bool			phong( vector < string>& input);
 	bool			reflective( vector < string>& input);
 	bool			transparent( vector < string>& input);
@@ -54,4 +74,4 @@ class sdfloader
 };
 
 
-#endif //SDFLOADER
+#endif //BUW_SDFLOADER

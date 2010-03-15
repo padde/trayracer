@@ -2,6 +2,7 @@
 
 // project header
 #include <scene.hpp>
+#include <iostream>
 
 
 
