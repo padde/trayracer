@@ -10,19 +10,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctime>
 
 //project headers
 #include "sdfloader.hpp"
 #include "scene.hpp"
 #include "shape.hpp"
-#include "compositeshape.hpp"
 #include "sphere.hpp"
 #include "triangle.hpp"
+#include "compositeshape.hpp"
 #include "box.hpp"
 #include "material.hpp"
 #include "phong.hpp"
 #include "reflective.hpp"
-//#include "transparent.hpp"
+#include "transparent.hpp"
 #include "light.hpp"
 #include "ambientlight.hpp"
 #include "pointlight.hpp"
@@ -66,7 +67,7 @@ sdfloader::getdir (string dir , vector<string>& files)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-//	load: converts file on drive in 2d input vector
+//	load: main routine that initiates the whole file loader
 ////////////////////////////////////////////////////////////////////////////////
 bool
 sdfloader::load ()
@@ -113,6 +114,9 @@ sdfloader::load ()
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//	fileload: converts file on drive in 2d input vector
+////////////////////////////////////////////////////////////////////////////////
 vector < vector<string> >
 sdfloader::fileload (const char* path )
 {
@@ -175,6 +179,7 @@ sdfloader::fileload (const char* path )
   	return input;
 }
 
+
 bool
 sdfloader::load (string& filename)
 {
@@ -202,255 +207,50 @@ sdfloader::parse ( vector< vector<string> >& input)
 	for (unsigned int i = 0; i < input.size()-1; ++i)
 	{
 	
-		if( phong(input[i]) )
+		if( phong( input[i]) )
 		{
-			cout << "Adding material \"" << input[i][3] << "\" of type phong ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 14)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}		
-				
-			// conversion of strings to floats :
-			float kaR = atof ( input[i][4].c_str() );
-			float kaG = atof ( input[i][5].c_str() );
-			float kaB = atof ( input[i][6].c_str() );
-			
-			float kdR = atof ( input[i][7].c_str() );
-			float kdG = atof ( input[i][8].c_str() );
-			float kdB = atof ( input[i][9].c_str() );
-			
-			float ksR = atof ( input[i][10].c_str() );
-			float ksG = atof ( input[i][11].c_str() );
-			float ksB = atof ( input[i][12].c_str() );
-			
-			float m = atof ( input[i][13].c_str() );
-			
-			cout << "\tka: (" << kaR <<','<< kaG <<','<< kaB << ") kd: (" << kdR <<','<<kdG <<','<< kdB << ") ks: (" << ksR <<','<< ksG <<','<< ksB << ") m: " << m << endl;
-			
-			
-			// integrate into world
-			world->push_material( new Phong(input[i][3], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), m) );
+			load_phong ( input[i] );
 		}
-		else if( reflective(input[i]) )
+		else if( reflective( input[i]) )
 		{
-			cout << "Adding material \"" << input[i][3] << "\" of type reflective ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 17)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-				
-			// conversion of strings to floats :
-			float kaR = atof ( input[i][4].c_str() );
-			float kaG = atof ( input[i][5].c_str() );
-			float kaB = atof ( input[i][6].c_str() );
-			
-			float kdR = atof ( input[i][7].c_str() );
-			float kdG = atof ( input[i][8].c_str() );
-			float kdB = atof ( input[i][9].c_str() );
-			
-			float ksR = atof ( input[i][10].c_str() );
-			float ksG = atof ( input[i][11].c_str() );
-			float ksB = atof ( input[i][12].c_str() );
-			
-			float krR = atof ( input[i][14].c_str() );
-			float krG = atof ( input[i][15].c_str() );
-			float krB = atof ( input[i][16].c_str() );
-			
-			float m = atof ( input[i][13].c_str() );
-			
-			// integrate into world
-			world->push_material( new Reflective(input[i][3], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), m, rgb( krR, krG, krB )) );
+			load_reflective( input[i] );
 		}		
-		else if( transparent(input[i]) ) // NEED TO EDIT, STILL COPY OF THONG
+		else if( transparent( input[i] ) )
 		{
-			cout << "Adding material \"" << input[i][2] << "\" of type transparent ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 13)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}		
-				
-			// conversion of strings to floats :
-			float kaR = atof ( input[i][3].c_str() );
-			float kaG = atof ( input[i][4].c_str() );
-			float kaB = atof ( input[i][5].c_str() );
-			
-			float kdR = atof ( input[i][6].c_str() );
-			float kdG = atof ( input[i][7].c_str() );
-			float kdB = atof ( input[i][8].c_str() );
-			
-			float ksR = atof ( input[i][9].c_str() );
-			float ksG = atof ( input[i][10].c_str() );
-			float ksB = atof ( input[i][11].c_str() );
-			
-			float m = atof ( input[i][12].c_str() );
-			
-			// integrate into world
-			world->push_material( new Phong(input[i][2], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), m) );
+			load_transparent( input[i] );
 		}				
-		else if( box(input[i]) )
+		else if( box( input[i] ) )
 		{
-			cout << "Adding box \"" << input[i][3] << "\" ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 11)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			// conversion of strings to correct types:
-			float lX = atof ( input[i][4].c_str() );
-			float lY = atof ( input[i][5].c_str() );
-			float lZ = atof ( input[i][6].c_str() );
-			
-			float hX = atof ( input[i][7].c_str() );
-			float hY = atof ( input[i][8].c_str() );
-			float hZ = atof ( input[i][9].c_str() );
-		
-			
-			Material* m = world->get_material( input[i][10] );
-
-	cout << input[i][10] << " ist material : " << world->get_material (  input[i][10] )->name() << endl;
-			// integrate into world
-			world->push_shape( new Box( input[i][3], Point( lX, lY, lZ), Point( hX, hY, hZ ), m ) ); 
+			load_box( input[i] );
+		}
+		else if( sphere( input[i] ) )
+		{
+			load_sphere( input[i] );
+		}
+		else if( composite( input[i] ) )
+		{
+			load_composite( input[i] );
+		}
+		else if( alight( input[i]) )
+		{
+			load_alight( input[i] );
+		}
+		else if( dlight( input[i] ) )
+		{
+			load_dlight( input[i] );
+		}
+		else if( camera( input[i] ) )
+		{
+			load_camera( input[i] );
+		}
+		else if( transform( input[i] ) )
+		{
+			apply_transformation( input[i] );
 			
 		}
-		else if( sphere(input[i]) )
+		else if( render( input[i] ) )
 		{
-			cout << "Adding sphere \"" << input[i][3] << "\" ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 9)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			// conversion of strings to correct type :
-			float cX = atof ( input[i][4].c_str() );
-			float cY = atof ( input[i][5].c_str() );
-			float cZ = atof ( input[i][6].c_str() );
-			
-			float r = atof ( input[i][7].c_str() );
-			
-			
-			Material* mat = world->get_material( input[i][8] );
-
-			
-			// integrate into world
-			world->push_shape( new Sphere( input[i][3], Point( cX, cY, cZ), r, mat ) ); 
-		}
-		else if( composite(input[i]) )
-		{
-			cout << "Adding composite \"" << input[i][3] << "\" ...\n";
-			
-			// create composite shape to fill
-			CompositeShape* temp = new CompositeShape( input[i][3] );
-			
-			// fill it with the remaining arguments
-			for (unsigned int j = 4; j < input[i].size(); ++j)
-			{
-				temp->push(world->get_and_remove_shape( input[i][j] ));
-			}
-			
-			// and add it to the world
-			world->push_shape( temp );
-		}
-		else if( alight(input[i]) )
-		{
-			cout << "Adding ambient light \"" << input[i][3] << "\" ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 7)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			// conversion of strings to correct type :
-			float r = atof ( input[i][4].c_str() );
-			float g = atof ( input[i][5].c_str() );
-			float b = atof ( input[i][6].c_str() );
-			
-			// integrate into world
-			world->set_ambient ( new AmbientLight ( input[i][3], rgb ( r, g, b)));
-		}
-		else if( dlight(input[i]) )
-		{
-			cout << "Adding diffuse light \"" << input[i][3] << "\" ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 10)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			// conversion of strings to correct type :
-			
-			float x = atof ( input[i][4].c_str() );
-			float y = atof ( input[i][5].c_str() );	
-			float z = atof ( input[i][6].c_str() );	
-					
-			float r = atof ( input[i][7].c_str() );
-			float g = atof ( input[i][8].c_str() );
-			float b = atof ( input[i][9].c_str() );
-			
-			// integrate into world
-			world->push_light ( new PointLight ( input[i][3], Point( x, y, z), rgb ( r, g, b) ));
-		}
-		else if( camera(input[i]) )
-		{
-			cout << "Adding camera \"" << input[i][2] << "\" ...\n";
-			
-			// check for input sanity
-			if (input[i].size() != 6)
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			// conversion of strings to correct type :
-			
-			float angle = atof ( input[i][3].c_str() );
-			float x_res = atof ( input[i][4].c_str() );	
-			float y_res = atof ( input[i][5].c_str() );	
-					
-			// integrate into world
-			world->push_camera ( new Camera ( input[i][2], x_res, y_res, angle ));
-		}
-		else if( transform(input[i]) )
-		{
-			cout << "Applying transformation \"" << input[i][2] << "\" to shape \"" << input[i][1] << "\" ...\n";
-			
-			/*	
-			MISSING FEATURE!
-			WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH!!!
-			SYNTAX ERROR!
-			*/
-			
-		}
-		else if( render(input[i]) )
-		{
-			cout << "\n Now rendering scene as seen through \"" << input[i][1] << "\" and outputting to file \"" << input[i][2] << "\" !\n\n";
-			
-			if (input[i].size() != 3)			
-			{
-				cerr << "\tInvalid number of arguments!\t" ;
-				break;
-			}
-			
-			Camera* cam = world->get_camera( input[i][1] );
-			cam->render( input[i][2] );
+			do_render( input[i] );
 			
 		}
 		else
@@ -467,6 +267,322 @@ sdfloader::parse ( vector< vector<string> >& input)
 
 
 
+
+
+void
+sdfloader::load_phong ( vector<string>& word )
+{
+	cout << "Adding material \"" << word[3] << "\" of type phong ...\n";
+	
+	// check for input sanity
+	if (word.size() != 14)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}		
+	else
+	{
+		
+	// conversion of strings to floats :
+	float kaR = atof ( word[4].c_str() );
+	float kaG = atof ( word[5].c_str() );
+	float kaB = atof ( word[6].c_str() );
+	
+	float kdR = atof ( word[7].c_str() );
+	float kdG = atof ( word[8].c_str() );
+	float kdB = atof ( word[9].c_str() );
+	
+	float ksR = atof ( word[10].c_str() );
+	float ksG = atof ( word[11].c_str() );
+	float ksB = atof ( word[12].c_str() );
+	
+	float m = atof ( word[13].c_str() );
+
+
+	// integrate into world
+	world->push_material( new Phong(word[3], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), m) );
+	}
+}
+
+void
+sdfloader::load_reflective ( vector<string>& word )
+{
+	cout << "Adding material \"" << word[3] << "\" of type reflective ...\n";
+			
+	// check for input sanity
+	if (word.size() != 17)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{	
+	// conversion of strings to floats :
+	float kaR = atof ( word[4].c_str() );
+	float kaG = atof ( word[5].c_str() );
+	float kaB = atof ( word[6].c_str() );
+	
+	float kdR = atof ( word[7].c_str() );
+	float kdG = atof ( word[8].c_str() );
+	float kdB = atof ( word[9].c_str() );
+	
+	float ksR = atof ( word[10].c_str() );
+	float ksG = atof ( word[11].c_str() );
+	float ksB = atof ( word[12].c_str() );
+	
+	float krR = atof ( word[14].c_str() );
+	float krG = atof ( word[15].c_str() );
+	float krB = atof ( word[16].c_str() );
+	
+	float m = atof ( word[13].c_str() );
+	
+	// integrate into world
+	world->push_material( new Reflective(word[3], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), m, rgb( krR, krG, krB )) );
+	}
+}
+
+void
+sdfloader::load_transparent ( vector<string>& word )
+{
+	cout << "Adding material \"" << word[3] << "\" of type transparent ...\n";
+			
+	// check for input sanity
+	if (word.size() != 19)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}		
+	else
+	{
+	// conversion of strings to floats :
+	float kaR = atof ( word[4].c_str() );
+	float kaG = atof ( word[5].c_str() );
+	float kaB = atof ( word[6].c_str() );
+	
+	float kdR = atof ( word[7].c_str() );
+	float kdG = atof ( word[8].c_str() );
+	float kdB = atof ( word[9].c_str() );
+	
+	float ksR = atof ( word[10].c_str() );
+	float ksG = atof ( word[11].c_str() );
+	float ksB = atof ( word[12].c_str() );
+	
+	float exp = atof ( word[13].c_str() );
+	
+	float krR = atof ( word[14].c_str() );
+	float krG = atof ( word[15].c_str() );
+	float krB = atof ( word[16].c_str() );
+	
+	float kt  = atof ( word[17].c_str() );
+	float ior = atof ( word[18].c_str() );
+	
+	// integrate into world
+	
+	world->push_material( new Transparent(word[3], rgb( kaR, kaG, kaB ), rgb( kdR, kdG, kdB ), rgb( ksR, ksG, ksB ), exp, rgb( krR, krG, krB ), kt, ior ) );
+	}
+}				
+
+void
+sdfloader::load_box ( vector<string>& word )
+{
+	cout << "Adding box \"" << word[3] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 11)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct types:
+	float lX = atof ( word[4].c_str() );
+	float lY = atof ( word[5].c_str() );
+	float lZ = atof ( word[6].c_str() );
+	
+	float hX = atof ( word[7].c_str() );
+	float hY = atof ( word[8].c_str() );
+	float hZ = atof ( word[9].c_str() );
+
+	
+	Material* m = world->get_material( word[10] );
+
+	// integrate into world
+	world->push_shape( new Box( word[3], Point( lX, lY, lZ), Point( hX, hY, hZ ), m ) ); 
+	}
+}
+
+void
+sdfloader::load_sphere ( vector<string>& word )
+{
+	cout << "Adding sphere \"" << word[3] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 9)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct type :
+	float cX = atof ( word[4].c_str() );
+	float cY = atof ( word[5].c_str() );
+	float cZ = atof ( word[6].c_str() );
+	
+	float r = atof ( word[7].c_str() );
+	
+	
+	Material* mat = world->get_material( word[8] );
+
+	
+	// integrate into world
+	world->push_shape( new Sphere( word[3], Point( cX, cY, cZ), r, mat ) );
+	} 
+}
+
+void
+sdfloader::load_composite ( vector<string>& word )
+{
+	cout << "Adding composite \"" << word[3] << "\" ...\n";
+	
+	// create composite shape to fill
+	CompositeShape* temp = new CompositeShape( word[3] );
+	
+	// fill it with the remaining arguments
+	for (unsigned int j = 4; j < word.size(); ++j)
+	{	
+		temp->push(world->get_and_remove_shape( word[j] ));
+	}
+
+	// and add it to the world
+	world->push_shape( temp );
+}
+
+void
+sdfloader::load_alight ( vector<string>& word )
+{
+	cout << "Adding ambient light \"" << word[3] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 7)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct type :
+	float r = atof ( word[4].c_str() );
+	float g = atof ( word[5].c_str() );
+	float b = atof ( word[6].c_str() );
+	
+	// integrate into world
+	world->set_ambient ( new AmbientLight ( word[3], rgb ( r, g, b)));
+	}
+}
+
+void
+sdfloader::load_dlight ( vector<string>& word )
+{			
+	cout << "Adding diffuse light \"" << word[3] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 10)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct type :
+	
+	float x = atof ( word[4].c_str() );
+	float y = atof ( word[5].c_str() );	
+	float z = atof ( word[6].c_str() );	
+			
+	float r = atof ( word[7].c_str() );
+	float g = atof ( word[8].c_str() );
+	float b = atof ( word[9].c_str() );
+	
+	// integrate into world
+	world->push_light ( new PointLight ( word[3], Point( x, y, z), rgb ( r, g, b) ));
+	}
+}
+
+void
+sdfloader::load_camera (vector<string>& word)
+{
+	cout << "Adding camera \"" << word[2] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 6)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct type :
+	
+	float angle = atof ( word[3].c_str() );
+	float x_res = atof ( word[4].c_str() );	
+	float y_res = atof ( word[5].c_str() );	
+			
+	// integrate into world
+	world->push_camera ( new Camera ( word[2], x_res, y_res, angle ));
+	}
+}
+
+void
+sdfloader::apply_transformation( vector<string>& word )
+{
+	cout << "Applying transformation \"" << word[2] << "\" to shape \"" << word[1] << "\" ...\n";
+	
+	Shape* move_me = world->get_shape( word[1] );
+		
+	if (word[2] == "scale")
+	{
+		float x = atof ( word[3].c_str() );
+		float y = atof ( word[4].c_str() );	
+		float z = atof ( word[5].c_str() );	
+		move_me->transform(make_scale(x,y,z));
+	}
+	else if (word[2] == "rotate")
+	{
+		float angle = atof ( word[3].c_str() );
+		float x = atof ( word[4].c_str() );	
+		float y = atof ( word[5].c_str() );	
+		float z = atof ( word[6].c_str() );	
+		move_me->transform(make_rotation(Vector(x,y,z), angle));
+	}
+	else if (word[2] == "translate")
+	{		
+		float x = atof ( word[3].c_str() );
+		float y = atof ( word[4].c_str() );	
+		float z = atof ( word[5].c_str() );	
+		move_me->transform(make_translation(x,y,z));
+	}
+	else
+	{
+		cerr << "\tInvalid arguments!\n" ;
+	}
+}
+
+void
+sdfloader::do_render(vector<string>& word)
+{
+	// preparations for filename
+	time_t      t = time(NULL);
+	struct tm* lt = localtime(&t);
+	char time_str [80];
+	strftime(time_str,80,"%Y-%m-%d__%H-%M-%S",lt);
+	const string filename = word[2] + "__" +  string(time_str) + ".png";
+	
+	cout << "\n Now rendering scene as seen through \"" << word[1] << "\" and outputting to file \"" << filename << "\" !\n\n";
+	
+	if (word.size() != 3)			
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	Camera* cam = world->get_camera( word[1] );
+	cam->render( filename );
+	}
+}
 
 bool
 sdfloader::phong( vector < string>& word)
