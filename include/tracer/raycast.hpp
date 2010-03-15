@@ -8,6 +8,10 @@
 #include <scene.hpp>
 
 
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... raycast tracer for basic materials (phong/matte)
+//
 
 class RayCast : public Tracer
 {
@@ -15,7 +19,7 @@ public: // c'tors, d'tor
 	RayCast ( Scene* scene_ptr );
 	~RayCast ();
 
-public: // virtual methods
+public: // public methods
 	rgb trace ( const Ray& ray, int depth ) const;
 };
 

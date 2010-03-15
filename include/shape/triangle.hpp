@@ -13,7 +13,10 @@
 #include <material.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... triangle class for advanced meshes and depiction of simple triangles in the scene
+//
 class Triangle : public Shape
 {
 public: // c'tors, d'tor

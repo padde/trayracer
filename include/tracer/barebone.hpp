@@ -8,14 +8,17 @@
 #include <scene.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... barebone tracer for simple tests
+//
 class BareBone : public Tracer
 {
 public: // c'tors, d'tor
 	BareBone ( Scene* scene_ptr );
 	~BareBone ();
 
-public: // virtual methods
+public: // public methods
 	rgb trace ( const Ray& ray, int depth ) const;
 };
 

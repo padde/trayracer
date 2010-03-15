@@ -8,6 +8,10 @@
 // fwd declarations
 class Scene;
 
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... abstract tracer interface
+//
 
 
 class Tracer

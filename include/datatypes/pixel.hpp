@@ -11,12 +11,14 @@
 //! @date ???
 //! @brief ... Basic pixel class
 //
+
 class pixel {
 public : // c'tor
 
   //! @param x x-coordinate
   //! @param y y-coordinate
-  pixel(std::size_t = 0 x, std::size_t = 0 y);
+
+  pixel(std::size_t x = 0, std::size_t y = 0);
   ~pixel();
 
 public : // methods 

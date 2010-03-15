@@ -52,12 +52,6 @@ Scene::set_bgcolor ( rgb col )
 }
 
 void
-Scene::set_tracer ( Tracer* ptr )
-{
-	tracer_ptr = ptr;
-}
-
-void
 Scene::set_ambient ( AmbientLight* ptr )
 {
 	ambient_ptr = ptr;

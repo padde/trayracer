@@ -8,6 +8,11 @@
 #include <scene.hpp>
 
 
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... whitted tracer for recursive shadings (reflective/transparent)
+//
+
 
 class Whitted : public Tracer
 {
@@ -15,7 +20,7 @@ public: // c'tors, d'tor
 	Whitted ( Scene* scene_ptr );
 	~Whitted ();
 
-public: // virtual methods
+public: // public methods
 	rgb trace ( const Ray& ray, int depth ) const;
 };
 

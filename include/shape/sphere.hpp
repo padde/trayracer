@@ -13,7 +13,10 @@
 #include <material.hpp>
 
 
-
+//! @author Patrick Oscity
+//! @date January 2010
+//! @brief ... sphere class for depicting balls in the scene
+//
 class Sphere : public Shape
 {
 public: // c'tors, d'tor

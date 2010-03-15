@@ -37,7 +37,6 @@ public: // methods
 	void push_camera   ( Camera*  camera_ptr  );
 
 	void set_bgcolor ( rgb      bgcolor     );
-	void set_tracer  ( Tracer*  tracer_ptr  );
 	void set_ambient ( AmbientLight* ambient_ptr );
 	
 	Shape*    get_shape    ( const std::string name ) const;

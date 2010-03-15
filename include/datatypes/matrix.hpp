@@ -12,7 +12,9 @@ class Point;
 //! @author Patrick Oscity
 //! @date February 2010
 //! @brief ... basic matrix class for viewpoint shifting
-//class Matrix 
+//
+
+class Matrix 
 {
 public : // c'tors, d'tor
 	Matrix  ( );
