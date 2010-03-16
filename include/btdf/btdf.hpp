@@ -17,6 +17,9 @@ public: // c'tors, d'tor
 	virtual ~BTDF();
 
 public: // methods
+	//! @brief returns the actual btdf rgb value
+	//! @param wo omega out angle
+	//! @param wi omega in angle
 	virtual rgb  f        ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
 	virtual rgb  sample_f ( const HitRecord& hitrec, const Vector& wo,       Vector& wi ) const;
 	virtual rgb  rho      ( const HitRecord& hitrec, const Vector& wo                   ) const;

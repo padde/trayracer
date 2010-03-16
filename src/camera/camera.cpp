@@ -64,9 +64,9 @@ Camera::render ( std::string filename ) const
 	png::image< png::rgb_pixel > png(hres_,vres_);
 	
 	// loop through all pixels of the viewplane
-	for (std::size_t y = 0; y < hres_; ++y)
+	for (std::size_t y = 0; y < vres_; ++y)
 	{
-		for (std::size_t x = 0; x < vres_; ++x)
+		for (std::size_t x = 0; x < hres_; ++x)
 		{
 			// create pixel
 			pixel p (x,y);

@@ -18,8 +18,16 @@ public: // c'tors, d'tor
 	virtual ~BRDF();
 
 public: // methods
+	//! @brief returns the actual brdf rgb value
+	//! @param wo omega out angle
+	//! @param wi omega in angle
 	virtual rgb f        ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
+	//! @brief used for reflectance
+	//! @param wo omega out angle
+	//! @param wi omega in angle
 	virtual rgb sample_f ( const HitRecord& hitrec, const Vector& wo,       Vector& wi ) const;
+	//! @brief returns the bihemispherical reflectance
+	//! @param wo omega out angle
 	virtual rgb rho      ( const HitRecord& hitrec, const Vector& wo                   ) const;
 };
 

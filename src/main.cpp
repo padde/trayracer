@@ -56,8 +56,6 @@ int main(int argc, char* argv[])
 	
 	sdfloader sl;
 	boost::thread thr(boost::bind(&sdfloader::load, &sl));
-	// rt_application rt;
-	// boost::thread thr(boost::bind(&rt_application::cornell_box, &rt));
 	
 	glutwindow::instance().run();
 	
