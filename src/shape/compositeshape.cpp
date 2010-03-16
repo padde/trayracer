@@ -2,6 +2,7 @@
 
 // project header
 #include <box.hpp>
+#include <iostream>
 
 
 
@@ -20,9 +21,11 @@ CompositeShape::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) cons
 	HitRecord tmprec(hitrec);
 	
 	// check bbox first
-	// if ( ! Shape::bbox().hit(ray,tmin,tmprec) )
-		// return false;
-	
+	float tmin_bbox = 0;
+	if ( ! Shape::bbox().hit(ray,tmin_bbox,tmprec) )
+	{
+		return false;
+	}
 	// go through all shapes and check for hits
 	for ( unsigned i=0; i < shapes_.size(); ++i )
 	{

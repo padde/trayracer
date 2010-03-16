@@ -1,0 +1,32 @@
+# materials
+
+define material reflective   mirror      0.0 0.0 0.0  0.1 0.1 0.1  0.1 0.1 0.1  1  0.9 0.9 0.9
+		
+
+#shapes
+# define shape box wall_right   500 -550  -800  550  550 -2000  mirror
+# define shape box wall_left   -500 -550  -800 -550  550 -2000  mirror
+# define shape box wall_top    -500  500  -800  500  550 -2000  mirror
+# define shape box wall_bottom -500 -500  -800  500 -550 -2000  mirror
+# define shape box wall_back   -550 -550 -2000  550  550 -2050  mirror
+define shape box   wall_bottom   -9999999999 -500 -9999999999   9999999999 -550 9999999999 mirror
+
+define shape sphere sphere_left   -300 -320 -1500  180  mirror
+define shape sphere sphere_right   250 -300 -1200  200  mirror
+define shape sphere sphere_center    0 -300 -1700  200  mirror
+define shape sphere sphere_small     0 -400 -1100  100  mirror
+
+
+ 
+# light
+define light ambient amb              0.5 0.5 0.5
+define light diffuse pl   0 300 -1500 1.0 1.0 1.0
+define light diffuse pl   0 300 -1500 1.0 1.0 1.0
+define light diffuse pl   -200 400 -1200 0.1 0.3 1.0
+define light diffuse pl   -200 400 -1200 0.1 0.3 1.0
+
+# camera
+define camera cam 31 640 480
+
+# go!
+render cam images/cornell_reflective

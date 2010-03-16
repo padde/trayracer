@@ -6,7 +6,7 @@
 // project header
 #include <box.hpp>
 
-namespace { const double epsilon = 0.01; }
+namespace { const double epsilon = 0.1; }
 
 
 
@@ -44,12 +44,15 @@ bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec 
 			// hit detected
 			tmin = t;
 			
+			Point  hitpoint = ray.origin() + t * ray.dir();
+			Vector normal   = hitpoint - center_;
+			
 			hitrec.t            = t;
 			hitrec.hit          = true;
 			hitrec.material_ptr = material_ptr_;
-			hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+			hitrec.hitpoint     = trans_ * ( hitpoint );
 			hitrec.ray          = original_ray;
-			hitrec.normal       = unify(hitrec.hitpoint - back_trans_ * center_);
+			hitrec.normal       = unify( trans_ * normal );
 			
 			return true;
 		}
@@ -61,12 +64,15 @@ bool Sphere::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec 
 			// hit detected
 			tmin = t;
 			
+			Point  hitpoint = ray.origin() + t * ray.dir();
+			Vector normal   = hitpoint - center_;
+			
 			hitrec.t            = t;
 			hitrec.hit          = true;
 			hitrec.material_ptr = material_ptr_;
-			hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+			hitrec.hitpoint     = trans_ * ( hitpoint );
 			hitrec.ray          = original_ray;
-			hitrec.normal       = unify(hitrec.hitpoint - back_trans_ * center_);
+			hitrec.normal       = unify( trans_ * normal );
 			
 			return true;
 		}

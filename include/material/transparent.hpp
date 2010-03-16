@@ -15,7 +15,10 @@
 //! @author Patrick Oscity
 //! @date January 2010
 //! @brief ... special type of phong for materials with glasslike attributes
-//
+//! @image html Figure27.04.png
+//! @image html Figure27.05.png
+//! @image html Figure27.06.png
+//! @image html Figure27.08.png
 class Transparent : public Phong
 {
 public: // c'tors, d'tor

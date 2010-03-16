@@ -1,0 +1,31 @@
+# materials
+
+define material phong   white_matte     0.0 0.0 0.0   1.0 1.0 1.0   0.0 0.0 0.0    10
+define material reflective mirror   0 0 0     0.1 0.1 0.1   0.2 0.2 0.2 1000  0.9 0.9 0.9
+
+# shapes
+define shape box   wall_bottom   -9999999999 -500 -9999999999   9999999999 -550 9999999999   white_matte
+
+define shape sphere s1   -250 -250 -900   150   mirror
+define shape sphere s2   -250  250 -900   150   mirror
+define shape sphere s3    250 -250 -900   150   mirror
+define shape sphere s4    250  250 -900   150   mirror
+define shape sphere s5      0    0 -900   150   mirror
+
+
+
+# transformations
+ 
+# light
+define light ambient   amb                     0.1 0.1 0.1
+define light diffuse   pl1      0  500  -500   1.0 1.0 1.0
+define light diffuse   pl2    500  500 -300   1.0 0.3 0.0
+
+# camera
+define camera   cam   30   640 480
+
+# go!
+render cam images/spheres_in_circle
+
+
+

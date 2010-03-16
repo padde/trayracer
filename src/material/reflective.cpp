@@ -2,6 +2,8 @@
 
 // project header
 #include <scene.hpp>
+#include <cmath>
+#include <iostream>
 
 
 
@@ -29,8 +31,20 @@ Reflective::shade ( HitRecord& hitrec ) const
 	
 	Ray r_ray( hitrec.hitpoint, wi);
 	float ndotwi = dot(hitrec.normal, wi);
-
+	
 	L += fr * ( hitrec.scene_ptr->tracer_ptr->trace(r_ray, hitrec.depth + 1) ) * ndotwi;
+	
+	/*if ( L[rgb::r]<0 or L[rgb::g]<0 or L[rgb::b]<0 )
+	{
+		std::cout << "--------------------------------------------"<< std::endl;
+		std::cout << "normal = " << hitrec.normal << std::endl;
+		std::cout << "wi     = " << wi << std::endl;
+		std::cout << "|wi|   = " << wi.length() << std::endl;
+		std::cout << "wo     = " << wo << std::endl;
+		std::cout << "|wo|   = " << wo.length() << std::endl;
+		std::cout << "L      = " << fr * ( hitrec.scene_ptr->tracer_ptr->trace(r_ray, hitrec.depth + 1) ) * ndotwi << std::endl;
+	}*/
 	
 	return L;
 }
+

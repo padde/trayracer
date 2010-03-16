@@ -24,6 +24,8 @@ public: // ctor's, d'tor
 	//! @param hres horizontal screen resolution
 	//! @param vres vertical screen resolution
 	//! @param fov_x opening angle of the camera lense
+	//! @image latex Figure08.15.EPS
+	//! @image html Figure08.15.png
 	Camera ( std::string name, std::size_t hres, std::size_t vres, float fov_x );
 	~Camera ();
 

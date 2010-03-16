@@ -17,6 +17,30 @@ deg_to_rad(double angle)
 }
 
 
+TEST ( matrix__should_multiplicate_with_matrix )
+{
+	double const expected[16] = {
+		1.0, 2.0, 7.5, 1.0,
+		0.4, 0.0, 7.0, 2.3,
+		1.3, 5.2, 4.6, 3.0,
+		6.0, 3.1, 9.0, 1.6
+	};
+	Matrix expected_matrix(expected);
+	
+	double const ident[16] = {
+		1.0, 0.0, 0.0, 0.0,
+		0.0, 1.0, 0.0, 0.0,
+		0.0, 0.0, 1.0, 0.0,
+		0.0, 0.0, 0.0, 1.0
+	};
+	Matrix ident_matrix(ident);
+	
+	Matrix m = expected_matrix * ident_matrix;
+	
+	CHECK_EQUAL(expected_matrix, m);
+}
+
+
 TEST ( matrix__should_make_translation_with_arguments )
 {
 	Matrix m = make_translation(1,2,3);

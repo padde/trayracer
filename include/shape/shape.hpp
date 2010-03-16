@@ -36,6 +36,9 @@ public: // methods
 	
 	virtual void transform ( const Matrix& ); // multiplicate trans_ with given matrix
 	
+	//! @brief getter for the bounding box
+	//! @image html Figure19.02.png
+	//! @image html Figure19.03.png
 	virtual Box bbox () const;
 	
 public: // virtual methods

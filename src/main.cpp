@@ -32,6 +32,9 @@
 
 
 /*! \mainpage Raytracer by Patrick Gombert, Patrick Oscity and Frank Urbainsky
+ * \htmlonly
+ * <center> <a href="UML2.pdf">UML diagramm of the tracer</a> </center>
+ * \endhtmlonly
  *
  * \section intro_sec How to use
  *

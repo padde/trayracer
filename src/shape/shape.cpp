@@ -43,8 +43,8 @@ Shape::name ( const std::string& name )
 /* virtual */ void
 Shape::transform ( const Matrix& new_trans )
 {
-	trans_      = trans_ * new_trans;
-	inv_trans_  = inverse(new_trans) * inv_trans_;
+	trans_      = new_trans * trans_;
+	inv_trans_  = inverse(trans_);
 	back_trans_ = transpose(trans_);
 }
 

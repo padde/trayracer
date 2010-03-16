@@ -14,7 +14,10 @@
 //! @author Patrick Oscity
 //! @date January 2010
 //! @brief ... special type of phong for materials with mirrorlike attributes
-//
+//! @image html Figure24.04.png
+//! @image html Figure24.05.png
+//! @image html Figure24.13.png
+
 class Reflective : public Phong
 {
 public: // c'tors, d'tor

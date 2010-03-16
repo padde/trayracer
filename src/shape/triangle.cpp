@@ -6,10 +6,11 @@
 
 // system header
 #include <cmath>
+#include <iostream>
 
 
 
-namespace { const float epsilon = 0.01; }
+namespace { const float epsilon = 0.5; }
 
 
 
@@ -75,14 +76,20 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 	
 	if ( t < tmin and t > epsilon)
 	{
+		Point hitp = ray.origin() + t * ray.dir();
+		Vector normal = unify(cross(Vector(b_-a_), Vector(c_ - a_)));
+		
 		// hit detected
 		tmin                = t;
+		
 		hitrec.t            = t;
 		hitrec.hit          = true;
-		hitrec.normal       = unify(back_trans_ * cross(Vector(b_-a_), Vector(c_ - a_)));
+		hitrec.normal       = unify(trans_ * normal);
 		hitrec.material_ptr = material_ptr_;
-		hitrec.hitpoint     = (back_trans_ * ray.origin()) + t * (back_trans_ * ray.dir());
+		hitrec.hitpoint     = trans_ * hitp;
 		hitrec.ray          = original_ray;
+		
+		// std::cout << hitrec.normal << std::endl;
 		
 		return true;
 	}

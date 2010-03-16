@@ -1,0 +1,42 @@
+# materials
+
+define material phong   white_matte     0.0 0.0 0.0   1.0 1.0 1.0   0.0 0.0 0.0    10
+define material phong   white_plastic   0.2 0.2 0.2   1.0 1.0 1.0   0.3 0.3 0.3   300
+
+# shapes
+define shape box   wall_bottom   -9999999999 -500 -9999999999   9999999999 -550 9999999999   white_matte
+
+define shape sphere s1    346  200 -900   105   white_plastic
+define shape sphere s2    200  346 -900   105   white_plastic
+define shape sphere s3      0  400 -900   105   white_plastic
+define shape sphere s4   -200  346 -900   105   white_plastic
+define shape sphere s5   -346  200 -900   105   white_plastic
+define shape sphere s6   -400    0 -900   105   white_plastic
+define shape sphere s7   -346 -200 -900   105   white_plastic
+define shape sphere s8   -200 -346 -900   105   white_plastic
+define shape sphere s9      0 -400 -900   105   white_plastic
+define shape sphere s10   200 -346 -900   105   white_plastic
+define shape sphere s11   346 -200 -900   105   white_plastic
+define shape sphere s12   400    0 -900   105   white_plastic
+
+define shape composite   root   s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12
+
+
+# transformations
+transform root scale 0.6 0.6 0.6
+transform root translate 600 0 0
+transform root rotate 0 1 0 45
+ 
+# light
+define light ambient   amb                     0.1 0.1 0.1
+define light diffuse   pl1      0  500  -500   1.0 1.0 1.0
+define light diffuse   pl2    500  500 -300   1.0 0.3 0.0
+
+# camera
+define camera   cam   30   640 480
+
+# go!
+render cam images/spheres_in_circle
+
+
+

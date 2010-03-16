@@ -9,6 +9,7 @@
 #include <scene.hpp>
 
 // system header
+#include <iostream>
 #include <string>
 #include <cmath>
 #include <GL/glut.h>

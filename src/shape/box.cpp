@@ -118,16 +118,18 @@ Box::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitrec ) const
 		
 		if (t0 > epsilon) { // ray hits outside
 			tmin = t0;
-			hitrec.normal = unify(back_trans_ * normals[face_in]);
+			hitrec.normal = unify(trans_ * normals[face_in]);
 		} else {            // ray hits inside
 			tmin = t1;
-			hitrec.normal = unify(back_trans_ * normals[face_out]);
+			hitrec.normal = unify(trans_ * normals[face_out]);
 		}
+		
+		Point hitp = ray.point_at_parameter(tmin);
 		
 		hitrec.t            = tmin;
 		hitrec.hit          = true;
 		hitrec.material_ptr = material_ptr_;
-		hitrec.hitpoint     = (back_trans_ * ray.origin()) + tmin * ( back_trans_ * ray.dir());
+		hitrec.hitpoint     = trans_ * hitp;
 		hitrec.ray          = original_ray;
 		
 		return true;
@@ -142,35 +144,33 @@ Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 	// transform ray to object space
 	Ray ray = original_ray.transform(inv_trans_);
 	
-	Point p1(a_), p2(b_);
-	
 	double ox = ray.origin()[0];
 	double oy = ray.origin()[1];
 	double oz = ray.origin()[2];
+	
 	double dx = ray.dir()[0];
 	double dy = ray.dir()[1];
 	double dz = ray.dir()[2];
-	double t0, t1;
+	
 	double tx_min, ty_min, tz_min;
 	double tx_max, ty_max, tz_max;
-	int face_in, face_out;
 	
 	double a = 1.0 / dx;
 	if (a >= 0) {
-		tx_min = (p1[0] - ox) * a;
-		tx_max = (p2[0] - ox) * a;
+		tx_min = (a_[0] - ox) * a;
+		tx_max = (b_[0] - ox) * a;
 	} else {
-		tx_min = (p2[0] - ox) * a;
-		tx_max = (p1[0] - ox) * a;
+		tx_min = (b_[0] - ox) * a;
+		tx_max = (a_[0] - ox) * a;
 	}
 	
 	double b = 1.0 / dy;
 	if (b >= 0) {
-		ty_min = (p1[1] - oy) * b;
-		ty_max = (p2[1] - oy) * b;
+		ty_min = (a_[1] - oy) * b;
+		ty_max = (b_[1] - oy) * b;
 	} else {
-		ty_min = (p2[1] - oy) * b;
-		ty_max = (p1[1] - oy) * b;
+		ty_min = (b_[1] - oy) * b;
+		ty_max = (a_[1] - oy) * b;
 	}
 	
 	if (tx_min > ty_max or ty_min > tx_max)
@@ -178,12 +178,15 @@ Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 	
 	double c = 1.0 / dz;
 	if (c >= 0) {
-		tz_min = (p1[2] - oz) * c;
-		tz_max = (p2[2] - oz) * c;
+		tz_min = (a_[2] - oz) * c;
+		tz_max = (b_[2] - oz) * c;
 	} else {
-		tz_min = (p2[2] - oz) * c;
-		tz_max = (p1[2] - oz) * c;
+		tz_min = (b_[2] - oz) * c;
+		tz_max = (a_[2] - oz) * c;
 	}
+	
+	double t0, t1;
+	int face_in, face_out;
 	
 	if (tx_min > tz_max or tz_min > tx_max)
 		return false;
@@ -214,11 +217,12 @@ Box::hit ( const Ray& original_ray, interval_t& tmin ) const
 	  face_out = (c >= 0.0) ? 5 : 2;
 	}
 	
-	if (t0 < t1 and t1 > epsilon and t0 < tmin)
-	{
-		if (t0 > epsilon) {
+	if (t0 < t1 and t1 > epsilon) {
+		// hit detected
+		
+		if (t0 > epsilon) { // ray hits outside
 			tmin = t0;
-		} else {
+		} else {            // ray hits inside
 			tmin = t1;
 		}
 		

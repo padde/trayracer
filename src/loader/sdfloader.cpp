@@ -227,6 +227,10 @@ sdfloader::parse ( vector< vector<string> >& input)
 		{
 			load_sphere( input[i] );
 		}
+		else if( triangle( input[i] ) )
+		{
+			load_triangle( input[i] );
+		}
 		else if( composite( input[i] ) )
 		{
 			load_composite( input[i] );
@@ -247,6 +251,10 @@ sdfloader::parse ( vector< vector<string> >& input)
 		{
 			apply_transformation( input[i] );
 			
+		}
+		else if( background ( input[i] ) )
+		{
+			set_bgcolor (input[i]);
 		}
 		else if( render( input[i] ) )
 		{
@@ -276,7 +284,7 @@ sdfloader::load_phong ( vector<string>& word )
 	
 	// check for input sanity
 	if (word.size() != 14)
-	{
+	{ 
 		cerr << "\tInvalid number of arguments!\n" ;
 	}		
 	else
@@ -437,6 +445,39 @@ sdfloader::load_sphere ( vector<string>& word )
 }
 
 void
+sdfloader::load_triangle ( vector<string>& word )
+{
+	cout << "Adding sphere \"" << word[3] << "\" ...\n";
+	
+	// check for input sanity
+	if (word.size() != 14)
+	{
+		cerr << "\tInvalid number of arguments!\n" ;
+	}
+	else
+	{
+	// conversion of strings to correct type :
+	float aX = atof ( word[4].c_str() );
+	float aY = atof ( word[5].c_str() );
+	float aZ = atof ( word[6].c_str() );
+	
+	float bX = atof ( word[7].c_str() );
+	float bY = atof ( word[8].c_str() );
+	float bZ = atof ( word[9].c_str() );
+	
+	float cX = atof ( word[10].c_str() );
+	float cY = atof ( word[11].c_str() );
+	float cZ = atof ( word[12].c_str() );
+	
+	Material* mat = world->get_material( word[13] );
+
+	
+	// integrate into world
+	world->push_shape( new Triangle( word[3], Point( aX, aY, aZ), Point( bX, bY, bZ), Point( cX, cY, cZ), mat ) );
+	} 
+}
+
+void
 sdfloader::load_composite ( vector<string>& word )
 {
 	cout << "Adding composite \"" << word[3] << "\" ...\n";
@@ -542,10 +583,10 @@ sdfloader::apply_transformation( vector<string>& word )
 	}
 	else if (word[2] == "rotate")
 	{
-		float angle = atof ( word[3].c_str() );
-		float x = atof ( word[4].c_str() );	
-		float y = atof ( word[5].c_str() );	
-		float z = atof ( word[6].c_str() );	
+		float x = atof ( word[3].c_str() );	
+		float y = atof ( word[4].c_str() );	
+		float z = atof ( word[5].c_str() );	
+		float angle = atof ( word[6].c_str() );
 		move_me->transform(make_rotation(Vector(x,y,z), angle));
 	}
 	else if (word[2] == "translate")
@@ -562,7 +603,17 @@ sdfloader::apply_transformation( vector<string>& word )
 }
 
 void
-sdfloader::do_render(vector<string>& word)
+sdfloader::set_bgcolor (vector< string >& word)
+{
+		float r = atof ( word[1].c_str() );
+		float g = atof ( word[2].c_str() );	
+		float b = atof ( word[3].c_str() );	
+		world->set_bgcolor ( rgb ( r, g, b) );
+}
+
+
+void
+sdfloader::do_render(vector<string>& word) const
 {
 	// preparations for filename
 	time_t      t = time(NULL);
@@ -585,7 +636,7 @@ sdfloader::do_render(vector<string>& word)
 }
 
 bool
-sdfloader::phong( vector < string>& word)
+sdfloader::phong( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "material" && word[2] == "phong")
 		return true;
@@ -595,7 +646,7 @@ sdfloader::phong( vector < string>& word)
 
 
 bool
-sdfloader::reflective( vector < string>& word)
+sdfloader::reflective( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "material" && word[2] == "reflective")
 		return true;
@@ -605,7 +656,7 @@ sdfloader::reflective( vector < string>& word)
 
 
 bool
-sdfloader::transparent( vector < string>& word)
+sdfloader::transparent( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "material" && word[2] == "transparent")
 		return true;
@@ -615,7 +666,7 @@ sdfloader::transparent( vector < string>& word)
 
 
 bool
-sdfloader::box( vector < string>& word)
+sdfloader::box( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "shape" && word[2] == "box" )
 		return true;
@@ -624,7 +675,7 @@ sdfloader::box( vector < string>& word)
 }
 
 bool
-sdfloader::sphere( vector < string>& word)
+sdfloader::sphere( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "shape" && word[2] == "sphere" )
 		return true;
@@ -633,7 +684,16 @@ sdfloader::sphere( vector < string>& word)
 }
 
 bool
-sdfloader::composite( vector < string>& word)
+sdfloader::triangle( vector < string>& word) const
+{
+	if ( word[0] == "define" && word[1] == "shape" && word[2] == "triangle" )
+		return true;
+	else
+		return false;
+}
+
+bool
+sdfloader::composite( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "shape" && word[2] == "composite" )
 		return true;
@@ -642,7 +702,7 @@ sdfloader::composite( vector < string>& word)
 }
 
 bool
-sdfloader::alight( vector < string>& word)
+sdfloader::alight( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "light" && word[2] == "ambient" )
 		return true;
@@ -651,7 +711,7 @@ sdfloader::alight( vector < string>& word)
 }
 
 bool
-sdfloader::dlight( vector < string>& word)
+sdfloader::dlight( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "light" && word[2] == "diffuse" )
 		return true;
@@ -660,7 +720,7 @@ sdfloader::dlight( vector < string>& word)
 }
 
 bool
-sdfloader::camera( vector < string>& word)
+sdfloader::camera( vector < string>& word) const
 {
 	if ( word[0] == "define" && word[1] == "camera" )
 		return true;
@@ -669,7 +729,7 @@ sdfloader::camera( vector < string>& word)
 }
 
 bool
-sdfloader::render( vector < string>& word)
+sdfloader::render( vector < string>& word) const
 {
 	if ( word[0] == "render" )
 		return true;
@@ -678,9 +738,18 @@ sdfloader::render( vector < string>& word)
 }
 
 bool
-sdfloader::transform( vector < string>& word)
+sdfloader::transform( vector < string>& word) const
 {
 	if ( word[0] == "transform" )
+		return true;
+	else
+		return false;
+}
+
+bool
+sdfloader::background( vector< string >& word) const
+{
+	if ( word[0] == "setbgcolor" )
 		return true;
 	else
 		return false;

@@ -22,6 +22,10 @@ public: // c'tors, d'tor
 	~Phong();
 	
 public: // methods
+	//! @brief checks with the hitrecord if the material is in the shadow
+	//! @image html Figure16.02.png
+	//! @image html Figure16.07.png
+	//! @image html Figure16.08.png
 	virtual rgb shade ( HitRecord& hitrec ) const;
 	
 private: // members

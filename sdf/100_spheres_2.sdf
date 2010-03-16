@@ -1,0 +1,177 @@
+# materials
+define material phong red    1 0 0   1 0 0   1 0 0   10
+define material phong blue   0 0 1   0 0 1   0 0 1   10
+define material phong yellow 1 1 0   1 1 0   1 1 0   10
+define material reflective mirror   0 0 0     0.1 0.1 0.1   0.2 0.2 0.2 1000  0.9 0.9 0.9
+
+
+# geometry
+define shape sphere s0  -500 -500 -1000  20  red
+define shape sphere s1  -400 -500 -1000  20  red
+define shape sphere s2  -300 -500 -1000  20  red
+define shape sphere s3  -200 -500 -1000  20  red
+define shape sphere s4  -100 -500 -1000  20  red
+define shape sphere s5  0 -500 -1000  20  red
+define shape sphere s6  100 -500 -1000  20  red
+define shape sphere s7  200 -500 -1000  20  red
+define shape sphere s8  300 -500 -1000  20  red
+define shape sphere s9  400 -500 -1000  20  red
+define shape sphere s10  500 -500 -1000  20  red
+
+# define shape composite c1 s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10
+
+define shape sphere s11  -500 -400 -1000  20  red
+define shape sphere s12  -400 -400 -1000  20  red
+define shape sphere s13  -300 -400 -1000  20  red
+define shape sphere s14  -200 -400 -1000  20  red
+define shape sphere s15  -100 -400 -1000  20  red
+define shape sphere s16  0 -400 -1000  20  red
+define shape sphere s17  100 -400 -1000  20  red
+define shape sphere s18  200 -400 -1000  20  red
+define shape sphere s19  300 -400 -1000  20  red
+define shape sphere s20  400 -400 -1000  20  red
+define shape sphere s21  500 -400 -1000  20  red
+
+# define shape composite c2 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20 s21
+
+define shape sphere s22  -500 -300 -1000  20  red
+define shape sphere s23  -400 -300 -1000  20  red
+define shape sphere s24  -300 -300 -1000  20  red
+define shape sphere s25  -200 -300 -1000  20  red
+define shape sphere s26  -100 -300 -1000  20  red
+define shape sphere s27  0 -300 -1000  20  red
+define shape sphere s28  100 -300 -1000  20  red
+define shape sphere s29  200 -300 -1000  20  red
+define shape sphere s30  300 -300 -1000  20  red
+define shape sphere s31  400 -300 -1000  20  red
+define shape sphere s32  500 -300 -1000  20  red
+
+# define shape composite c3 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32
+
+define shape sphere s33  -500 -200 -1000  20  red
+define shape sphere s34  -400 -200 -1000  20  red
+define shape sphere s35  -300 -200 -1000  20  red
+define shape sphere s36  -200 -200 -1000  20  red
+define shape sphere s37  -100 -200 -1000  20  red
+define shape sphere s38  0 -200 -1000  20  red
+define shape sphere s39  100 -200 -1000  20  red
+define shape sphere s40  200 -200 -1000  20  red
+define shape sphere s41  300 -200 -1000  20  red
+define shape sphere s42  400 -200 -1000  20  red
+define shape sphere s43  500 -200 -1000  20  red
+
+# define shape composite c4 s33 s34 s35 s36 s37 s38 s39 s40 s41 s42 s43
+
+define shape sphere s44  -500 -100 -1000  20  red
+define shape sphere s45  -400 -100 -1000  20  red
+define shape sphere s46  -300 -100 -1000  20  red
+define shape sphere s47  -200 -100 -1000  20  red
+define shape sphere s48  -100 -100 -1000  20  red
+define shape sphere s49  0 -100 -1000  20  red
+define shape sphere s50  100 -100 -1000  20  red
+define shape sphere s51  200 -100 -1000  20  red
+define shape sphere s52  300 -100 -1000  20  red
+define shape sphere s53  400 -100 -1000  20  red
+define shape sphere s54  500 -100 -1000  20  red
+
+# define shape composite c5 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 s54
+
+define shape sphere s55  -500 0 -1000  20  red
+define shape sphere s56  -400 0 -1000  20  red
+define shape sphere s57  -300 0 -1000  20  red
+define shape sphere s58  -200 0 -1000  20  red
+define shape sphere s59  -100 0 -1000  20  red
+define shape sphere s60  0 0 -1000  20  red
+define shape sphere s61  100 0 -1000  20  red
+define shape sphere s62  200 0 -1000  20  red
+define shape sphere s63  300 0 -1000  20  red
+define shape sphere s64  400 0 -1000  20  red
+define shape sphere s65  500 0 -1000  20  red
+
+# define shape composite c6 s55 s56 s57 s58 s59 s60 s61 s62 s63 s64 s65
+
+define shape sphere s66  -500 100 -1000  20  red
+define shape sphere s67  -400 100 -1000  20  red
+define shape sphere s68  -300 100 -1000  20  red
+define shape sphere s69  -200 100 -1000  20  red
+define shape sphere s70  -100 100 -1000  20  red
+define shape sphere s71  0 100 -1000  20  red
+define shape sphere s72  100 100 -1000  20  red
+define shape sphere s73  200 100 -1000  20  red
+define shape sphere s74  300 100 -1000  20  red
+define shape sphere s75  400 100 -1000  20  red
+define shape sphere s76  500 100 -1000  20  red
+
+# define shape composite c7 s66 s67 s68 s69 s70 s71 s72 s73 s74 s75 s76
+
+define shape sphere s77  -500 200 -1000  20  red
+define shape sphere s78  -400 200 -1000  20  red
+define shape sphere s79  -300 200 -1000  20  red
+define shape sphere s80  -200 200 -1000  20  red
+define shape sphere s81  -100 200 -1000  20  red
+define shape sphere s82  0 200 -1000  20  red
+define shape sphere s83  100 200 -1000  20  red
+define shape sphere s84  200 200 -1000  20  red
+define shape sphere s85  300 200 -1000  20  red
+define shape sphere s86  400 200 -1000  20  red
+define shape sphere s87  500 200 -1000  20  red
+
+# define shape composite c8 s77 s78 s79 s80 s81 s82 s83 s84 s85 s86 s87
+
+define shape sphere s88  -500 300 -1000  20  red
+define shape sphere s89  -400 300 -1000  20  red
+define shape sphere s90  -300 300 -1000  20  red
+define shape sphere s91  -200 300 -1000  20  red
+define shape sphere s92  -100 300 -1000  20  red
+define shape sphere s93  0 300 -1000  20  red
+define shape sphere s94  100 300 -1000  20  red
+define shape sphere s95  200 300 -1000  20  red
+define shape sphere s96  300 300 -1000  20  red
+define shape sphere s97  400 300 -1000  20  red
+define shape sphere s98  500 300 -1000  20  red
+
+# define shape composite c9 s88 s89 s90 s91 s92 s93 s94 s95 s96 s97 s98
+
+define shape sphere s99  -500 400 -1000  20  red
+define shape sphere s100  -400 400 -1000  20  red
+define shape sphere s101  -300 400 -1000  20  red
+define shape sphere s102  -200 400 -1000  20  red
+define shape sphere s103  -100 400 -1000  20  red
+define shape sphere s104  0 400 -1000  20  red
+define shape sphere s105  100 400 -1000  20  red
+define shape sphere s106  200 400 -1000  20  red
+define shape sphere s107  300 400 -1000  20  red
+define shape sphere s108  400 400 -1000  20  red
+define shape sphere s109  500 400 -1000  20  red
+
+# define shape composite c10 s99 s100 s101 s102 s103 s104 s105 s106 s107 s108 s109
+
+define shape sphere s110  -500 500 -1000  20  red
+define shape sphere s111  -400 500 -1000  20  red
+define shape sphere s112  -300 500 -1000  20  red
+define shape sphere s113  -200 500 -1000  20  red
+define shape sphere s114  -100 500 -1000  20  red
+define shape sphere s115  0 500 -1000  20  red
+define shape sphere s116  100 500 -1000  20  red
+define shape sphere s117  200 500 -1000  20  red
+define shape sphere s118  300 500 -1000  20  red
+define shape sphere s119  400 500 -1000  20  red
+define shape sphere s120  500 500 -1000  20  red
+
+# define shape composite c11 s110 s111 s112 s113 s114 s115 s116 s117 s118 s119 s120
+
+# composite
+# define shape composite root c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11
+
+	
+# lights
+define light ambient amb               0.1 0.1 0.1
+define light diffuse sun1    500 800 0  1.0 1.0 1.0
+define light diffuse sun2   -500 300 -1000  1.0 0.2 0.1
+define light diffuse sun3    0 -600 0  0.0 0.1 1.0
+
+# camera
+define camera eye 60.0 480 320
+
+# ... and go
+render eye images/100_spheres

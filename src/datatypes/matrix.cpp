@@ -116,6 +116,101 @@ Matrix::operator*=(Matrix const& rhs)
 	Matrix tmp;
 	
 	tmp.data_[ 0] = (data_[ 0] * rhs.data_[ 0] +
+	                 data_[ 1] * rhs.data_[ 4] +
+	                 data_[ 2] * rhs.data_[ 8] +
+	                 data_[ 3] * rhs.data_[12]);
+	
+	tmp.data_[ 1] = (data_[ 0] * rhs.data_[ 1] +
+	                 data_[ 1] * rhs.data_[ 5] +
+	                 data_[ 2] * rhs.data_[ 9] +
+	                 data_[ 3] * rhs.data_[13]);
+	
+	tmp.data_[ 2] = (data_[ 0] * rhs.data_[ 2] +
+	                 data_[ 1] * rhs.data_[ 6] +
+	                 data_[ 2] * rhs.data_[10] +
+	                 data_[ 3] * rhs.data_[14]);
+	
+	tmp.data_[ 3] = (data_[ 0] * rhs.data_[ 3] +
+	                 data_[ 1] * rhs.data_[ 7] +
+	                 data_[ 2] * rhs.data_[11] +
+	                 data_[ 3] * rhs.data_[15]);
+	
+	tmp.data_[ 4] = (data_[ 4] * rhs.data_[ 0] +
+	                 data_[ 5] * rhs.data_[ 4] +
+	                 data_[ 6] * rhs.data_[ 8] +
+	                 data_[ 7] * rhs.data_[12]);
+	
+	tmp.data_[ 5] = (data_[ 4] * rhs.data_[ 1] +
+	                 data_[ 5] * rhs.data_[ 5] +
+	                 data_[ 6] * rhs.data_[ 9] +
+	                 data_[ 7] * rhs.data_[13]);
+	
+	tmp.data_[ 6] = (data_[ 4] * rhs.data_[ 2] +
+	                 data_[ 5] * rhs.data_[ 6] +
+	                 data_[ 6] * rhs.data_[10] +
+	                 data_[ 7] * rhs.data_[14]);
+	
+	tmp.data_[ 7] = (data_[ 4] * rhs.data_[ 3] +
+	                 data_[ 5] * rhs.data_[ 7] +
+	                 data_[ 6] * rhs.data_[11] +
+	                 data_[ 7] * rhs.data_[15]);
+	
+	tmp.data_[ 8] = (data_[ 8] * rhs.data_[ 0] +
+	                 data_[ 9] * rhs.data_[ 4] +
+	                 data_[10] * rhs.data_[ 8] +
+	                 data_[11] * rhs.data_[12]);
+	
+	tmp.data_[ 9] = (data_[ 8] * rhs.data_[ 1] +
+	                 data_[ 9] * rhs.data_[ 5] +
+	                 data_[10] * rhs.data_[ 9] +
+	                 data_[11] * rhs.data_[13]);
+	
+	tmp.data_[10] = (data_[ 8] * rhs.data_[ 2] +
+	                 data_[ 9] * rhs.data_[ 6] +
+	                 data_[10] * rhs.data_[10] +
+	                 data_[11] * rhs.data_[14]);
+	
+	tmp.data_[11] = (data_[ 8] * rhs.data_[ 3] +
+	                 data_[ 9] * rhs.data_[ 7] +
+	                 data_[10] * rhs.data_[11] +
+	                 data_[11] * rhs.data_[15]);
+	
+	tmp.data_[12] = (data_[12] * rhs.data_[ 0] +
+	                 data_[13] * rhs.data_[ 4] +
+	                 data_[14] * rhs.data_[ 8] +
+	                 data_[15] * rhs.data_[12]);
+	
+	tmp.data_[13] = (data_[12] * rhs.data_[ 1] +
+	                 data_[13] * rhs.data_[ 5] +
+	                 data_[14] * rhs.data_[ 9] +
+	                 data_[15] * rhs.data_[13]);
+	
+	tmp.data_[14] = (data_[12] * rhs.data_[ 2] +
+	                 data_[13] * rhs.data_[ 6] +
+	                 data_[14] * rhs.data_[10] +
+	                 data_[15] * rhs.data_[14]);
+	
+	tmp.data_[15] = (data_[12] * rhs.data_[ 3] +
+	                 data_[13] * rhs.data_[ 7] +
+	                 data_[14] * rhs.data_[11] +
+	                 data_[15] * rhs.data_[15]);
+	
+	swap(tmp);
+	
+	return *this;
+}
+
+
+
+
+
+/*
+Matrix&
+Matrix::operator*=(Matrix const& rhs)
+{
+	Matrix tmp;
+	
+	tmp.data_[ 0] = (data_[ 0] * rhs.data_[ 0] +
 	                 data_[ 4] * rhs.data_[ 1] +
 	                 data_[ 8] * rhs.data_[ 2] +
 	                 data_[12] * rhs.data_[ 3]);
@@ -199,7 +294,7 @@ Matrix::operator*=(Matrix const& rhs)
 	
 	return *this;
 }
-
+*/
 
 Matrix&
 Matrix::operator*=( double rhs )
@@ -557,7 +652,6 @@ make_scale ( Vector const& v)
 Matrix make_rotation ( Vector const& v_original, double a )
 {
 	Vector v(v_original);
-	v.unify();
 	
 	a = deg_to_rad(a);
 	Vector u   = unify(v);
