@@ -1,0 +1,44 @@
+# materials
+
+define material phong   white_matte     0.0 0.0 0.0   1.0 1.0 1.0   0.4 0.4 0.4    1
+define material transparent  ruby       0.0 0.0 0.0  0.4 0.025 0.0  0.3 0.3 0.3  50  0.8 0.5 0.0  1.0  1.7
+
+
+# shapes
+define shape box wall_bottom   -9999999999 -500 -9999999999   9999999999 -550 9999999999   white_matte
+
+define shape triangle t0    200 0    0    141 0  141   0  150 0   ruby
+define shape triangle t1    200 0    0    141 0  141   0 -300 0   ruby
+define shape triangle t2    141 0  141      0 0  200   0  150 0   ruby
+define shape triangle t3    141 0  141      0 0  200   0 -300 0   ruby
+define shape triangle t4      0 0  200   -141 0  141   0  150 0   ruby
+define shape triangle t5      0 0  200   -141 0  141   0 -300 0   ruby
+define shape triangle t6   -141 0  141   -200 0    0   0  150 0   ruby
+define shape triangle t7   -141 0  141   -200 0    0   0 -300 0   ruby
+define shape triangle t8   -200 0    0   -141 0 -141   0  150 0   ruby
+define shape triangle t9   -200 0    0   -141 0 -141   0 -300 0   ruby
+define shape triangle t10  -141 0 -141      0 0 -200   0  150 0   ruby
+define shape triangle t11  -141 0 -141      0 0 -200   0 -300 0   ruby
+define shape triangle t12     0 0 -200    141 0 -141   0  150 0   ruby
+define shape triangle t13     0 0 -200    141 0 -141   0 -300 0   ruby
+define shape triangle t14   141 0 -141    200 0    0   0  150 0   ruby
+define shape triangle t15   141 0 -141    200 0    0   0 -300 0   ruby
+
+define shape composite gem t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15
+
+
+# transformations
+transform gem translate 100 -100 -1000
+transform gem rotate 1 1 -1 10
+
+ 
+# light
+define light ambient   amb                     0.1 0.1 0.1
+define light diffuse   pl1   500  200  -1000   1.0 1.0 1.0
+define light diffuse   pl2   500  200  -1000   1.0 1.0 1.0
+
+# camera
+define camera   cam   30   640 480
+
+# go!
+render cam images/ruby

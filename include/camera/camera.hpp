@@ -35,6 +35,10 @@ public: // methods
 	void render ( std::string filename ) const;
 	//! @brief returns the name of the camera
 	std::string name () const;
+	//! @brief returns the width of the viewplane
+	std::size_t hres () const;
+	//! @brief returns the height of the viewplane
+	std::size_t vres () const;
 
 public:
 	Scene* scene_ptr;

@@ -19,11 +19,7 @@
 
 
 namespace {
-	
-	double
-	deg_to_rad(double angle)
-	{
-		// a deg -> a*(180/pi) rad
+	double inline deg_to_rad (double angle) {
 		return angle * 0.0174533;
 	}
 }
@@ -44,7 +40,6 @@ Camera::Camera ( std::string name, std::size_t hres, std::size_t vres, float ang
 	
 	// compute view plane distance
 	vpd_ = abs ( (hres_ / 2) / tan(angle_ / 2 ) );
-	
 	
 	origin_ = Point ( 0, 0, vpd_ );
 }
@@ -114,4 +109,16 @@ std::string
 Camera::name () const
 {
 	return name_;
+}
+
+std::size_t
+Camera::hres () const
+{
+	return hres_;
+}
+
+std::size_t
+Camera::vres () const
+{
+	return vres_;
 }

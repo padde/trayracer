@@ -49,8 +49,8 @@
 
 int main(int argc, char* argv[])
 {
-	const std::size_t width = 500;
-	const std::size_t height = 500;
+	const std::size_t width = 1440;
+	const std::size_t height = 900;
 	
 	glutwindow::init(width, height, 100, 100, "Raytracer", argc, argv);
 	

@@ -96,6 +96,20 @@ sdfloader::load ()
 		unsigned number;
 		cin >> number;
 		
+		while (number > sdf_files.size() - 1 )
+		{
+			cerr << endl << "That's no correct number!" << endl;
+			
+			cout << endl << "Please choose the sdf file to load:" << endl;
+			
+			for (unsigned int i = 0;i < sdf_files.size();++i)
+				cout << '['<<i<<"] " << sdf_files[i] << endl;
+		
+			cout << endl << "Enter the number of the correct file: ";
+		
+			cin >> number;
+		}
+		
 		load (sdf_files[number]);
 		
 	}
@@ -400,7 +414,7 @@ sdfloader::load_sphere ( vector<string>& word )
 void
 sdfloader::load_triangle ( vector<string>& word )
 {
-	cout << "Adding sphere \"" << word[3] << "\" ...\n";
+	cout << "Adding triangle \"" << word[3] << "\" ...\n";
 	
 	// check for input sanity
 	if (word.size() != 14)

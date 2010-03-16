@@ -21,8 +21,14 @@ public: // methods
 	//! @param wo omega out angle
 	//! @param wi omega in angle
 	virtual rgb  f        ( const HitRecord& hitrec, const Vector& wo, const Vector& wi ) const;
+	//! @brief used for recursive calls
+	//! @param wo omega out angle
+	//! @param wi omega in angle
 	virtual rgb  sample_f ( const HitRecord& hitrec, const Vector& wo,       Vector& wi ) const;
+	//! @brief returns the bihemispherical reflectance
+	//! @param wo omega out angle
 	virtual rgb  rho      ( const HitRecord& hitrec, const Vector& wo                   ) const;
+	//! @brief checks for total innner reflection
 	virtual bool tir      ( const HitRecord& hitrec                                     ) const;
 };
 

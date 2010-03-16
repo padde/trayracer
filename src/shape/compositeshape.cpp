@@ -22,10 +22,10 @@ CompositeShape::hit ( const Ray& ray, interval_t& tmin, HitRecord& hitrec ) cons
 	
 	// check bbox first
 	float tmin_bbox = 0;
-	if ( ! Shape::bbox().hit(ray,tmin_bbox,tmprec) )
-	{
-		return false;
-	}
+	// if ( ! Shape::bbox().hit(ray,tmin_bbox,tmprec) )
+	// 	{
+	// 		return false;
+	// 	}
 	// go through all shapes and check for hits
 	for ( unsigned i=0; i < shapes_.size(); ++i )
 	{

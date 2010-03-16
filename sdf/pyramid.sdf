@@ -1,0 +1,39 @@
+# materials
+
+define material phong   white_matte     0.0 0.0 0.0   1.0 1.0 1.0   0.4 0.4 0.4    1
+define material reflective mirror   0 0 0     0.1 0.1 0.1   0.2 0.2 0.2 1000  0.9 0.9 0.9
+define material transparent  glass       0.0 0.0 0.0  0.0 0.0 0.0  0.5 0.5 0.5  2000  0.1 0.1 0.1  1.0  1.5
+
+
+# shapes
+define shape box   wall_bottom   -9999999999 -500 -9999999999   9999999999 -550 9999999999   white_matte
+
+define shape triangle t1      0   50 -1375   -250 -250 -1250    250 -250 -1250   mirror
+define shape triangle t2      0   50 -1375    250 -250 -1250    250 -250 -1500   mirror
+define shape triangle t3      0   50 -1375    250 -250 -1500   -250 -250 -1500   mirror
+define shape triangle t4      0   50 -1375   -250 -250 -1500   -250 -250 -1250   mirror
+define shape triangle t5   -250 -250 -1250    250 -250 -1250    250 -250 -1500   mirror
+define shape triangle t6   -250 -250 -1250   -250 -250 -1500    250 -250 -1500   mirror
+
+define shape composite pyramid t1 t2 t3 t4 t5 t6
+
+# transformations
+
+transform pyramid translate 1200 0 0
+transform pyramid scale 1 -1 1
+transform pyramid rotate 0 1 0 40
+ 
+# light
+define light ambient   amb                     0.1 0.1 0.1
+define light diffuse   pl1   500  500  -1000   1.0 0.0 0.0
+define light diffuse   pl2  -600   50  -1250   0.0 1.0 0.0
+define light diffuse   pl3     0  500  -1500   0.0 0.0 1.0
+
+# camera
+define camera   cam   30   640 480
+
+# go!
+render cam images/pyramid
+
+
+

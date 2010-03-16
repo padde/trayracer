@@ -79,6 +79,9 @@ bool Triangle::hit ( const Ray& original_ray, interval_t& tmin, HitRecord& hitre
 		Point hitp = ray.origin() + t * ray.dir();
 		Vector normal = unify(cross(Vector(b_-a_), Vector(c_ - a_)));
 		
+		// FIXME 
+		if (normal[2] < 0 ) normal *= -1;
+		
 		// hit detected
 		tmin                = t;
 		
